@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+body {
+  overflow-x: hidden; 
+}
+b {
+  font-weight: 600;
+  color:inherit
+}
+html {
+  scroll-behavior: smooth;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.centerColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+.flexJustify{
+  justify-content: center;
+  display:flex;
+  flex-wrap: wrap;
+  gap:20px;
+}  
