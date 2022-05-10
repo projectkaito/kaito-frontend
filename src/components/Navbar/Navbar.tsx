@@ -1,7 +1,7 @@
 import React from "react";
-import { Theme, Typography } from "@mui/material";
+import { Button, Grid, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import Logo from "src/assets/logos/logo.png";
+import logo from "src/assets/logos/logo.png";
 import BurgerMenu from "src/components/BurgerMenu/BurgerMenu";
 import { useLocation, useNavigate } from "react-router-dom";
 import WalletIcon from "../WalletIcon/WalletIcon";
@@ -10,15 +10,16 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    height: 70,
-    boxShadow: "0px 2px 2px rgba(0,0,0,0.3)",
+    height: 500,
+    // boxShadow: "0px 2px 2px rgba(0,0,0,0.3)",
     paddingLeft: 10,
     paddingRight: 10,
-    [theme.breakpoints.down("md")]: {
-      paddingRight: 25,
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   paddingRight: 25,
+    // },
+    flexDirection: "column",
   },
   hideSmDown: {
     display: "flex",
@@ -42,6 +43,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: "none",
     },
   },
+  navItems: {
+    display: "flex",
+    gap: "40px",
+  },
+  logo: {
+    marginBottom: "20px",
+  },
 }));
 
 interface Props {}
@@ -62,23 +70,14 @@ const Navbar: React.FC<Props> = () => {
 
   return (
     <div className={classes.root}>
-      <img height="90%" src={Logo} alt="" onClick={() => linkClicked("/")} />
+      <img src={logo} className={classes.logo} alt="logo" />
 
-      <div className={classes.hideSmDown}>
-        {links.map(([name, link], index) => (
-          <Typography
-            key={index}
-            onClick={() => linkClicked(link)}
-            className={clsx(classes.link, location.pathname === link && classes.selected)}
-          >
-            {name}
-          </Typography>
-        ))}
-      </div>
-
-      <WalletIcon />
-      <div className={classes.hideMdUp}>
-        <BurgerMenu links={links} />
+      <div className={classes.navItems}>
+        <Button color="secondary">About</Button>
+        <Button color="secondary">Roadmap</Button>
+        <Button color="secondary">Purchase</Button>
+        <Button color="secondary">Team</Button>
+        <Button color="secondary">Mint!</Button>
       </div>
     </div>
   );

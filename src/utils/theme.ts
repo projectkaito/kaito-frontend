@@ -28,8 +28,25 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 //   }
 // }
 
+const primaryCrimson = "#D3165E"
+const secondaryWhite = "#FFFFFF"
+
 let theme = createTheme({
-  palette: {},
+
+
+  palette: {
+
+
+    primary: {
+      main: primaryCrimson
+    },
+    secondary: {
+      main: secondaryWhite
+    }
+  },
+  typography: {
+    fontFamily: " 'Ubuntu', sans-serif",
+  },
   breakpoints: {
     values: {
       xs: 0,
@@ -47,7 +64,17 @@ let theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: "'Ubuntu', san-serif",
+        }
+
+      }
+    }
+
   },
+
 });
 
 theme = responsiveFontSizes(theme);
