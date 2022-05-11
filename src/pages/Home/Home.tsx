@@ -18,6 +18,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: "55px !important",
     fontWeight: "700 !important",
   },
+  roadmap: {
+    width: "100%",
+    padding: "28px",
+    margin: "auto",
+    textAlign: "center",
+    color: theme.palette.secondary.main,
+    maxWidth: "772px",
+    marginTop: "88px",
+  },
   rightContent: {
     width: "100%",
     maxWidth: "692px",
@@ -61,6 +70,18 @@ const Home: React.FC<Props> = () => {
           {/* <div className={classes.rightContent}> */}
           <img style={{ width: "100%" }} src={nftImage} alt="nft image" />
           {/* </div> */}
+        </Grid>
+        <Grid item md={12}>
+          <div className={classes.roadmap}>
+            <Typography variant="h1" className={classes.title}>
+              Roadmap
+            </Typography>
+            <Typography variant="body1">
+              The blockchain will be ethereum compatible. It runs on a PoW consensus; using the SHA-3 hash algorithm.
+              Encouragement of more Dapp developers, the team will release an assembly for smart contracts to be written
+              in different code languages.
+            </Typography>
+          </div>
         </Grid>
       </Grid>
     </div>

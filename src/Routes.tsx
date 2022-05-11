@@ -49,7 +49,7 @@ const Routes: React.FC<Props> = () => {
 
   const classes = useStyle();
   return (
-    <div onScroll={() => setContentHeight("500px")} className={classes.mainContainer} style={{}}>
+    <div  className={classes.mainContainer} style={{}}>
       <div className={classes.img}></div>
       <div
         style={{
