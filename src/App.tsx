@@ -5,6 +5,7 @@ import { useWallet } from "@react-dapp/wallet";
 import { getDefaultValues } from "./utils";
 import { ModalObject, ModalProvider } from "./context/ModalContext";
 import Hello from "./modals/Hello/Hello";
+import { ScrollContainer } from "react-scroll-motion";
 
 const allModals: ModalObject[] = [
   {
@@ -25,9 +26,12 @@ function App() {
   return (
     <UtilsProvider config={{ provider: library }}>
       <ModalProvider allModals={allModals}>
-        <div>
+        {/* @ts-ignore */}
+        <ScrollContainer>
+          {/* <div> */}
           <Routes />
-        </div>
+          {/* </div> */}
+        </ScrollContainer>
       </ModalProvider>
     </UtilsProvider>
   );

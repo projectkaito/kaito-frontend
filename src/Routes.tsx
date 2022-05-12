@@ -53,7 +53,7 @@ const Routes: React.FC<Props> = () => {
       <div className={classes.img}></div>
       <div
         style={{
-          background: "rgb(30 0 33 / 61%)",
+          background: "#0000009c",
           position: "absolute",
           top: 0,
           left: 0,

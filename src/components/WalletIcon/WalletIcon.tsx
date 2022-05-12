@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   iconBTn: {
     marginRight: 5,
+    color: theme.palette.primary.main,
   },
   accountAdd: {
     fontSize: 12,
