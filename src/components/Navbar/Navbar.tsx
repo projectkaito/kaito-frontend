@@ -22,6 +22,7 @@ import clsx from "clsx";
 import WalletIcon from "src/components/WalletIcon/WalletIcon";
 import BurgerMenu from "src/components/BurgerMenu/BurgerMenu";
 import theme from "src/utils/theme";
+
 // import { batch } from "react-redux";
 
 // animatedLogo.defaultProps = {
@@ -50,8 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     width: "100%",
     maxWidth: "184px",
-    marginTop: "13px",
-    marginLeft: "28px",
+
     [theme.breakpoints.down("md")]: {
       maxWidth: "124px",
     },
@@ -207,7 +207,17 @@ const Navbar: React.FC<Props> = () => {
           left: "10px",
         }}
       >
-        <img ref={logoRef as any} src={logo} className={classes.logo} alt="logo" />
+        <img
+          ref={logoRef as any}
+          style={{
+            marginTop: scrollPosition === 0 ? "" : "13px",
+            marginLeft: scrollPosition === 0 ? "" : "28px",
+          }}
+          src={logo}
+          className={classes.logo}
+          alt="logo"
+        />
+        {/* <LinearProgress /> */}
       </div>
       <div
         style={{
