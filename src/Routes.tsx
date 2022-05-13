@@ -6,6 +6,8 @@ import Footer from "src/components/Footer/Footer";
 import NotFound from "src/pages/NotFound/NotFound";
 import useAccount from "./hooks/useAccount";
 import { makeStyles } from "@mui/styles";
+// @ts-ignore
+// import backgroundImage from "src/assets/images/gif.webm";
 import backgroundImage from "src/assets/images/bg.gif";
 import zIndex from "@mui/material/styles/zIndex";
 

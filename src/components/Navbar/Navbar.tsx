@@ -136,15 +136,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingLeft: 10,
     paddingRight: 10,
     // background: "#52266b42",
-    height: "100vh",
     transition: "all 0.5s linear",
-
     flexDirection: "column",
     top: "0px",
     [theme.breakpoints.down("md")]: {
       paddingRight: 25,
-      background: "#210825f2",
-      height: "95px",
+      height: "95px !important",
     },
   },
 }));
@@ -195,13 +192,20 @@ const Navbar: React.FC<Props> = () => {
   const classes = useStyles();
   console.log("percentage", percentage);
   return (
-    <div className={classes.container} style={{}}>
+    <div
+      className={classes.container}
+      style={{
+        height: percentage >= 4 ? "" : "100vh",
+      }}
+    >
       <div
         className={classes.navContent}
         style={{
           // background: percentage >= 10 ? "#210825f2" : "",
           // boxShadow: percentage >= 10 ? "inset 0px 0px 114px 12px black, inset -11px 0px 35px -1px black" : "",
           width: "100%",
+          height: "100px",
+
           position: percentage >= 4 ? "fixed" : "sticky",
           top: "0px",
           left: "10px",
@@ -222,6 +226,8 @@ const Navbar: React.FC<Props> = () => {
       <div
         style={{
           width: "100%",
+          height: "100px",
+
           position: percentage >= 4 ? "fixed" : "sticky",
           inset: "44px -76px",
         }}

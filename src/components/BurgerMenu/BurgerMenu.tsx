@@ -40,17 +40,23 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
     };
 
   const handleLinkClick = async (id: string) => {
-    toggleDrawer("right", false)(undefined);
+    toggleDrawer("top", false)(undefined);
     id[0] === "/" ? navigate(id) : window.open(id, "_blank");
   };
 
   return (
     <div className={classes.root}>
       <Drawer
-        anchor={"right"}
-        open={state["right"]}
-        onClose={toggleDrawer("right", false)}
-        PaperProps={{ style: { width: "100%", maxWidth: 300 } }}
+        // // anchor={"top"}
+        // // open={state["top"]}
+        // // onClose={toggleDrawer("top", false)}
+        // // PaperProps={{ style: { width: "100%", maxWidth: 300 } }}
+
+        // sx={{ width:  'auto' }}
+        // role="presentation"
+        // onClick={toggleDrawer(anchor, false)}
+        // onKeyDown={toggleDrawer(anchor, false)}
+
       >
         <List>
           {links.map(([name, path]) => (
@@ -62,8 +68,8 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
       </Drawer>
       <div className={classes.burgerContainer}>
         <Burger
-          onClick={toggleDrawer("right", true)}
-          active={state.right}
+          onClick={toggleDrawer("top", true)}
+          active={state.top}
           burger="slider"
           color={theme.palette.primary.main}
           hoverOpacity={0.8}

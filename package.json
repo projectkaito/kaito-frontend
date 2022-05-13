@@ -30,6 +30,7 @@
     "react-scripts": "^5.0.1",
     "react-scroll-motion": "^0.2.6",
     "react-spring": "^9.4.5",
+    "react-swipeable-views": "^0.14.0",
     "reapop": "^4.0.5",
     "tst-reflect": "^0.7.4",
     "typescript": "^4.4.2",

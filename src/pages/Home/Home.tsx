@@ -5,6 +5,8 @@ import useNotify from "src/hooks/useNotify";
 import FileUploader from "src/components/FileUploader/FileUploader";
 import useModal from "src/hooks/useModal";
 import nftImage from "src/assets/images/nftImage.png";
+import Roadmap from "./components/Roadmap";
+import RoadmapTabs from "./components/RoadmapTabs";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   leftContent: {
@@ -20,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   roadmap: {
     width: "100%",
-    padding: "28px",
+    // padding: "28px",
     margin: "auto",
     textAlign: "center",
     color: theme.palette.secondary.main,
-    maxWidth: "772px",
+    maxWidth: "672px",
     marginTop: "88px",
   },
   rightContent: {
@@ -33,6 +35,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "20px",
     color: "white",
     margin: "auto",
+  },
+  roadmapContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "14px",
   },
 }));
 
@@ -53,7 +62,7 @@ const Home: React.FC<Props> = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container justifyContent={"center"} alignItems={"center"} spacing={2}>
         <Grid item md={5}>
           <div className={classes.leftContent}>
             <Typography variant="h1" className={classes.title}>
@@ -76,11 +85,9 @@ const Home: React.FC<Props> = () => {
             <Typography variant="h1" className={classes.title}>
               Roadmap
             </Typography>
-            <Typography variant="body1">
-              The blockchain will be ethereum compatible. It runs on a PoW consensus; using the SHA-3 hash algorithm.
-              Encouragement of more Dapp developers, the team will release an assembly for smart contracts to be written
-              in different code languages.
-            </Typography>
+            <div className={classes.roadmapContainer}>
+              {/* <RoadmapTabs /> */}
+            </div>
           </div>
         </Grid>
       </Grid>
