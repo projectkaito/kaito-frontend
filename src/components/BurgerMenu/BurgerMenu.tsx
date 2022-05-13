@@ -1,8 +1,9 @@
 import React from "react";
-import { Theme, List, ListItem, useTheme, Drawer, ListItemText } from "@mui/material";
+import { Theme, List, ListItem, useTheme, Drawer, ListItemText, IconButton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Burger from "react-css-burger";
 import { useNavigate } from "react-router-dom";
+import { Remove } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 0,
     justifyContent: "flex-end",
     paddingRight: 20,
-    zIndex: 100,
+    zIndex: 999999,
   },
 }));
 
@@ -47,17 +48,18 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
   return (
     <div className={classes.root}>
       <Drawer
-        // // anchor={"top"}
-        // // open={state["top"]}
-        // // onClose={toggleDrawer("top", false)}
-        // // PaperProps={{ style: { width: "100%", maxWidth: 300 } }}
+        anchor={"top"}
+        open={state["top"]}
+        onClose={toggleDrawer("top", false)}
+        PaperProps={{ style: { width: "100%", height: "100%", background: "#0e041c" } }}
 
         // sx={{ width:  'auto' }}
         // role="presentation"
         // onClick={toggleDrawer(anchor, false)}
         // onKeyDown={toggleDrawer(anchor, false)}
-
       >
+        {/* <IconButton color="primary" style={{ background: "red" }}> */}
+        {/* </IconButton> */}
         <List>
           {links.map(([name, path]) => (
             <ListItem button key={path} onClick={() => handleLinkClick(path)}>
