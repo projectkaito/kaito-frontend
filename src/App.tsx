@@ -26,12 +26,7 @@ function App() {
   return (
     <UtilsProvider config={{ provider: library }}>
       <ModalProvider allModals={allModals}>
-        {/* @ts-ignore */}
-        <ScrollContainer>
-          {/* <div> */}
-          <Routes />
-          {/* </div> */}
-        </ScrollContainer>
+        <Routes />
       </ModalProvider>
     </UtilsProvider>
   );

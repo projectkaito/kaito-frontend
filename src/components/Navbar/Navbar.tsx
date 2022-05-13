@@ -50,6 +50,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     width: "100%",
     maxWidth: "184px",
+    marginTop: "13px",
+    marginLeft: "28px",
     [theme.breakpoints.down("md")]: {
       maxWidth: "124px",
     },
@@ -107,10 +109,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottom: "2px black solid",
   },
   hideMdUp: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: " flex",
     alignItems: "center",
-    width: "100%",
+    justifyContent: "space-between",
+
+    position: "fixed",
+    top: "12px",
+    left: "12px",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -127,16 +132,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
     padding: "5px",
     // height: 100,
-    boxShadow: "0px 0px 114px 12px black, inset -11px 0px 35px -1px black",
+    // boxShadow: "0px 0px 114px 1px #140a1a, inset -11px 0px 54px -7px #0a0a0a",
     paddingLeft: 10,
     paddingRight: 10,
-    background: "#52266b42",
+    // background: "#52266b42",
     height: "100vh",
+    transition: "all 0.5s linear",
+
     flexDirection: "column",
     top: "0px",
     [theme.breakpoints.down("md")]: {
       paddingRight: 25,
-      height: "auto",
+      background: "#210825f2",
+      height: "95px",
     },
   },
 }));
@@ -144,6 +152,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Navbar: React.FC<Props> = () => {
   const [scrollPosition, setScrollposition] = React.useState(0);
   React.useLayoutEffect(() => {
+    myscrollfn(0);
     function updatePosition() {
       setScrollposition(window.scrollY);
       myscrollfn(window.scrollY);
@@ -164,11 +173,9 @@ const Navbar: React.FC<Props> = () => {
     let percentage = (scrollPosition / max) * 39;
     if (percentage > 50) percentage = 50;
     if (logoRef.current) {
-      // console.log(logoRef.current.style.transform, percentage);
       logoRef.current.style.transform = `translateX(calc(50vw - 50% - ${percentage}vw + ${percentage}% ))`;
     }
     if (NavItemsRef.current) {
-      // console.log(NavItemsRef.current.style.transform, percentage);
       NavItemsRef.current.style.transform = `translateX(calc(50vw - 50% + ${percentage}vw - ${percentage}% ))`;
     }
     console.log("scroll", scrollPosition);
@@ -192,13 +199,12 @@ const Navbar: React.FC<Props> = () => {
       <div
         className={classes.navContent}
         style={{
-          background: percentage >= 10 ? "#210825f2" : "",
-          boxShadow: percentage >= 10 ? "inset 0px 0px 114px 12px black, inset -11px 0px 35px -1px black" : "",
+          // background: percentage >= 10 ? "#210825f2" : "",
+          // boxShadow: percentage >= 10 ? "inset 0px 0px 114px 12px black, inset -11px 0px 35px -1px black" : "",
           width: "100%",
           position: percentage >= 4 ? "fixed" : "sticky",
           top: "0px",
           left: "10px",
-          transition: "all 100ms linear",
         }}
       >
         <img ref={logoRef as any} src={logo} className={classes.logo} alt="logo" />
@@ -207,7 +213,7 @@ const Navbar: React.FC<Props> = () => {
         style={{
           width: "100%",
           position: percentage >= 4 ? "fixed" : "sticky",
-          inset: "44px -30px",
+          inset: "44px -76px",
         }}
       >
         {scrollPosition > 5 && (

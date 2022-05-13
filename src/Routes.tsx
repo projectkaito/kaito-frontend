@@ -47,13 +47,24 @@ const Routes: React.FC<Props> = () => {
   useAccount();
   const [contentHeight, setContentHeight] = React.useState("100vh");
 
+  const [scrollPosition, setScrollposition] = React.useState(0);
+  React.useLayoutEffect(() => {
+    function updatePosition() {
+      setScrollposition(window.scrollY);
+    }
+    window.addEventListener("scroll", updatePosition);
+    return () => window.removeEventListener("scroll", updatePosition);
+  }, []);
+
   const classes = useStyle();
   return (
-    <div  className={classes.mainContainer} style={{}}>
+    <div className={classes.mainContainer} style={{}}>
       <div className={classes.img}></div>
       <div
         style={{
-          background: "#0000009c",
+          background: scrollPosition <= 50 ? "" : "#00000085",
+          // background: scrollPosition <= 10 ? "" :  scrollPosition > 10 ? "" : "#00000085",
+          transition: "background 0.5s ease-out",
           position: "absolute",
           top: 0,
           left: 0,
