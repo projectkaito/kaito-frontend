@@ -21,19 +21,16 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <span
       role="tabpanel"
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      style={{ width: "100%" }}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
+      {value === index && <Box sx={{ width: "100%" }}>{children}</Box>}
+    </span>
   );
 }
 
@@ -67,7 +64,15 @@ export default function RoadmapTabs() {
         width: "100%",
       }}
     >
-      <AppBar elevation={0} position="static" style={{ width: "100%", maxWidth: "752px", background: "#ff000000" }}>
+      <AppBar
+        elevation={0}
+        position="static"
+        style={{
+          width: "100%",
+          background: "#ff000000",
+          maxWidth: "500px",
+        }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -75,28 +80,27 @@ export default function RoadmapTabs() {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
-          
         >
           <Tab label="Charity" {...a11yProps(0)} />
           <Tab label="Anime Series" {...a11yProps(1)} />
           <Tab label="Token" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <SwipeableViews   
+      {/* <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <Roadmap />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
-      </SwipeableViews>
+      > */}
+      <TabPanel value={value} index={0} dir={theme.direction}>
+        <Roadmap />
+      </TabPanel>
+      <TabPanel value={value} index={1} dir={theme.direction}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2} dir={theme.direction}>
+        Item Three
+      </TabPanel>
+      {/* </SwipeableViews> */}
     </Box>
   );
 }

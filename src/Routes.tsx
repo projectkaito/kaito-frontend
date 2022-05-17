@@ -14,7 +14,7 @@ import zIndex from "@mui/material/styles/zIndex";
 const useStyle = makeStyles((theme) => ({
   mainContainer: {
     //  display: "grid", gridTemplateRows: "min-content 1fr min-content"
-    height: "500vh",
+    // height: "500vh",
 
     position: "relative",
 
@@ -50,7 +50,7 @@ const Routes: React.FC<Props> = () => {
   const [contentHeight, setContentHeight] = React.useState("100vh");
 
   const [scrollPosition, setScrollposition] = React.useState(0);
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     function updatePosition() {
       setScrollposition(window.scrollY);
     }
