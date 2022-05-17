@@ -7,6 +7,7 @@ import useModal from "src/hooks/useModal";
 import nftImage from "src/assets/images/nftImage.png";
 import Roadmap from "./components/RoadmapAnime1";
 import RoadmapTabs from "./components/RoadmapTabs";
+import TeamMembers from "./components/TeamMembers";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   leftContent: {
@@ -70,13 +71,23 @@ const Home: React.FC<Props> = () => {
           <img style={{ width: "100%" }} src={nftImage} alt="nft image" />
           {/* </div> */}
         </Grid>
-        <Grid item md={12}>
+        <Grid item xs={12} sm={12} md={12}>
           <div className={classes.roadmap}>
             <Typography variant="h1" className={classes.title}>
               Roadmap
             </Typography>
             <div className={classes.roadmapContainer}>
               <RoadmapTabs />
+            </div>
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <div className={classes.roadmap}>
+            <Typography variant="h1" className={classes.title}>
+              TeamMembers
+            </Typography>
+            <div>
+              <TeamMembers />
             </div>
           </div>
         </Grid>
