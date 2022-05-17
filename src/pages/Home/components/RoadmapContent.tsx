@@ -4,10 +4,10 @@ import { Theme, Typography } from "@mui/material";
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentWrapper: {
-    background: "rgba(0,0,0,0.4)",
-    borderRadius: 16,
+    // background: "rgba(0,0,0,0.4)",
+    // borderRadius: 16,
     // backdropFilter: "blur(10px)",
-    boxShadow: "0px 2px 10px 5px rgba(0,0,0,0.4)",
+    // boxShadow: "0px 2px 10px 5px rgba(0,0,0,0.4)",
     [theme.breakpoints.down("md")]: {
       marginLeft: "0px !important",
       position: "relative !important",
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: theme.fonts[0],
   },
   content: {
+    width: "305px",
     display: "flex",
     flexDirection: "column",
   },

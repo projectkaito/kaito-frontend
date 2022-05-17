@@ -74,7 +74,7 @@ const RoadmapAnime2: React.FC<Props> = () => {
         <RoadmapContent
           image={rocketImage}
           style={{
-            maxWidth: "300px",
+            maxWidth: "387px",
             marginLeft: "calc(80% - 190px)",
           }}
           rank="Q1"
@@ -86,7 +86,7 @@ const RoadmapAnime2: React.FC<Props> = () => {
         <RoadmapContent
           image={crown}
           style={{
-            maxWidth: "320px",
+            maxWidth: "438px",
             position: "absolute",
             top: "12%",
             left: "calc(25% - 219px)",
@@ -101,7 +101,7 @@ const RoadmapAnime2: React.FC<Props> = () => {
         <RoadmapContent
           image={boy}
           style={{
-            maxWidth: "300px",
+            maxWidth: "387px",
             position: "absolute",
             top: "75%",
             left: "calc(35% - 193px)",
@@ -115,7 +115,7 @@ const RoadmapAnime2: React.FC<Props> = () => {
         <RoadmapContent
           image={music11}
           style={{
-            maxWidth: "300px",
+            maxWidth: "387px",
             top: "60%",
             right: "calc(25% - 193px)",
             position: "absolute",
