@@ -195,7 +195,8 @@ const Navbar: React.FC<Props> = () => {
     <div
       className={classes.container}
       style={{
-        height: percentage >= 4 ? "" : "100vh",
+        // height: percentage >= 4 ? "" : "100vh",
+        height: "100vh",
       }}
     >
       <div

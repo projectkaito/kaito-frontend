@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: "auto",
     textAlign: "center",
     color: theme.palette.secondary.main,
-    maxWidth: "672px",
+    // maxWidth: "672px",
     marginTop: "88px",
   },
   rightContent: {
@@ -86,7 +86,7 @@ const Home: React.FC<Props> = () => {
               Roadmap
             </Typography>
             <div className={classes.roadmapContainer}>
-              {/* <RoadmapTabs /> */}
+              <RoadmapTabs />
             </div>
           </div>
         </Grid>
