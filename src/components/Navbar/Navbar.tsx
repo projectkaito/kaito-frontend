@@ -44,8 +44,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100vh",
   },
   navContent: {
+    position: "relative",
+    // display: "flex",
+    // justifyContent: "center",
     [theme.breakpoints.down("md")]: {
-      display: "none",
+      // display: "none",
     },
   },
   logo: {
@@ -56,10 +59,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       maxWidth: "124px",
     },
     [theme.breakpoints.down("sm")]: {
-      maxWidth: "100px",
+      // maxWidth: "100px",
     },
     [theme.breakpoints.down("xs")]: {
-      maxWidth: "84px",
+      // maxWidth: "84px",
     },
   },
   navItems: {
@@ -69,6 +72,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "black",
     display: "flex",
     gap: "40px",
+    transition: "opacity 200ms ease-in-out",
+    paddingRight: 20,
   },
   nav: {
     background: "red",
@@ -131,18 +136,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     alignItems: "center",
     padding: "5px",
-    // height: 100,
-    // boxShadow: "0px 0px 114px 1px #140a1a, inset -11px 0px 54px -7px #0a0a0a",
-    paddingLeft: 10,
-    paddingRight: 10,
-    // background: "#52266b42",
+    paddingLeft: 0,
+    paddingRight: 20,
+    paddingTop: 10,
     transition: "all 0.5s linear",
     flexDirection: "column",
     top: "0px",
-    [theme.breakpoints.down("md")]: {
-      paddingRight: 25,
-      height: "95px !important",
-    },
+    position: "relative",
+  },
+  navContainer: {
+    width: "100%",
+    position: "relative",
+    top: -117,
   },
 }));
 
@@ -161,21 +166,23 @@ const Navbar: React.FC<Props> = () => {
   const logoRef = useRef<HTMLImageElement | null>();
   const NavItemsRef = useRef<HTMLImageElement | null>();
   const max = 333;
+
   React.useEffect(() => {
     // let
   }, [scrollPosition]);
 
-  console.log("percentage", percentage);
   function myscrollfn(scrollPosition: number) {
     let percentage = (scrollPosition / max) * 39;
     if (percentage > 50) percentage = 50;
+
     if (logoRef.current) {
       logoRef.current.style.transform = `translateX(calc(50vw - 50% - ${percentage}vw + ${percentage}% ))`;
     }
     if (NavItemsRef.current) {
       NavItemsRef.current.style.transform = `translateX(calc(50vw - 50% + ${percentage}vw - ${percentage}% ))`;
+      if (percentage > 5) NavItemsRef.current.style.opacity = "1";
+      else NavItemsRef.current.style.opacity = "0";
     }
-    console.log("scroll", scrollPosition);
   }
 
   const links = [
@@ -189,65 +196,39 @@ const Navbar: React.FC<Props> = () => {
   const linkClicked = (url: string) => {
     url[0] === "/" ? navigate(url) : window.open(url, "_blank");
   };
+
   const classes = useStyles();
-  console.log("percentage", percentage);
   return (
     <div
       className={classes.container}
       style={{
-        height: percentage >= 4 ? "" : "100vh",
+        // height: "100vh",
+        position: "sticky",
       }}
     >
       <div
         className={classes.navContent}
         style={{
-          // background: percentage >= 10 ? "#210825f2" : "",
-          // boxShadow: percentage >= 10 ? "inset 0px 0px 114px 12px black, inset -11px 0px 35px -1px black" : "",
           width: "100%",
-          height: "100px",
-
-          position: percentage >= 4 ? "fixed" : "sticky",
-          top: "0px",
-          left: "10px",
         }}
       >
-        <img
-          ref={logoRef as any}
-          style={{
-            marginTop: scrollPosition === 0 ? "" : "13px",
-            marginLeft: scrollPosition === 0 ? "" : "28px",
-          }}
-          src={logo}
-          className={classes.logo}
-          alt="logo"
-        />
-        {/* <LinearProgress /> */}
+        <img ref={logoRef as any} src={logo} className={classes.logo} alt="logo" />
       </div>
-      <div
-        style={{
-          width: "100%",
-          height: "100px",
-
-          position: percentage >= 4 ? "fixed" : "sticky",
-          inset: "44px -76px",
-        }}
-      >
-        {scrollPosition > 5 && (
-          <div ref={NavItemsRef as any} className={classes.navItems}>
-            <div className={classes.hideSmDown}>
-              <Button color="secondary">About</Button>
-              <Button color="secondary">Roadmap</Button>
-              <Button color="secondary">Purchase</Button>
-              <Button color="secondary">Team</Button>
-              <Button color="secondary">Mint!</Button>
-              <WalletIcon />
-            </div>
+      <div className={classes.navContainer}>
+        <div ref={NavItemsRef as any} className={classes.navItems} style={{ opacity: 0 }}>
+          <div className={classes.hideSmDown}>
+            <Button color="secondary">About</Button>
+            <Button color="secondary">Roadmap</Button>
+            <Button color="secondary">Purchase</Button>
+            <Button color="secondary">Team</Button>
+            <Button color="secondary">Mint!</Button>
+            <WalletIcon />
           </div>
-        )}
+        </div>
       </div>
 
       <div className={classes.hideMdUp}>
-        <img src={logo} className={classes.logo} alt="logo" />
+        {/* <img src={logo} className={classes.logo} alt="logo" /> */}
         <BurgerMenu links={links} />
       </div>
     </div>

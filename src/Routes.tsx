@@ -75,7 +75,9 @@ const Routes: React.FC<Props> = () => {
           zIndex: -1,
         }}
       ></div>
+      <div style={{ height: "calc(50vh - 70px)" }} />
       <Navbar />
+      <div style={{ height: "calc(50vh - 70px)" }} />
       <Switch>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
