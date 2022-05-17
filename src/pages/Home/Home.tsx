@@ -5,7 +5,7 @@ import useNotify from "src/hooks/useNotify";
 import FileUploader from "src/components/FileUploader/FileUploader";
 import useModal from "src/hooks/useModal";
 import nftImage from "src/assets/images/nftImage.png";
-import Roadmap from "./components/Roadmap";
+import Roadmap from "./components/RoadmapAnime1";
 import RoadmapTabs from "./components/RoadmapTabs";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -49,16 +49,6 @@ interface Props {}
 
 const Home: React.FC<Props> = () => {
   const classes = useStyles();
-  const { notifySuccess, notifyError, notifyLoading, dismissNotifyAll } = useNotify();
-  const { openModal } = useModal();
-
-  // const onFile = (file: File | File[]) => {
-  //   console.log(file);
-  // };
-
-  // const handleModal = () => {
-  //   openModal("Hello", {}, {});
-  // };
 
   return (
     <div className={classes.root}>

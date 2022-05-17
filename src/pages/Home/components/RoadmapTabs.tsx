@@ -8,7 +8,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Roadmap from "./Roadmap";
+import Roadmap from "./RoadmapAnime1";
+import { Button } from "@mui/material";
+import RoadmapAnime1 from "./RoadmapAnime1";
+import RoadmapAnime2 from "./RoadmapAnime2";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,7 +46,7 @@ function a11yProps(index: number) {
 
 export default function RoadmapTabs() {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -86,16 +89,20 @@ export default function RoadmapTabs() {
           <Tab label="Token" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      {/* <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      > */}
+
       <TabPanel value={value} index={0} dir={theme.direction}>
-        <Roadmap />
+        Item 1
       </TabPanel>
+
       <TabPanel value={value} index={1} dir={theme.direction}>
-        Item Two
+        <Button variant="contained" color="primary" style={{ marginTop: 20 }}>
+          2022
+        </Button>
+        <RoadmapAnime1 />
+        <Button variant="contained" color="primary" style={{ marginTop: 40 }}>
+          2023
+        </Button>
+        <RoadmapAnime2 />
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
         Item Three

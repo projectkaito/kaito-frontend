@@ -7,42 +7,40 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 //   }
 // }
 
-// declare module "@mui/material/styles" {
-//   interface Theme {
-//     textShadows: {
-//       primary: string;
-//       secondary: string;
-//       white: string;
-//     };
+declare module "@mui/material/styles" {
+  interface Theme {
+    textShadows: {
+      primary: string;
+      secondary: string;
+      white: string;
+    };
 
-//     fonts: string[];
-//   }
-//   // allow configuration using `createTheme`
-//   interface ThemeOptions {
-//     textShadows?: {
-//       primary?: string;
-//       secondary?: string;
-//       white?: string;
-//     };
-//     fonts?: string[];
-//   }
-// }
+    fonts: string[];
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    textShadows?: {
+      primary?: string;
+      secondary?: string;
+      white?: string;
+    };
+    fonts?: string[];
+  }
+}
 
-const primaryCrimson = "#D3165E"
-const secondaryWhite = "#FFFFFF"
+const Typographica = "Typographica";
+
+const primaryCrimson = "#D3165E";
+const secondaryWhite = "#FFFFFF";
 
 let theme = createTheme({
-
-
   palette: {
-
-
     primary: {
-      main: primaryCrimson
+      main: primaryCrimson,
     },
     secondary: {
-      main: secondaryWhite
-    }
+      main: secondaryWhite,
+    },
   },
   typography: {
     fontFamily: " 'Ubuntu', sans-serif",
@@ -62,19 +60,24 @@ let theme = createTheme({
         root: {
           textTransform: "none",
         },
+        containedPrimary: {
+          boxShadow: "none",
+          borderRadius: 10,
+          fontWeight: 600,
+          fontSize: "1.2rem",
+          padding: "3px 32px",
+        },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
           fontFamily: "'Ubuntu', san-serif",
-        }
-
-      }
-    }
-
+        },
+      },
+    },
   },
-
+  fonts: [Typographica],
 });
 
 theme = responsiveFontSizes(theme);
