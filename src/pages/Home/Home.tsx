@@ -7,7 +7,9 @@ import useModal from "src/hooks/useModal";
 import nftImage from "src/assets/images/nftImage.png";
 import Roadmap from "./components/RoadmapAnime1";
 import RoadmapTabs from "./components/RoadmapTabs";
+import Footer from "src/components/Footer/Footer";
 import TeamMembers from "./components/TeamMembers";
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   leftContent: {
@@ -90,6 +92,9 @@ const Home: React.FC<Props> = () => {
               <TeamMembers />
             </div>
           </div>
+        </Grid>
+        <Grid item xs={12}>
+          <Footer />
         </Grid>
       </Grid>
     </div>

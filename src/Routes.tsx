@@ -86,7 +86,6 @@ const Routes: React.FC<Props> = () => {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Switch>
-      <div style={{ height: "50px" }} />
       {/* <Footer /> */}
     </div>
   );

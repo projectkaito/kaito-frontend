@@ -30,9 +30,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexFlow: "column",
     alignItems: "flex-start",
+    width: "calc(100% - 20px)",
   },
   title: {
     fontFamily: theme.fonts[0],
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    width: "100%",
   },
 }));
 
@@ -46,7 +51,7 @@ const TeamMemberCard: React.FC<Props> = () => {
       <img src={CharImg} alt="" className={classes.img} />
       <div className={classes.contentContainer}>
         <div className={classes.contentWrapper}>
-          <Typography variant="h4" color="primary" className={classes.title}>
+          <Typography variant="h4" color="primary" align="left" className={classes.title}>
             <b>Faraz</b>
           </Typography>
           <Typography>Artist</Typography>

@@ -143,6 +143,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     top: "0px",
     position: "relative",
+    [theme.breakpoints.up("md")]: {
+      background: "transparent !important",
+    },
   },
   navContainer: {
     width: "100%",
@@ -163,8 +166,9 @@ const Navbar: React.FC<Props> = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
   const percentage = scrollPosition / 100;
-  const logoRef = useRef<HTMLImageElement | null>();
-  const NavItemsRef = useRef<HTMLImageElement | null>();
+  const logoRef = useRef<HTMLImageElement | null>(null);
+  const NavItemsRef = useRef<HTMLImageElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const max = 333;
 
   React.useEffect(() => {
@@ -177,6 +181,11 @@ const Navbar: React.FC<Props> = () => {
 
     if (logoRef.current) {
       logoRef.current.style.transform = `translateX(calc(50vw - 50% - ${percentage}vw + ${percentage}% ))`;
+      if (percentage > 49 && containerRef.current) {
+        containerRef.current.style.background = "rgba(0,0,0,0.3)";
+      } else if (containerRef.current) {
+        containerRef.current.style.background = "rgba(0,0,0,0)";
+      }
     }
     if (NavItemsRef.current) {
       NavItemsRef.current.style.transform = `translateX(calc(50vw - 50% + ${percentage}vw - ${percentage}% ))`;
@@ -201,9 +210,11 @@ const Navbar: React.FC<Props> = () => {
   return (
     <div
       className={classes.container}
+      ref={containerRef!}
       style={{
         // height: "100vh",
         position: "sticky",
+        zIndex: 10,
       }}
     >
       <div
