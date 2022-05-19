@@ -6,11 +6,11 @@ import Footer from "src/components/Footer/Footer";
 import NotFound from "src/pages/NotFound/NotFound";
 import useAccount from "./hooks/useAccount";
 import { makeStyles } from "@mui/styles";
-// @ts-ignore
 // import backgroundImage from "src/assets/images/gif.webm";
-import backgroundImage from "src/assets/images/bg.gif";
+// import backgroundImage from "src/assets/images/bg.gif";
 import zIndex from "@mui/material/styles/zIndex";
 import { Theme } from "@mui/material";
+import Animation from "src/assets/images/gif.webm";
 
 const useStyle = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -35,7 +35,7 @@ const useStyle = makeStyles((theme: Theme) => ({
     height: "100%",
     top: 0,
     left: 0,
-    background: `url(${backgroundImage})`,
+    // background: `url(${backgroundImage})`,
     backgroundAttachment: "fixed",
     backgroundSize: "cover",
     backgroundPositionY: "bottom",
@@ -44,6 +44,16 @@ const useStyle = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down("lg")]: {
       backgroundPositionX: "71%",
     },
+  },
+  vid: {
+    height: "100vh",
+    width: "100vw",
+    objectFit: "cover",
+    objectPosition: "70%",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    zIndex: -1,
   },
 }));
 
@@ -66,6 +76,7 @@ const Routes: React.FC<Props> = () => {
   return (
     <div className={classes.mainContainer} style={{}}>
       <div className={classes.img}></div>
+      <video autoPlay={true} loop={true} src={Animation} muted className={classes.vid} />
       <div
         style={{
           background: scrollPosition <= 50 ? "" : "#00000085",
