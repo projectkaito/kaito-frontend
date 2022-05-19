@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: 20,
     zIndex: 999999,
   },
+  link: {
+    color: "white",
+    borderBottom: `1px solid rgba(255,255,255,0.2)`,
+  },
 }));
 
 interface Props {
@@ -51,7 +55,9 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
         anchor={"top"}
         open={state["top"]}
         onClose={toggleDrawer("top", false)}
-        PaperProps={{ style: { width: "100%", height: "100%", background: "#0e041c" } }}
+        PaperProps={{
+          style: { width: "100%", minHeight: "50vh", background: "rgba(14,4,28,0.2)", backdropFilter: "blur(10px)" },
+        }}
 
         // sx={{ width:  'auto' }}
         // role="presentation"
@@ -62,7 +68,7 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
         {/* </IconButton> */}
         <List>
           {links.map(([name, path]) => (
-            <ListItem button key={path} onClick={() => handleLinkClick(path)}>
+            <ListItem button key={path} onClick={() => handleLinkClick(path)} className={classes.link}>
               <ListItemText className="center" primary={name} />
             </ListItem>
           ))}

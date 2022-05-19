@@ -61,9 +61,11 @@ interface Props {}
 
 const Routes: React.FC<Props> = () => {
   useAccount();
-  const [contentHeight, setContentHeight] = React.useState("100vh");
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const classes = useStyle();
 
   const [scrollPosition, setScrollposition] = React.useState(0);
+
   React.useEffect(() => {
     function updatePosition() {
       setScrollposition(window.scrollY);
@@ -72,11 +74,15 @@ const Routes: React.FC<Props> = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
-  const classes = useStyle();
+  React.useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  }, [videoRef]);
   return (
     <div className={classes.mainContainer} style={{}}>
       <div className={classes.img}></div>
-      <video autoPlay={true} loop={true} src={Animation} muted className={classes.vid} />
+      <video ref={videoRef} autoPlay={true} loop={true} src={Animation} muted className={classes.vid} />
       <div
         style={{
           background: scrollPosition <= 50 ? "" : "#00000085",
