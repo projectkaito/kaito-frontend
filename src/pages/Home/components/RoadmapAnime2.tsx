@@ -189,6 +189,12 @@ const RoadmapAnime2: React.FC<Props> = () => {
           </div>
           <div className={classes.boxWrapper}>
             <div className={classes.box} />
+          </div>
+          <div className={classes.boxWrapper}>
+            <div className={classes.box} />
+          </div>
+          <div className={classes.boxWrapper}>
+            <div className={classes.box} />
             <div className={classes.box} />
           </div>
           <div className={classes.boxWrapper}>
