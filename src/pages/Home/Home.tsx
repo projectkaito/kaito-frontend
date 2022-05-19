@@ -83,8 +83,8 @@ const Home: React.FC<Props> = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
           <div className={classes.roadmap}>
-            <Typography variant="h1" className={classes.title}>
-              TeamMembers
+            <Typography variant="h2">
+              <b>TeamMembers</b>
             </Typography>
             <div>
               <TeamMembers />
