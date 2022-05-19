@@ -141,8 +141,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: 10,
     transition: "all 0.5s linear",
     flexDirection: "column",
-    top: "0px",
+    top: "-1px",
     position: "relative",
+    background: "rgba(0,0,0,0)",
+    boxShadow: "none",
     [theme.breakpoints.up("md")]: {
       background: "transparent !important",
     },
@@ -151,6 +153,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     position: "relative",
     top: -117,
+  },
+  containerScrolled: {
+    background: "linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,0))",
+    // backdropFilter: "blur(5px)",
+    // boxShadow: "0px 5px 20px rgba(0,0,0,0.3)",
   },
 }));
 
@@ -182,9 +189,9 @@ const Navbar: React.FC<Props> = () => {
     if (logoRef.current) {
       logoRef.current.style.transform = `translateX(calc(50vw - 50% - ${percentage}vw + ${percentage}% ))`;
       if (percentage > 49 && containerRef.current) {
-        containerRef.current.style.background = "rgba(0,0,0,0.3)";
+        containerRef.current.classList.add(classes.containerScrolled);
       } else if (containerRef.current) {
-        containerRef.current.style.background = "rgba(0,0,0,0)";
+        containerRef.current.classList.remove(classes.containerScrolled);
       }
     }
     if (NavItemsRef.current) {

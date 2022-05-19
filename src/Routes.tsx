@@ -79,6 +79,7 @@ const Routes: React.FC<Props> = () => {
       videoRef.current.play();
     }
   }, [videoRef]);
+
   return (
     <div className={classes.mainContainer} style={{}}>
       <div className={classes.img}></div>
