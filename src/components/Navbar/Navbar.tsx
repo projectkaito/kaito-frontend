@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     width: "100%",
     maxWidth: "184px",
-
+    transition: "padding .2s ease-in-out",
     [theme.breakpoints.down("md")]: {
       maxWidth: "124px",
     },
@@ -160,6 +160,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     // boxShadow: "0px 5px 20px rgba(0,0,0,0.3)",
   },
 }));
+const max = window.innerHeight / 2 - 75;
 
 const Navbar: React.FC<Props> = () => {
   const [scrollPosition, setScrollposition] = React.useState(0);
@@ -172,26 +173,27 @@ const Navbar: React.FC<Props> = () => {
     window.addEventListener("scroll", updatePosition);
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
-  const percentage = scrollPosition / 100;
+
   const logoRef = useRef<HTMLImageElement | null>(null);
   const NavItemsRef = useRef<HTMLImageElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const max = 333;
 
   React.useEffect(() => {
     // let
   }, [scrollPosition]);
 
   function myscrollfn(scrollPosition: number) {
-    let percentage = (scrollPosition / max) * 39;
+    let percentage = (scrollPosition / max) * 50;
     if (percentage > 50) percentage = 50;
 
     if (logoRef.current) {
       logoRef.current.style.transform = `translateX(calc(50vw - 50% - ${percentage}vw + ${percentage}% ))`;
       if (percentage > 49 && containerRef.current) {
         containerRef.current.classList.add(classes.containerScrolled);
+        logoRef.current.style.marginLeft = "30px";
       } else if (containerRef.current) {
         containerRef.current.classList.remove(classes.containerScrolled);
+        logoRef.current.style.marginLeft = "0px";
       }
     }
     if (NavItemsRef.current) {
