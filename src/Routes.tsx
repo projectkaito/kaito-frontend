@@ -10,8 +10,9 @@ import { makeStyles } from "@mui/styles";
 // import backgroundImage from "src/assets/images/gif.webm";
 import backgroundImage from "src/assets/images/bg.gif";
 import zIndex from "@mui/material/styles/zIndex";
+import { Theme } from "@mui/material";
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles((theme: Theme) => ({
   mainContainer: {
     //  display: "grid", gridTemplateRows: "min-content 1fr min-content"
     // height: "500vh",
@@ -40,6 +41,9 @@ const useStyle = makeStyles((theme) => ({
     backgroundPositionY: "bottom",
     position: "absolute",
     zIndex: -2,
+    [theme.breakpoints.down("lg")]: {
+      backgroundPositionX: "71%",
+    },
   },
 }));
 

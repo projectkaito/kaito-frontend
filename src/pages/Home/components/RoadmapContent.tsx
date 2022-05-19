@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Theme, Typography } from "@mui/material";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentWrapper: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       position: "relative !important",
       top: "auto !important",
       left: "auto !important",
+      marginTop: "0px !important",
     },
   },
   position: {
@@ -37,9 +39,10 @@ interface Props {
   description?: string;
   style?: React.CSSProperties | undefined;
   imageHeight?: string;
+  className?: string;
 }
 
-const RoadmapContent: React.FC<Props> = ({ imageHeight, style, image, rank, position, description }) => {
+const RoadmapContent: React.FC<Props> = ({ imageHeight, style, image, rank, position, description, className }) => {
   const classes = useStyles();
 
   return (
@@ -49,7 +52,7 @@ const RoadmapContent: React.FC<Props> = ({ imageHeight, style, image, rank, posi
         gap: "15px",
         ...style,
       }}
-      className={classes.contentWrapper}
+      className={clsx(classes.contentWrapper, className)}
     >
       <div className={classes.content}>
         <Typography variant="h4">{rank}</Typography>

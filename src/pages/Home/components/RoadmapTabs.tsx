@@ -12,6 +12,7 @@ import Roadmap from "./RoadmapAnime1";
 import { Button } from "@mui/material";
 import RoadmapAnime1 from "./RoadmapAnime1";
 import RoadmapAnime2 from "./RoadmapAnime2";
+import RoadmapAnime3 from "./RoadmapAnime3";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -103,6 +104,10 @@ export default function RoadmapTabs() {
           2023
         </Button>
         <RoadmapAnime2 />
+        <Button variant="contained" color="primary" style={{ marginTop: 40 }}>
+          2024
+        </Button>
+        <RoadmapAnime3 />
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
         Item Three
