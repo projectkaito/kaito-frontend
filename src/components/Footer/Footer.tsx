@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Container, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import logo from "src/assets/logos/logo.png";
@@ -10,7 +10,8 @@ import Opensea from "src/assets/images/icons/opensea.png";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: "80vh",
+    height: "100vh",
+    maxHeight: 1920,
     background: "radial-gradient(ellipse at 50% 130%, rgba(50, 0, 26, 1) 15%, rgba(2, 0, 36, 1) 100%)",
     backgroundAttachment: "fixed",
     // background: "radial-gradient(ellipse at 50% 100%, rgba(50,0,26,1) 29%, rgba(2,0,36,1) 100%)",
@@ -29,13 +30,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  style?: CSSProperties;
+}
 
-const Footer: React.FC<Props> = () => {
+const Footer: React.FC<Props> = ({ style }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={style}>
       <div className="center" style={{ height: "100%" }}>
         <div style={{ width: "100%" }}>
           <div className="center">

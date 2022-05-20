@@ -11,7 +11,6 @@ import RoadmapContent from "./RoadmapContent";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: "100vw",
     marginTop: "94px",
     position: "relative",
     background: `url(${RoadMapWhole})`,

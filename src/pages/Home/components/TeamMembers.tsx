@@ -5,7 +5,7 @@ import TeamMemberCard from "src/components/TeamMemberCard/TeamMemberCard";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginTop: 20,
+    marginTop: 100,
   },
 }));
 
