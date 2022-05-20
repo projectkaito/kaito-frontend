@@ -205,6 +205,7 @@ const Navbar: React.FC<Props> = () => {
 
   const links = [
     ["Home", "/"],
+    ["Minting", "/minting"],
     ["404", "/404"],
   ];
 

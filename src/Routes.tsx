@@ -11,6 +11,7 @@ import { makeStyles } from "@mui/styles";
 import zIndex from "@mui/material/styles/zIndex";
 import { Theme } from "@mui/material";
 import Animation from "src/assets/images/gif.webm";
+import Minting from "./pages/Minting/Minting";
 
 const useStyle = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -82,26 +83,35 @@ const Routes: React.FC<Props> = () => {
 
   return (
     <div className={classes.mainContainer} style={{}}>
-      <div className={classes.img}></div>
+      {/* <div className={classes.img}></div> */}
       <video ref={videoRef} autoPlay={true} loop={true} src={Animation} muted className={classes.vid} />
-      <div
-        style={{
-          background: scrollPosition <= 50 ? "" : "#00000085",
-          // background: scrollPosition <= 10 ? "" :  scrollPosition > 10 ? "" : "#00000085",
-          transition: "background 0.5s ease-out",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-        }}
-      ></div>
-      <div style={{ height: "calc(50vh - 70px)" }} />
-      <Navbar />
-      <div style={{ height: "calc(50vh - 70px)" }} />
+
       <Switch>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <div
+                style={{
+                  background: scrollPosition <= 50 ? "" : "#00000085",
+                  // background: scrollPosition <= 10 ? "" :  scrollPosition > 10 ? "" : "#00000085",
+                  transition: "background 0.5s ease-out",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  zIndex: -1,
+                }}
+              ></div>
+              <div style={{ height: "calc(50vh - 70px)" }} />
+              <Navbar />
+              <div style={{ height: "calc(50vh - 70px)" }} />
+              <Home />
+            </>
+          }
+        />
+        <Route path="/minting" element={<Minting />} />
         <Route path="*" element={<NotFound />} />
       </Switch>
       {/* <Footer /> */}
