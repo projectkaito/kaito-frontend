@@ -30,8 +30,13 @@ export function getDefaultValues<T>(objType: Type | undefined = undefined) {
   return obj as T;
 }
 
-export const getBase64 = (file: File) =>
-  new Promise<string>((resolve, reject) => {
+export const getBase64 = (file: File | Blob | string) =>
+  new Promise<string>(async (resolve, reject) => {
+    if (typeof file === "string") {
+      const response = await fetch(file);
+      const blob = await response.blob();
+      file = blob;
+    }
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {

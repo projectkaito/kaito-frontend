@@ -5707,6 +5707,11 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+gifshot@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/gifshot/-/gifshot-0.4.5.tgz#e3cb570203a3b139ff3069d7578098a29c03b0f8"
+  integrity sha1-48tXAgOjsTn/MGnXV4CYopwDsPg=
+
 glitch-canvas@^1.1.10:
   version "1.1.10"
   resolved "https://registry.yarnpkg.com/glitch-canvas/-/glitch-canvas-1.1.10.tgz#4b4a6832d000cd182f846248aacc87b965ca4177"

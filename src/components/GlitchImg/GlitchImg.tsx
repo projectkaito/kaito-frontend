@@ -3,6 +3,9 @@ import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material";
 import glitch from "glitch-canvas";
 import { getBase64 } from "src/utils";
+import { getGlitchImagesForMultpleImages, imagesToGif } from "src/utils/glitch";
+
+// var myWorker = new Worker("src/utils/glitch.ts");
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -10,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 300,
   },
 }));
-
 interface Props {
   src?: string;
   srcSet?: string[];
@@ -18,68 +20,56 @@ interface Props {
 
 const GlitchImg: React.FC<Props> = ({ src, srcSet }) => {
   const classes = useStyles();
-  const [int, setInt] = React.useState<NodeJS.Timer[]>([]);
+  const int = React.useRef<NodeJS.Timer[]>([]);
   const imgRef = React.useRef<HTMLImageElement>(null);
+  const [imagesBase64, setImagesBase64] = React.useState<string[]>([]);
+  const [glitchedImages, setGlitchedImages] = React.useState<string[]>([]);
+  const [img, setImg] = React.useState("");
 
-  const setGlitchImg = (
-    iterations: {
-      iterations: number;
-    },
-    image: HTMLImageElement
-  ) => {
-    let amount = 99;
-    let seed = 35;
-    let quality = 99;
-    glitch({ amount: 60, seed: 84, quality: 55, iterations: iterations.iterations })
-      .fromImage(image)
-      .toDataURL()
-      .then(function (dataURL: string) {
-        if (imgRef?.current) imgRef.current.src = dataURL;
-        iterations.iterations++;
-        if (iterations.iterations > 10) iterations.iterations = 1;
-      });
+  const srcSetToBase64 = async () => {
+    if (!srcSet) return;
+    let arr: string[] = [];
+    for (let i = 0; i < srcSet.length; i++) {
+      const element = srcSet[i];
+      let data = await getBase64(element);
+      arr.push(data);
+    }
+    setImagesBase64(arr);
   };
 
-  // function to get random number from range
-  const getRandomInt = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  React.useEffect(() => {
+    srcSetToBase64();
+  }, [srcSet]);
 
-  const startGlitch = React.useCallback(() => {
-    if (!imgRef?.current) return;
-    let img = new Image();
-    if (src) {
-      img.src = src;
-    } else if (srcSet) {
-      setInt((ele) => {
-        ele[0] = setInterval(() => {
-          img.src = srcSet[getRandomInt(0, srcSet.length - 1)];
-        }, 2000);
-        return ele;
-      });
-    } else return;
-    let obj = { iterations: 1 };
-    setInt((ele) => {
-      ele[1] = setInterval(() => setGlitchImg(obj, img), 100);
-      return ele;
+  React.useEffect(() => {
+    if (!srcSet) return;
+    getGlitchImagesForMultpleImages(srcSet).then(async (res) => {
+      setGlitchedImages(res);
+      setImg(await imagesToGif(res));
     });
-    img.onload = () => {};
-  }, [src]);
+  }, [srcSet]);
 
   React.useEffect(() => {
-    startGlitch();
+    let index = 0;
+    let int = setInterval(() => {
+      if (!imgRef?.current) return;
+      if (glitchedImages.length > 0) {
+        imgRef.current.src = glitchedImages[index];
+        index === glitchedImages.length - 1 ? (index = 0) : index++;
+      }
+    }, 100);
     return () => {
-      int.forEach((item) => {
-        clearInterval(item);
-      });
+      clearInterval(int);
     };
-  }, [startGlitch, glitch]);
+  }, [glitchedImages]);
 
-  React.useEffect(() => {
-    // getBase64()
-  });
-
-  return <img ref={imgRef} className={classes.root}></img>;
+  return (
+    <img
+      src={img}
+      // ref={imgRef}
+      className={classes.root}
+    />
+  );
 };
 
 export default GlitchImg;
