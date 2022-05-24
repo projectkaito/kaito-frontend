@@ -1,6 +1,7 @@
 import glitch from "glitch-canvas";
 import { createGIF } from "gifshot";
 import { getBase64 } from "./index";
+import hash from "hash.js";
 
 export const getGlitchImg = (url: string, iteration: number, callback?: () => void) =>
   new Promise<string>(async (res) => {
@@ -25,7 +26,14 @@ export const getMultipleGlitchImages = (base64: string, number: number) =>
   });
 
 export const getGlitchImagesForMultpleImages = (base64: string[]) =>
-  new Promise<string[]>(async (res) => {
+  new Promise<string>(async (res) => {
+    let sha256 = hash.sha256().update(base64).digest("hex");
+    let storedHash = localStorage.getItem("gifhash");
+    console.log(storedHash, sha256);
+    if (storedHash === sha256 && localStorage.getItem("gif")) {
+      res(localStorage.getItem("gif")!);
+      return;
+    }
     let promiseArr = [];
     for (let i = 0; i < base64.length; i++) {
       promiseArr.push(getMultipleGlitchImages(base64[i], 10));
@@ -34,7 +42,10 @@ export const getGlitchImagesForMultpleImages = (base64: string[]) =>
     // string of strings to one string
     let finalImages = images.reduce((acc, curr) => acc.concat(curr), []);
     console.log("glitch done creating gif now");
-    res(finalImages);
+    let response = await imagesToGif(finalImages);
+    localStorage.setItem("gif", response);
+    localStorage.setItem("gifhash", sha256);
+    res(response);
   });
 
 export const imagesToGif = (images: string[]) =>

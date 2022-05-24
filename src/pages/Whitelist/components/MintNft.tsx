@@ -3,7 +3,6 @@ import { makeStyles } from "@mui/styles";
 import { Button, Theme } from "@mui/material";
 import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
