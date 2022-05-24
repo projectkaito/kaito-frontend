@@ -62,7 +62,7 @@ const Footer: React.FC<Props> = ({ style }) => {
             </a>
           </div>
           <Typography color="secondary" align="center" style={{ marginTop: 50 }}>
-            © Kaito 2022 | All Rights Reserved
+            © Project Kaito 2022 | All Rights Reserved
           </Typography>
         </div>
       </div>

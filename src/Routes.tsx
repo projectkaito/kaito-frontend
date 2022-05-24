@@ -12,6 +12,7 @@ import zIndex from "@mui/material/styles/zIndex";
 import { Theme } from "@mui/material";
 import Animation from "src/assets/images/gif.webm";
 import Minting from "./pages/Minting/Minting";
+import Whitelist from "./pages/Whitelist/Whitelist";
 
 const useStyle = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -112,6 +113,7 @@ const Routes: React.FC<Props> = () => {
           }
         />
         <Route path="/minting" element={<Minting />} />
+        <Route path="/whitelist" element={<Whitelist />} />
         <Route path="*" element={<NotFound />} />
       </Switch>
       {/* <Footer /> */}

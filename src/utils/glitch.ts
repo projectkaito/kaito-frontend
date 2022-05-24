@@ -33,6 +33,7 @@ export const getGlitchImagesForMultpleImages = (base64: string[]) =>
     let images = await Promise.all(promiseArr);
     // string of strings to one string
     let finalImages = images.reduce((acc, curr) => acc.concat(curr), []);
+    console.log("glitch done creating gif now");
     res(finalImages);
   });
 

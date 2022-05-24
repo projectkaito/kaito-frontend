@@ -41,6 +41,9 @@ let theme = createTheme({
     secondary: {
       main: secondaryWhite,
     },
+    text: {
+      primary: "rgb(255,255,255)",
+    },
   },
   typography: {
     fontFamily: " 'Ubuntu', sans-serif",
