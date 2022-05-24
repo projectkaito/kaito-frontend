@@ -3,10 +3,15 @@ import { makeStyles } from "@mui/styles";
 import { IconButton, Theme, Typography } from "@mui/material";
 import CharImg from "src/assets/images/character.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import ImdbImg from "src/assets/icons/imdb.png";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     transition: "all 0.2s ease-in-out",
+    height: "100%",
+    display: "grid",
+    gridTemplateRows: "min-content 1fr",
     "&:hover": {
       boxShadow: "10px 10px 5px rgba(211,22,94,0.8)",
       transform: "translate(-10px, -10px)",
@@ -34,31 +39,50 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     fontFamily: theme.fonts[0],
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    width: "100%",
+    fontWeight: 600,
+    letterSpacing: 2,
   },
 }));
 
-interface Props {}
+interface Props {
+  image: string;
+  name: string;
+  designation?: string;
+  twitter?: string;
+  instagram?: string;
+  imdb?: string;
+}
 
-const TeamMemberCard: React.FC<Props> = () => {
+const TeamMemberCard: React.FC<Props> = ({ image, name, designation, instagram, twitter, imdb }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <img src={CharImg} alt="" className={classes.img} />
+      <img src={image} alt="" className={classes.img} />
       <div className={classes.contentContainer}>
         <div className={classes.contentWrapper}>
           <Typography variant="h4" color="primary" align="left" className={classes.title}>
-            <b>Faraz</b>
+            {name}
           </Typography>
-          <Typography>Artist</Typography>
+          <Typography>{designation}</Typography>
         </div>
-        <IconButton color="secondary">
-          <TwitterIcon fontSize="small" />
-        </IconButton>
+        <div>
+          {instagram && (
+            <IconButton href="https://www.instagram.com/projectkaitonft/" color="secondary">
+              <InstagramIcon fontSize="small" />
+            </IconButton>
+          )}
+          {twitter && (
+            <IconButton color="secondary">
+              <TwitterIcon fontSize="small" />
+            </IconButton>
+          )}
+          {imdb && (
+            <IconButton color="secondary">
+              <img src={ImdbImg} alt="imdb" height="13px" />
+            </IconButton>
+          )}
+        </div>
       </div>
     </div>
   );
