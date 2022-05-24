@@ -1,12 +1,14 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Grid, Theme, Typography } from "@mui/material";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   attributeWrapper: {
-    border: "1px solid white",
     padding: "10px 16px",
+    transition: "all .2s ease-out",
+    border: "1px solid white",
   },
   attrType: {
     fontSize: 12,
@@ -30,7 +32,7 @@ const Details: React.FC<Props> = () => {
       <Grid container spacing={2} style={{ marginTop: 10 }}>
         {attributes.map((attr, index) => (
           <Grid item xs={6} md={4} key={index}>
-            <div className={classes.attributeWrapper}>
+            <div className={clsx(classes.attributeWrapper, "gloweff")}>
               <Typography color="textPrimary" className={classes.attrType}>
                 {attr.type}:
               </Typography>

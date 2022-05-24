@@ -11,7 +11,12 @@
   margin: 0;
   border: 0;
 }
-
+:root {
+  --text-color: hsla(210, 50%, 85%, 1);
+  --shadow-color: rgba(182, 84, 114, 0.4);
+  --btn-color: #D3165E;
+  --bg-color: #141218;
+}
 body {
   overflow-x: hidden;
   font-family: 'Ubuntu', sans-serif;
@@ -59,4 +64,27 @@ html {
   background: rgb(255, 18, 93);
   border-radius: 360px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.gloweff:hover{
+  /* border-color: transparent; */
+  box-shadow:
+  inset 0 0 10px rgb(179, 199, 253),
+  inset 5px 0 15px rgb(210,31,136),
+  inset -5px 0 15px rgb(81,202,241),
+  inset 5px 0 50px rgb(210,31,136),
+  inset -5px 0 50px rgb(81,202,241),
+  0 0 15px rgb(255, 255, 255),
+  -2px 0 15px rgb(210,31,136),
+  2px 0 15px rgb(81,202,241);
+}
+
+@keyframes glow {
+  from {
+
+  }
+  to {
+
+  }
 }
