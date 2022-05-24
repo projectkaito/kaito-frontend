@@ -9,11 +9,19 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Roadmap from "./RoadmapAnime1";
-import { Button } from "@mui/material";
+import { Button, Theme } from "@mui/material";
 import RoadmapAnime1 from "./RoadmapAnime1";
 import RoadmapAnime2 from "./RoadmapAnime2";
 import RoadmapAnime3 from "./RoadmapAnime3";
+import AnimeSeriesRoadmap from "./AnimeSeriesRoadmap";
+import { makeStyles } from "@mui/styles";
 
+const useStyles = makeStyles((theme: Theme) => ({
+  roadmapHeading: {
+    fontFamily: theme.fonts[0],
+    marginTop: 30,
+  },
+}));
 interface TabPanelProps {
   children?: React.ReactNode;
   dir?: string;
@@ -48,6 +56,7 @@ function a11yProps(index: number) {
 export default function RoadmapTabs() {
   const theme = useTheme();
   const [value, setValue] = React.useState(1);
+  const classes = useStyles();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -96,18 +105,10 @@ export default function RoadmapTabs() {
       </TabPanel>
 
       <TabPanel value={value} index={1} dir={theme.direction}>
-        <Button variant="contained" color="primary" style={{ marginTop: 20 }}>
-          2022
-        </Button>
-        <RoadmapAnime1 />
-        <Button variant="contained" color="primary" style={{ marginTop: 40 }}>
-          2023
-        </Button>
-        <RoadmapAnime2 />
-        <Button variant="contained" color="primary" style={{ marginTop: 40 }}>
-          2024
-        </Button>
-        <RoadmapAnime3 />
+        <Typography color="primary" variant="h3" align="center" className={classes.roadmapHeading}>
+          Anime Series Roadmap
+        </Typography>
+        <AnimeSeriesRoadmap />
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
         Item Three
