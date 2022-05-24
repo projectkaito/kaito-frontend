@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Container, Grid, Theme, Typography } from "@mui/material";
-import Logo from "src/assets/logos/logo.png";
-import Bg from "src/assets/images/1c.png";
+import Bg from "src/assets/images/buildings.gif";
 import Content from "./components/Content";
 import MintNft from "./components/MintNft";
+import LogoBar from "src/components/LogoBar/LogoBar";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,7 +26,7 @@ const Whitelist: React.FC<Props> = () => {
   return (
     <div className={classes.root}>
       <Container maxWidth="lg">
-        <img src={Logo} alt="Kaito" style={{ maxWidth: 150, marginTop: 20 }} />
+        <LogoBar />
         <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
           Whitelist
         </Typography>

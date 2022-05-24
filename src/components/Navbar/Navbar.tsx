@@ -207,6 +207,7 @@ const Navbar: React.FC<Props> = () => {
     ["Home", "/"],
     ["Minting", "/minting"],
     ["Whitelist", "/whitelist"],
+    ["NFT", "/nft/0x0/0"],
     ["404", "/404"],
   ];
 
