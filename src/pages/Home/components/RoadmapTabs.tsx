@@ -15,6 +15,8 @@ import RoadmapAnime2 from "./RoadmapAnime2";
 import RoadmapAnime3 from "./RoadmapAnime3";
 import AnimeSeriesRoadmap from "./AnimeSeriesRoadmap";
 import { makeStyles } from "@mui/styles";
+import RoadmapCharity from "./RoadmapCharity";
+import RoadmapToken from "./RoadmapToken";
 
 const useStyles = makeStyles((theme: Theme) => ({
   roadmapHeading: {
@@ -101,17 +103,23 @@ export default function RoadmapTabs() {
       </AppBar>
 
       <TabPanel value={value} index={0} dir={theme.direction}>
-        Item 1
+        {/* <Typography color="primary" variant="h2" align="center" className={classes.roadmapHeading}>
+          CharityRoadmap
+        </Typography> */}
+        <RoadmapCharity />
       </TabPanel>
 
       <TabPanel value={value} index={1} dir={theme.direction}>
-        <Typography color="primary" variant="h3" align="center" className={classes.roadmapHeading}>
+        {/* <Typography color="primary" variant="h2" align="center" className={classes.roadmapHeading}>
           Anime Series Roadmap
-        </Typography>
+        </Typography> */}
         <AnimeSeriesRoadmap />
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
-        Item Three
+        {/* <Typography color="primary" variant="h2" align="center" className={classes.roadmapHeading}>
+          TokenRoadmap
+        </Typography> */}
+        <RoadmapToken />
       </TabPanel>
       {/* </SwipeableViews> */}
     </Box>

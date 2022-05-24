@@ -1,12 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Container, Theme, Typography } from "@mui/material";
-import rocketImage from "src/assets/images/rocketImage.png";
-import roadmap from "src/assets/images/roadmap.png";
-import boy from "src/assets/images/boy.png";
-import crown from "src/assets/images/crown.png";
-import music11 from "src/assets/images/music11.png";
-import RoadMapWhole from "src/assets/images/animeroadmap.png";
+import RoadMapWhole from "src/assets/images/roadmaptoken.png";
 import RoadmapContent from "./RoadmapContent";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -62,26 +57,28 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {}
 
-const AnimeSeriesRoadmap: React.FC<Props> = () => {
+const RoadmapToken: React.FC<Props> = () => {
   const classes = useStyles();
 
   return (
     <Container maxWidth="lg">
       <div className={classes.root}>
         <img src={RoadMapWhole} alt="" className={classes.img} />
-        <RoadmapContent className={classes.content} position="June" description={"Community voiceover auditions"} />
+        <RoadmapContent className={classes.content} position="June" description={"Mint Staking commencies"} />
+        <RoadmapContent className={classes.content} position="2022Q3" description={"Kaito Metaverse Gallery Launch"} />
         <RoadmapContent
           className={classes.content}
-          position="2022Q3"
-          description={"Kaito Anime Show Trailer Released"}
+          position="2022Q4"
+          description={"Kaito Redacted Claim Merch Available"}
         />
-        <RoadmapContent className={classes.content} position="2022Q4" description={"Kaito Series 1 Recording"} />
+        <RoadmapContent className={classes.content} position="2023Q1" description={"Metaverse Land Acquisition"} />
+        <RoadmapContent className={classes.content} position="2023Q2" description={"Kaito Marketplace Launch"} />
+        <RoadmapContent className={classes.content} position="2023Q3" description={"Mental Health App Launch"} />
         <RoadmapContent
           className={classes.content}
-          position="2023Q2"
-          description={"Kaito Series 1 Premieres in the Metaverse"}
+          position="2023Q4"
+          description={"Kaito [Redacted] Companion Project"}
         />
-        <RoadmapContent className={classes.content} position="2023Q3" description={"Kaito Series 2 Recording"} />
 
         <div className={classes.boxesContainer}>
           <div className={classes.boxWrapper}>
@@ -133,29 +130,13 @@ const AnimeSeriesRoadmap: React.FC<Props> = () => {
           <div className={classes.boxWrapper}>
             <div className={classes.box} />
           </div>
+          <div className={classes.boxWrapper}>
+            <div className={classes.box} />
+          </div>
+          <div className={classes.boxWrapper}>
+            <div className={classes.box} />
+          </div>
 
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-          </div>
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-          </div>
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-            <div className={classes.box} />
-          </div>
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-          </div>
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-          </div>
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-          </div>
-          <div className={classes.boxWrapper}>
-            <div className={classes.box} />
-          </div>
           <div className={classes.boxWrapper}>
             <div className={classes.box} />
             <div className={classes.box} />
@@ -173,4 +154,4 @@ const AnimeSeriesRoadmap: React.FC<Props> = () => {
   );
 };
 
-export default AnimeSeriesRoadmap;
+export default RoadmapToken;

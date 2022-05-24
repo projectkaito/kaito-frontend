@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: theme.fonts[0],
   },
   content: {
-    width: "305px",
+    width: "275px",
     display: "flex",
     flexDirection: "column",
   },
