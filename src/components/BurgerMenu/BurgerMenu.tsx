@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import Burger from "react-css-burger";
 import { useNavigate } from "react-router-dom";
 import { Remove } from "@mui/icons-material";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -18,7 +19,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   link: {
     color: "white",
-    borderBottom: `1px solid rgba(255,255,255,0.2)`,
+    // borderBottom: `1px solid rgba(255,255,255,0.2)`,
+  },
+  text: {
+    fontSize: "2rem",
+    letterSpacing: 2,
+    fontFamily: theme.fonts[0],
   },
 }));
 
@@ -56,7 +62,7 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
         open={state["top"]}
         onClose={toggleDrawer("top", false)}
         PaperProps={{
-          style: { width: "100%", minHeight: "50vh", background: "rgba(14,4,28,0.2)", backdropFilter: "blur(10px)" },
+          style: { width: "100%", minHeight: "100vh", background: "rgba(14,4,28,0.2)", backdropFilter: "blur(10px)" },
         }}
 
         // sx={{ width:  'auto' }}
@@ -66,13 +72,25 @@ const BurgerMenu: React.FC<Props> = ({ links }) => {
       >
         {/* <IconButton color="primary" style={{ background: "red" }}> */}
         {/* </IconButton> */}
-        <List>
-          {links.map(([name, path]) => (
-            <ListItem button key={path} onClick={() => handleLinkClick(path)} className={classes.link}>
-              <ListItemText className="center" primary={name} />
-            </ListItem>
-          ))}
-        </List>
+        <div className={classes.burgerContainer}>
+          <Burger
+            onClick={toggleDrawer("top", false)}
+            active={state.top}
+            burger="slider"
+            color={theme.palette.primary.main}
+            hoverOpacity={0.8}
+            scale={1.2}
+          />
+        </div>
+        <div className="center" style={{ height: "90vh" }}>
+          <List>
+            {links.map(([name, path]) => (
+              <ListItem button key={path} onClick={() => handleLinkClick(path)} className={classes.link}>
+                <ListItemText disableTypography className={clsx("center", classes.text)} primary={name} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </Drawer>
       <div className={classes.burgerContainer}>
         <Burger

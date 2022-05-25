@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: " flex",
     alignItems: "center",
     justifyContent: "space-between",
-
+    pointerEvents: "all",
     position: "fixed",
     top: "12px",
     left: "12px",
