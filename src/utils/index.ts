@@ -1,34 +1,4 @@
-import { getType, Type } from "tst-reflect";
-
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-/**
- * @reflect
- */
-export function getDefaultValues<T>(objType: Type | undefined = undefined) {
-  let obj: { [key: string | number | symbol]: any } = {};
-  objType = objType ?? getType<T>();
-
-  objType.getProperties().forEach((prop) => {
-    if (prop.type.isString()) {
-      obj[prop.name] = "";
-    } else if (prop.type.isNumber() || prop.type.isEnum()) {
-      obj[prop.name] = 0;
-    } else if (prop.type.isBoolean()) {
-      obj[prop.name] = false;
-    } else if (prop.type.isArray()) {
-      obj[prop.name] = [];
-    } else if (prop.type.isAssignableTo(Type.Undefined)) {
-      obj[prop.name] = undefined;
-    } else if (prop.type.isAssignableTo(Type.Null)) {
-      obj[prop.name] = null;
-    } else if (prop.type.isObjectLike()) {
-      obj[prop.name] = getDefaultValues(prop.type);
-    }
-  });
-
-  return obj as T;
-}
 
 export const getBase64 = (file: File | Blob | string) =>
   new Promise<string>(async (resolve, reject) => {
