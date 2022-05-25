@@ -2,22 +2,8 @@ import React, { useRef } from "react";
 import { makeStyles } from "@mui/styles";
 import { Button, Theme, Typography } from "@mui/material";
 import logo from "src/assets/logos/logo.png";
-import backgroundImage from "src/assets/images/bg.gif";
-import {
-  Animator,
-  ScrollPage,
-  Fade,
-  batch,
-  Sticky,
-  MoveOut,
-  MoveIn,
-  FadeIn,
-  FadeOut,
-  ZoomIn,
-  Move,
-} from "react-scroll-motion";
 import { Box } from "@mui/system";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import WalletIcon from "src/components/WalletIcon/WalletIcon";
 import BurgerMenu from "src/components/BurgerMenu/BurgerMenu";

@@ -60,12 +60,16 @@ const Home: React.FC<Props> = () => {
           <Grid item md={5}>
             <div className={classes.leftContent}>
               <Typography variant="h1" className={classes.title}>
-                Then Manifesto
+                The Manifesto
               </Typography>
-              <Typography variant="body1">
-                The blockchain will be ethereum compatible. It runs on a PoW consensus; using the SHA-3 hash algorithm.
-                Encouragement of more Dapp developers, the team will release an assembly for smart contracts to be
-                written in different code languages.
+              <Typography variant="h4" color="primary" style={{ marginTop: 20 }}>
+                <b> Welcome to the Future</b>
+              </Typography>
+              <Typography variant="body1" style={{ marginTop: 10 }}>
+                There’s no better time than now. There’s no better place than here. Project Kaito is on a mission to end
+                world hunger and we will not stop until world hunger is extinct. If you go the extra mile, proclaim your
+                rarity and never give up, one day will be your day. Thank you for joining us on this journey to end
+                world hunger.
               </Typography>
             </div>
           </Grid>
