@@ -89,7 +89,7 @@ const Routes: React.FC<Props> = () => {
       <video ref={videoRef} autoPlay={true} loop={true} src={Animation} muted className={classes.vid} />
 
       <Switch>
-        <Route
+        {/* <Route
           path="/"
           element={
             <>
@@ -112,7 +112,8 @@ const Routes: React.FC<Props> = () => {
               <Home />
             </>
           }
-        />
+        /> */}
+        <Route path="/" element={<Whitelist />} />
         <Route path="/minting" element={<Minting />} />
         <Route path="/whitelist" element={<Whitelist />} />
         <Route path="/nft/:address/:tokenid" element={<NFTPage />} />
