@@ -2,12 +2,9 @@ import React, { useRef } from "react";
 import { makeStyles } from "@mui/styles";
 import { Button, Theme, Typography } from "@mui/material";
 import logo from "src/assets/logos/logo.png";
-import { Box } from "@mui/system";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import WalletIcon from "src/components/WalletIcon/WalletIcon";
 import BurgerMenu from "src/components/BurgerMenu/BurgerMenu";
-import theme from "src/utils/theme";
 
 // import { batch } from "react-redux";
 

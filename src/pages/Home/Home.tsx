@@ -1,11 +1,7 @@
 import React from "react";
-import { Button, Theme, Grid, Typography, Container } from "@mui/material";
+import { Theme, Grid, Typography, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import useNotify from "src/hooks/useNotify";
-import FileUploader from "src/components/FileUploader/FileUploader";
-import useModal from "src/hooks/useModal";
 import nftImage from "src/assets/images/nftImage.png";
-import Roadmap from "./components/RoadmapAnime1";
 import RoadmapTabs from "./components/RoadmapTabs";
 import Footer from "src/components/Footer/Footer";
 import TeamMembers from "./components/TeamMembers";
