@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "black",
     display: "flex",
     gap: "40px",
-    transition: "opacity 200ms ease-in-out",
+    transition: "opacity 100ms ease-in-out",
     paddingRight: 20,
     pointerEvents: "all",
   },
@@ -201,7 +201,7 @@ const Navbar: React.FC<Props> = () => {
     }
     if (NavItemsRef.current) {
       NavItemsRef.current.style.transform = `translateX(calc(50vw - 50% + ${percentage}vw - ${percentage}% ))`;
-      if (percentage > 5) NavItemsRef.current.style.opacity = "1";
+      if (percentage > 10) NavItemsRef.current.style.opacity = "1";
       else NavItemsRef.current.style.opacity = "0";
     }
   }
@@ -215,7 +215,6 @@ const Navbar: React.FC<Props> = () => {
   ];
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const linkClicked = (url: string) => {
     url[0] === "/" ? navigate(url) : window.open(url, "_blank");
@@ -227,7 +226,6 @@ const Navbar: React.FC<Props> = () => {
       className={classes.container}
       ref={containerRef!}
       style={{
-        // height: "100vh",
         position: "sticky",
         zIndex: 10,
       }}
@@ -238,10 +236,10 @@ const Navbar: React.FC<Props> = () => {
           width: "100%",
         }}
       >
-        <img ref={logoRef as any} src={logo} className={classes.logo} alt="logo" />
+        <img ref={logoRef} src={logo} className={classes.logo} alt="logo" />
       </div>
       <div className={classes.navContainer}>
-        <div ref={NavItemsRef as any} className={classes.navItems} style={{ opacity: 0 }}>
+        <div ref={NavItemsRef} className={classes.navItems} style={{ opacity: 0 }}>
           <div className={classes.hideSmDown}>
             <Button color="secondary">About</Button>
             <Button color="secondary">Roadmap</Button>
@@ -253,7 +251,6 @@ const Navbar: React.FC<Props> = () => {
       </div>
 
       <div className={classes.hideMdUp}>
-        {/* <img src={logo} className={classes.logo} alt="logo" /> */}
         <BurgerMenu links={links} />
       </div>
     </div>
