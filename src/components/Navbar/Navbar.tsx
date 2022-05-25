@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     maxWidth: "184px",
     transition: "padding .2s ease-in-out",
+    pointerEvents: "all",
     [theme.breakpoints.down("md")]: {
       maxWidth: "124px",
     },
@@ -74,6 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     gap: "40px",
     transition: "opacity 200ms ease-in-out",
     paddingRight: 20,
+    pointerEvents: "all",
   },
   nav: {
     background: "red",
@@ -145,6 +147,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "relative",
     background: "rgba(0,0,0,0)",
     boxShadow: "none",
+    pointerEvents: "none",
     [theme.breakpoints.up("md")]: {
       background: "transparent !important",
     },
@@ -245,7 +248,6 @@ const Navbar: React.FC<Props> = () => {
             <Button color="secondary">Purchase</Button>
             <Button color="secondary">Team</Button>
             <Button color="secondary">Mint!</Button>
-            <WalletIcon />
           </div>
         </div>
       </div>
