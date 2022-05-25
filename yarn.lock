@@ -8823,11 +8823,6 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-hooks-worker@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-hooks-worker/-/react-hooks-worker-1.0.4.tgz#17037ea80bb5f7fd501f0877874297a77fc3394d"
-  integrity sha512-72U6J+UcwfEjzygVU6OQpKeFo8hzuai4Ir3lNvNk5RXv9vhbMqgJGSgIlHWfvh5/qEAOeAcWyF2jIWXjnGO3rw==
-
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -8944,11 +8939,6 @@ react-scripts@^5.0.1:
     workbox-webpack-plugin "^6.4.1"
   optionalDependencies:
     fsevents "^2.3.2"
-
-react-scroll-motion@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/react-scroll-motion/-/react-scroll-motion-0.2.6.tgz#6aa50b889fef54cc28152a79447642ca4a94e019"
-  integrity sha512-KoUgStvnolIdMkVmEa8Q+DY2hxBQtVD1mhRReOfNMCEiHVIEyg73ib/gt5ktJZhEC11eIYALWJON2/A8OZz+DQ==
 
 react-spring@^9.4.5:
   version "9.4.5"
