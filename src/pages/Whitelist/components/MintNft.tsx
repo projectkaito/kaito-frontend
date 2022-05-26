@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Button, Theme } from "@mui/material";
 import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
+import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
@@ -35,9 +36,9 @@ const MintNft: React.FC<Props> = () => {
     <div className={classes.root}>
       <div className={classes.glitchContainer}>
         <GlitchImg srcSet={NFT_IMAGES} className={classes.img} />
-        <Button className={classes.btn} color="primary" variant="contained">
+        <WalletButtonBase className={classes.btn} color="primary" variant="contained">
           Mint
-        </Button>
+        </WalletButtonBase>
       </div>
     </div>
   );

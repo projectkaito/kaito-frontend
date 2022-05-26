@@ -64,7 +64,6 @@ const useStyle = makeStyles((theme: Theme) => ({
 interface Props {}
 
 const Routes: React.FC<Props> = () => {
-  useAccount();
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const classes = useStyle();
 

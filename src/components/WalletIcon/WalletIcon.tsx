@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   accountAdd: {
     fontSize: 12,
   },
+  paper: {
+    borderRadius: 5,
+    background: "black",
+    border: `1px solid ${theme.palette.primary.main}`,
+  },
 }));
 
 interface Props {}
@@ -30,7 +35,6 @@ const WalletIcon: React.FC<Props> = () => {
 
   const logout = () => {
     deactivate();
-    localStorage.removeItem("token");
     localStorage.removeItem("Allow-Wallet-Reconnect");
     setPop(null);
   };
@@ -48,10 +52,13 @@ const WalletIcon: React.FC<Props> = () => {
           horizontal: "left",
         }}
         onClose={() => setPop(null)}
+        PaperProps={{
+          className: classes.paper,
+        }}
       >
         <List>
-          <ListItem button onClick={logout}>
-            <ListItemText primary="Logout" />
+          <ListItem button onClick={logout} color="primary">
+            <Typography color="secondary">Logout</Typography>
           </ListItem>
         </List>
       </Popover>

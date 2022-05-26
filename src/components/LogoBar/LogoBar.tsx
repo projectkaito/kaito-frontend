@@ -3,9 +3,13 @@ import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material";
 import Logo from "src/assets/logos/logo.png";
 import { useNavigate } from "react-router-dom";
+import WalletIcon from "../WalletIcon/WalletIcon";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
+  root: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }));
 
 interface Props {}
@@ -21,6 +25,7 @@ const LogoBar: React.FC<Props> = () => {
   return (
     <div className={classes.root}>
       <img src={Logo} alt="Kaito" style={{ maxWidth: 150, marginTop: 20 }} onClick={handleClick} />
+      <WalletIcon />
     </div>
   );
 };
