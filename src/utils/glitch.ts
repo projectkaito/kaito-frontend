@@ -61,7 +61,6 @@ export const imagesToGif = (images: string[]) =>
 
     createGIF(options, (obj: any) => {
       if (!obj.error) {
-        console.log("GIF Image: ", obj.image);
         res(obj.image);
       }
     });
