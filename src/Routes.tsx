@@ -67,16 +67,6 @@ const Routes: React.FC<Props> = () => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const classes = useStyle();
 
-  const [scrollPosition, setScrollposition] = React.useState(0);
-
-  React.useEffect(() => {
-    function updatePosition() {
-      setScrollposition(window.scrollY);
-    }
-    window.addEventListener("scroll", updatePosition);
-    return () => window.removeEventListener("scroll", updatePosition);
-  }, []);
-
   React.useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play();
@@ -116,7 +106,7 @@ const Routes: React.FC<Props> = () => {
         <Route path="/" element={<Whitelist />} />
         <Route path="/minting" element={<Minting />} />
         <Route path="/whitelist" element={<Whitelist />} />
-        <Route path="/nft/:address/:tokenid" element={<NFTPage />} />
+        <Route path="/nft/:address/:tokenId" element={<NFTPage />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
       </Switch>

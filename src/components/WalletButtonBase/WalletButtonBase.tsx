@@ -41,7 +41,7 @@ const WalletButtonBase: React.FC<Props> = ({
       {displayAccount && !loading && (children || "Connect")}
       {displayAccount && loading && (
         <>
-          <CircularProgress size={30} thickness={4} style={{ marginRight: 5 }} />
+          <CircularProgress size={25} thickness={4} style={{ marginRight: 5 }} />
           {loadingText}
         </>
       )}

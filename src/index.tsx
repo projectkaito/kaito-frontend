@@ -30,7 +30,7 @@ ReactDOM.render(
     <WalletProvider
       config={{
         chainId: isProduction ? CHAIN_ID.ETH : CHAIN_ID.GOERLI,
-        supportedChainIds: [{ id: isProduction ? CHAIN_ID.ETH : CHAIN_ID.GOERLI }],
+        supportedChainIds: [{ id: isProduction ? CHAIN_ID.ETH : CHAIN_ID.GOERLI }, { id: 1337 }, { id: 31337 }],
       }}
     >
       <Provider store={store}>

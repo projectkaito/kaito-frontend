@@ -79,6 +79,13 @@ let theme = createTheme({
         },
       },
     },
+    MuiCircularProgress: {
+      styleOverrides: {
+        root: {
+          color: "white",
+        },
+      },
+    },
   },
   fonts: [Typographica],
 });

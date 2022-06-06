@@ -15,26 +15,35 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  data: {
+    name: string;
+    description: string;
+    image: string;
+    attributes: {
+      trait_type: string;
+      value: string;
+    }[];
+  };
+}
 
-const Details: React.FC<Props> = () => {
+const Details: React.FC<Props> = ({ data }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Typography variant="h4" color="textPrimary">
-        A suitable girl
+        {data.name}
       </Typography>
       <Typography color="textPrimary" style={{ marginTop: 20 }}>
-        Project Kaito is on a mission to end world hunger and give hope to the hopeless, with thirty percent of all
-        sales set to be donated to \u2018Feed the Children\u2019 and Mental Health charities.
+        {data.description}
       </Typography>
       <Grid container spacing={2} style={{ marginTop: 10 }}>
-        {attributes.map((attr, index) => (
+        {data.attributes.map((attr, index) => (
           <Grid item xs={6} md={4} key={index}>
             <div className={clsx(classes.attributeWrapper, "gloweff")}>
               <Typography color="textPrimary" className={classes.attrType}>
-                {attr.type}:
+                {attr.trait_type}:
               </Typography>
               <Typography color="textPrimary">
                 <b>{attr.value}</b>

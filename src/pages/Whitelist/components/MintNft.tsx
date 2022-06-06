@@ -4,6 +4,7 @@ import { Button, Theme } from "@mui/material";
 import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
 import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
+import useTeamMint from "src/hooks/useTeamMint";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
@@ -31,12 +32,20 @@ interface Props {}
 
 const MintNft: React.FC<Props> = () => {
   const classes = useStyles();
+  let { mintToken, loading } = useTeamMint();
 
   return (
     <div className={classes.root}>
       <div className={classes.glitchContainer}>
         <GlitchImg srcSet={NFT_IMAGES} className={classes.img} />
-        <WalletButtonBase className={classes.btn} color="primary" variant="contained">
+        <WalletButtonBase
+          loading={loading}
+          loadingText="Minting.."
+          className={classes.btn}
+          color="primary"
+          variant="contained"
+          onClick={mintToken}
+        >
           Mint
         </WalletButtonBase>
       </div>
