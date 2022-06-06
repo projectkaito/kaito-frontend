@@ -23,13 +23,13 @@ const Content: React.FC<Props> = () => {
   return (
     <div className={classes.root}>
       <Typography color="textPrimary" variant="h4">
-        Mint your
+        Welcome to the
       </Typography>
       <Typography color="primary" variant="h2">
-        $KAITO
+        Future
       </Typography>
       <Typography color="textPrimary" variant="h5" style={{ marginTop: 50 }}>
-        <b>Whitelist Sale</b>
+        <b>Public Sale</b>
       </Typography>
       <div className={classes.countdownContainer}>
         <div>
