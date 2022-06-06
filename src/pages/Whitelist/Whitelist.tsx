@@ -27,9 +27,9 @@ const Whitelist: React.FC<Props> = () => {
     <div className={classes.root}>
       <Container maxWidth="lg">
         <LogoBar />
-        <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
+        {/* <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
           Whitelist
-        </Typography>
+        </Typography> */}
         <Grid container spacing={3} style={{ marginTop: 50 }}>
           <Grid item xs={12} sm={12} md={6}>
             <div style={{ display: "flex", justifyContent: "center" }}>

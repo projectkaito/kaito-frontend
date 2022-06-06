@@ -25,7 +25,7 @@ const useTeamMint = () => {
       let tokenId = args.tokenId.toNumber();
       console.log(tokenId);
       notifySuccess(`Minted Token ${tokenId}`, "Minted Token Successfully");
-      navigate(`/nft/address/${tokenId}`);
+      navigate(`/nft/${MINT_CONTRACT}/${tokenId}`);
     } catch (error) {
       let msg =
         error?.data?.message.replace(

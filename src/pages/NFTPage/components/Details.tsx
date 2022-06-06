@@ -33,20 +33,20 @@ const Details: React.FC<Props> = ({ data }) => {
   return (
     <div className={classes.root}>
       <Typography variant="h4" color="textPrimary">
-        {data.name}
+        {data?.name}
       </Typography>
       <Typography color="textPrimary" style={{ marginTop: 20 }}>
-        {data.description}
+        {data?.description}
       </Typography>
       <Grid container spacing={2} style={{ marginTop: 10 }}>
-        {data.attributes.map((attr, index) => (
+        {data?.attributes.map((attr, index) => (
           <Grid item xs={6} md={4} key={index}>
             <div className={clsx(classes.attributeWrapper, "gloweff")}>
               <Typography color="textPrimary" className={classes.attrType}>
-                {attr.trait_type}:
+                {attr?.trait_type}:
               </Typography>
               <Typography color="textPrimary">
-                <b>{attr.value}</b>
+                <b>{attr?.value}</b>
               </Typography>
             </div>
           </Grid>
@@ -57,42 +57,3 @@ const Details: React.FC<Props> = ({ data }) => {
 };
 
 export default Details;
-
-const attributes = [
-  {
-    type: "Type",
-    value: "Dreamer",
-  },
-  {
-    type: "Background",
-    value: "Sci-fi Door",
-  },
-  {
-    type: "Clothes",
-    value: "Flower Shirt",
-  },
-  {
-    type: "Eyes",
-    value: "Sad",
-  },
-  {
-    type: "Face",
-    value: "Sweat",
-  },
-  {
-    type: "Hair",
-    value: "Bun",
-  },
-  {
-    type: "Neck",
-    value: "Choker",
-  },
-  {
-    type: "Mouth",
-    value: "Surprised",
-  },
-  {
-    type: "Earrings",
-    value: "Double Hoop II",
-  },
-];
