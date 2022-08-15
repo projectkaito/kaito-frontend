@@ -5,6 +5,7 @@ import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
 import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
 import useTeamMint from "src/hooks/useTeamMint";
+import useWhitelist from "src/hooks/useWhitelist";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
@@ -32,7 +33,7 @@ interface Props {}
 
 const MintNft: React.FC<Props> = () => {
   const classes = useStyles();
-  let { mintToken, loading } = useTeamMint();
+  const { whitelistInfo, loading, mint } = useWhitelist();
 
   return (
     <div className={classes.root}>
@@ -44,9 +45,13 @@ const MintNft: React.FC<Props> = () => {
           className={classes.btn}
           color="primary"
           variant="contained"
-          onClick={mintToken}
+          onClick={mint}
         >
-          Mint
+          {whitelistInfo?.userType === "team"
+            ? "Mint Team"
+            : whitelistInfo?.userType === "user"
+            ? "Mint Whitelist"
+            : "Mint"}
         </WalletButtonBase>
       </div>
     </div>

@@ -5,6 +5,9 @@ import Bg from "src/assets/images/buildings.gif";
 import Content from "./components/Content";
 import MintNft from "./components/MintNft";
 import LogoBar from "src/components/LogoBar/LogoBar";
+import { getWhitelistInfo } from "src/api/whitelist";
+import { useWallet } from "@react-dapp/wallet";
+import { WhitelistInfo } from "src/types/apis";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -39,7 +39,7 @@ const Details: React.FC<Props> = ({ data }) => {
         {data?.description}
       </Typography>
       <Grid container spacing={2} style={{ marginTop: 10 }}>
-        {data?.attributes.map((attr, index) => (
+        {data?.attributes?.map((attr, index) => (
           <Grid item xs={6} md={4} key={index}>
             <div className={clsx(classes.attributeWrapper, "gloweff")}>
               <Typography color="textPrimary" className={classes.attrType}>

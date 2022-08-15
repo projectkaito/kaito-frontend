@@ -29,8 +29,8 @@ ReactDOM.render(
   <React.StrictMode>
     <WalletProvider
       config={{
-        chainId: isProduction ? CHAIN_ID.ETH : 4,
-        supportedChainIds: [{ id: isProduction ? CHAIN_ID.ETH : 4 }, { id: 1337 }, { id: 31337 }],
+        chainId: isProduction ? CHAIN_ID.ETH : 5,
+        supportedChainIds: [{ id: isProduction ? CHAIN_ID.ETH : 5 }, { id: 1337 }, { id: 31337 }],
       }}
     >
       <Provider store={store}>
