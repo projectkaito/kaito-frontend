@@ -4,7 +4,6 @@ import { Button, Theme } from "@mui/material";
 import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
 import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
-import useTeamMint from "src/hooks/useTeamMint";
 import useWhitelist from "src/hooks/useWhitelist";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},

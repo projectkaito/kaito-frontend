@@ -8,6 +8,7 @@ import LogoBar from "src/components/LogoBar/LogoBar";
 import { getWhitelistInfo } from "src/api/whitelist";
 import { WhitelistInfo } from "src/types/apis";
 import clsx from "clsx";
+import useWhitelist from "src/hooks/useWhitelist";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -45,6 +46,7 @@ type SelectedType = undefined | "team" | "user";
 const Whitelist: React.FC<Props> = () => {
   const classes = useStyles();
   const [selectedType, setSelectedType] = React.useState<SelectedType>(undefined);
+  const { whitelistInfo, stats } = useWhitelist();
 
   return (
     <div className={classes.root}>
@@ -84,7 +86,7 @@ const Whitelist: React.FC<Props> = () => {
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Content />
+              <Content stats={stats} selectedType={selectedType} />
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>

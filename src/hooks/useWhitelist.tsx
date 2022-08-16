@@ -1,32 +1,106 @@
 import React, { useState } from "react";
 import { getWhitelistInfo } from "src/api/whitelist";
 import { WhitelistInfo } from "src/types/apis";
-import { MINT_CONTRACT } from "src/config/config";
 import { Kaito } from "src/types/contract/Kaito";
 import useNotify from "./useNotify";
 import { useNavigate } from "react-router-dom";
 import abi from "src/assets/abi/Kaito.json";
 import { ContractReceipt, ethers } from "ethers";
 import useWallet from "./useWallet";
-import { useContract } from "wagmi";
+import { useContract, useContractReads } from "wagmi";
+import { Contracts } from "src/config";
+
+const whitelistContractInfo = {
+  contractInterface: abi,
+  addressOrName: Contracts.kaitoWhitelist,
+};
+
+interface ReadContract {
+  contractInterface: any;
+  addressOrName: string;
+  functionName: string;
+  args?: any[];
+}
+
+export interface Stats {
+  maxPublicMintPerWallet: number;
+  maxWhitelistMintPerWallet: number;
+  maxTeamMintPerWallet: number;
+  publicMintStartTimestamp: number;
+  teamMintStartTimestamp: number;
+  whitelistMintStartTimestamp: number;
+  numberMinted: number;
+}
+
+const mapContractReads = (data?: any) => {
+  if (data) {
+    const obj: Stats = {
+      maxPublicMintPerWallet: data[0].toNumber(),
+      maxWhitelistMintPerWallet: data[1].toNumber(),
+      maxTeamMintPerWallet: data[2].toNumber(),
+      publicMintStartTimestamp: data[3].toNumber(),
+      teamMintStartTimestamp: data[4].toNumber(),
+      whitelistMintStartTimestamp: data[5].toNumber(),
+      numberMinted: data[6].toNumber(),
+    };
+    return obj;
+  } else return undefined;
+};
 
 const useWhitelist = () => {
   const { account, signer, provider } = useWallet();
+
+  const readContracts: ReadContract[] = React.useMemo(
+    () => [
+      {
+        ...whitelistContractInfo,
+        functionName: "maxPublicMintPerWallet",
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "maxWhitelistMintPerWallet",
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "maxTeamMintPerWallet",
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "publicMintStartTimestamp",
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "teamMintStartTimestamp",
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "whitelistMintStartTimestamp",
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "numberMinted",
+        args: [account],
+      },
+    ],
+    [account]
+  );
+
   const contract = useContract<Kaito>({
-    contractInterface: abi,
-    addressOrName: MINT_CONTRACT!,
     signerOrProvider: signer || provider,
+    ...whitelistContractInfo,
   });
   const { dismissNotify, notifyLoading, notifyError, notifySuccess, notifySystem } = useNotify();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { data } = useContractReads({
+    contracts: readContracts,
+  });
+  const stats = React.useMemo(() => mapContractReads(data), [data]);
 
   const [whitelistInfo, setWhitelistInfo] = React.useState<WhitelistInfo>();
 
   const callMint = async (type?: "user" | "team") => {
-    console.log(type, whitelistInfo?.status);
     if (whitelistInfo?.status && type === "user") {
-      console.log("whitelist");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintWhitelist(
         whitelistInfo.deadline!.toString(),
@@ -38,7 +112,6 @@ const useWhitelist = () => {
       let reciept = await tx.wait();
       return reciept;
     } else if (whitelistInfo?.status && type === "team") {
-      console.log("team");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintTeam(
         whitelistInfo.deadline!.toString(),
@@ -50,7 +123,6 @@ const useWhitelist = () => {
       let reciept = await tx.wait();
       return reciept;
     } else {
-      console.log("default mint");
       let tx = await contract?.mint(1);
       let reciept = await tx.wait();
       return reciept;
@@ -66,7 +138,7 @@ const useWhitelist = () => {
       let tokenId = args.tokenId.toNumber();
       console.log(tokenId);
       notifySuccess(`Minted Token ${tokenId}`, "Minted Token Successfully");
-      navigate(`/nft/${MINT_CONTRACT}/${tokenId}`);
+      navigate(`/nft/${Contracts.kaitoWhitelist}/${tokenId}`);
     } catch (error: any) {
       let msg =
         error?.error?.message
@@ -94,7 +166,7 @@ const useWhitelist = () => {
     });
   }, [account]);
 
-  return { whitelistInfo, loading, mint };
+  return { whitelistInfo, loading, mint, stats };
 };
 
 export default useWhitelist;
