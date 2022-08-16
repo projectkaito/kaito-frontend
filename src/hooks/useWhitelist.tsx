@@ -35,7 +35,6 @@ export interface Stats {
 }
 
 const mapContractReads = (data?: any) => {
-  console.log("d", data);
   if (data) {
     const obj: Stats = {
       maxPublicMintPerWallet: data[0].toNumber(),
@@ -48,6 +47,7 @@ const mapContractReads = (data?: any) => {
       teamClaim: data[7],
       whitelistClaim: data[8],
     };
+    console.log("stats", obj);
     return obj;
   } else return undefined;
 };

@@ -37,7 +37,7 @@ const MintNft: React.FC<Props> = ({ selectedType }) => {
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
 
   const disabled = React.useMemo(() => {
-    if (!selectedType) {
+    if (!selectedType && stats && stats?.numberMinted < stats?.maxPublicMintPerWallet) {
       return false;
     } else if (selectedType === "user" && whitelistInfo?.userType === "user" && !stats?.whitelistClaim) {
       return false;
