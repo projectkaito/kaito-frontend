@@ -6,7 +6,6 @@ import Content from "./components/Content";
 import MintNft from "./components/MintNft";
 import LogoBar from "src/components/LogoBar/LogoBar";
 import { getWhitelistInfo } from "src/api/whitelist";
-import { useWallet } from "@react-dapp/wallet";
 import { WhitelistInfo } from "src/types/apis";
 import clsx from "clsx";
 
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     transform: "scale(0.8)",
     cursor: "pointer",
     userSelect: "none",
-    transition: "all 300ms ease-in-out"
+    transition: "all 300ms ease-in-out",
   },
   selected: {
     color: "white",

@@ -5,8 +5,8 @@ import LogoBar from "src/components/LogoBar/LogoBar";
 import Img1 from "src/assets/images/nfts/1.jpg";
 import Details from "./components/Details";
 import Bg from "src/assets/images/buildings.gif";
-import { useParams, useSearchParams } from "react-router-dom";
-import { useMetadata } from "@react-dapp/utils";
+import { useParams } from "react-router-dom";
+import { useMetadata } from "src/hooks/useMetadata";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

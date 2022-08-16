@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { useWallet } from "@react-dapp/wallet";
 import { getWhitelistInfo } from "src/api/whitelist";
 import { WhitelistInfo } from "src/types/apis";
-import { useContract } from "@react-dapp/utils";
 import { MINT_CONTRACT } from "src/config/config";
 import { Kaito } from "src/types/contract/Kaito";
 import useNotify from "./useNotify";
 import { useNavigate } from "react-router-dom";
 import abi from "src/assets/abi/Kaito.json";
 import { ContractReceipt, ethers } from "ethers";
+import useWallet from "./useWallet";
+import { useContract } from "wagmi";
 
 const useWhitelist = () => {
-  const { account } = useWallet();
-  const contract = useContract<Kaito>(abi, MINT_CONTRACT);
+  const { account, signer, provider } = useWallet();
+  const contract = useContract<Kaito>({
+    contractInterface: abi,
+    addressOrName: MINT_CONTRACT!,
+    signerOrProvider: signer || provider,
+  });
   const { dismissNotify, notifyLoading, notifyError, notifySuccess, notifySystem } = useNotify();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -23,9 +27,9 @@ const useWhitelist = () => {
     if (whitelistInfo?.status === "true" && whitelistInfo.userType === "user") {
       console.log("whitelist");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
-      let tx = contract?.mintWhitelist(
-        whitelistInfo.deadline,
-        whitelistInfo.quantity,
+      let tx = await contract?.mintWhitelist(
+        whitelistInfo.deadline!.toString(),
+        whitelistInfo.quantity!.toString(),
         splitted.v,
         splitted.r,
         splitted.s
@@ -33,11 +37,19 @@ const useWhitelist = () => {
       let reciept = await tx.wait();
       return reciept;
     } else if (whitelistInfo?.status === "true" && whitelistInfo.userType === "team") {
+      console.log("team");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
-      let tx = contract?.mintTeam(whitelistInfo.deadline, whitelistInfo.quantity, splitted.v, splitted.r, splitted.s);
+      let tx = await contract?.mintTeam(
+        whitelistInfo.deadline!.toString(),
+        whitelistInfo.quantity!.toString(),
+        splitted.v,
+        splitted.r,
+        splitted.s
+      );
       let reciept = await tx.wait();
       return reciept;
     } else {
+      console.log("default mint");
       let tx = await contract?.mint(1);
       let reciept = await tx.wait();
       return reciept;

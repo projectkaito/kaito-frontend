@@ -1,7 +1,7 @@
 import { Button, CircularProgress, ButtonProps } from "@mui/material";
-import { useWallet } from "@react-dapp/wallet";
-import { useEthers } from "@react-dapp/utils";
+
 import React from "react";
+import useWallet from "src/hooks/useWallet";
 
 interface Props extends ButtonProps {
   loading?: boolean;
@@ -15,11 +15,10 @@ const WalletButtonBase: React.FC<Props> = ({
   disabled,
   ...props
 }) => {
-  const { displayAccount } = useEthers();
-  const { account, setOpen: openWalletModal } = useWallet();
+  const { account, openModal: openWalletModal, displayAccount } = useWallet();
 
   const connectWallet = () => {
-    openWalletModal(true);
+    openWalletModal();
   };
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined = (e) => {

@@ -1,34 +1,33 @@
 import "./App.css";
 import Routes from "./Routes";
-import { UtilsProvider } from "@react-dapp/utils";
-import { useEagerConnect, useWallet } from "@react-dapp/wallet";
 import { ModalObject, ModalProvider } from "./context/ModalContext";
 import Hello from "./modals/Hello/Hello";
 import React from "react";
+import wagmiConfig from "./config/wagmi";
+import { WagmiConfig } from "wagmi";
+import { WalletModal } from "./modals/WalletModal/WalletModal";
+import { WalletProvider } from "./components/WalletContext/WalletContext";
 
 const allModals: ModalObject[] = [
   {
     name: "Hello",
     component: Hello,
   },
+  {
+    name: "Connect Wallet",
+    component: WalletModal,
+  },
 ];
 
 function App() {
-  const { library, account } = useWallet();
-  useEagerConnect(Boolean(localStorage.getItem("Allow-Wallet-Reconnect")));
-
-  React.useEffect(() => {
-    if (account) {
-      localStorage.setItem("Allow-Wallet-Reconnect", "true");
-    }
-  }, [account]);
-
   return (
-    <UtilsProvider config={{ provider: library }}>
-      <ModalProvider allModals={allModals}>
-        <Routes />
-      </ModalProvider>
-    </UtilsProvider>
+    <WagmiConfig client={wagmiConfig}>
+      <WalletProvider>
+        <ModalProvider allModals={allModals}>
+          <Routes />
+        </ModalProvider>
+      </WalletProvider>
+    </WagmiConfig>
   );
 }
 

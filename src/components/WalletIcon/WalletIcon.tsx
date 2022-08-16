@@ -2,8 +2,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { IconButton, Typography, Theme, Popover, List, ListItem, ListItemText } from "@mui/material";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import { useWallet } from "@react-dapp/wallet";
-import { useEthers } from "@react-dapp/utils";
+import useWallet from "src/hooks/useWallet";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -25,16 +24,15 @@ interface Props {}
 
 const WalletIcon: React.FC<Props> = () => {
   const classes = useStyles();
-  const { account, deactivate, setOpen } = useWallet();
-  const { displayAccount } = useEthers();
+  const { account, displayAccount, disconnect, openModal } = useWallet();
   const [pop, setPop] = React.useState<HTMLButtonElement | null>(null);
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {
-    !account ? setOpen(true) : setPop(event.currentTarget);
+    !account ? openModal() : setPop(event.currentTarget);
   };
 
   const logout = () => {
-    deactivate();
+    disconnect();
     localStorage.removeItem("Allow-Wallet-Reconnect");
     setPop(null);
   };

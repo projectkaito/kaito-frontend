@@ -1,4 +1,6 @@
+import { BigNumberish, ethers } from "ethers";
 import { getType, Type } from "tst-reflect";
+import BigNumber from "bignumber.js";
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -71,3 +73,52 @@ export const shapeFormData = (data: any) => {
   }
   return formData;
 };
+
+export const truncateAddress = (address?: string) => {
+  if (!address) return "No Account";
+  const match = address.match(/^(0x[a-zA-Z0-9]{2})[a-zA-Z0-9]+([a-zA-Z0-9]{2})$/);
+  if (!match) return address;
+  return `${match[1]}…${match[2]}`;
+};
+
+export const toHex = (num: number) => {
+  const val = Number(num);
+  return "0x" + val.toString(16);
+};
+
+export const toEth = (wei: BigNumberish) => {
+  return ethers.utils.formatEther(wei);
+};
+
+export const toWei = (eth: string | number) => {
+  return ethers.utils.parseEther(eth.toString());
+};
+
+/**
+ * To convert ethers bignumber to bignumber.js
+ * @param value is the BigNumber from ethers.js
+ * @returns BigNumber of bignumber.js
+ */
+export const toBigNumber = (value: any): BigNumber => {
+  if (!value) return new BigNumber(0);
+  if (value._isBigNumber) return new BigNumber(value?.toHexString ? value.toHexString() : value);
+  if (value.type === "BigNumber") return new BigNumber(value.hex);
+  return new BigNumber(String(value));
+};
+
+/**
+ * Fetch IPFS data
+ *
+ * @param ipfsUrl IPFS url of the metadata
+ * @returns json object of the metadata
+ */
+export const fetchIpfs = (ipfsUrl: string) =>
+  new Promise(async (resolve) => {
+    let url = `https://ipfs.io/${ipfsUrl.replace("ipfs://", "")}`;
+    let response = await fetch(url);
+    const data = await response.json();
+    if (data?.image?.includes("ipfs://")) {
+      data.image = `https://ipfs.io/${data.image.replace("ipfs://", "")}`;
+    }
+    resolve(data);
+  });

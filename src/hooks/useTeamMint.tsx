@@ -1,16 +1,20 @@
-// @ts-nocheck
-import { MergeSharp } from "@mui/icons-material";
-import { useContract } from "@react-dapp/utils";
 import { ContractReceipt, ethers } from "ethers";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import abi from "src/assets/abi/Kaito.json";
 import { MINT_CONTRACT } from "src/config/config";
 import { Kaito } from "src/types/contract/Kaito";
+import { useContract } from "wagmi";
 import useNotify from "./useNotify";
+import useWallet from "./useWallet";
 
 const useTeamMint = () => {
-  const contract = useContract<Kaito>(abi, MINT_CONTRACT);
+  const { signer, provider } = useWallet();
+  const contract = useContract<Kaito>({
+    addressOrName: MINT_CONTRACT!,
+    contractInterface: abi,
+    signerOrProvider: signer || provider,
+  });
   const { dismissNotify, notifyLoading, notifyError, notifySuccess, notifySystem } = useNotify();
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
@@ -26,7 +30,7 @@ const useTeamMint = () => {
       console.log(tokenId);
       notifySuccess(`Minted Token ${tokenId}`, "Minted Token Successfully");
       navigate(`/nft/${MINT_CONTRACT}/${tokenId}`);
-    } catch (error) {
+    } catch (error: any) {
       let msg =
         error?.data?.message.replace(
           "Error: VM Exception while processing transaction: reverted with reason string ",

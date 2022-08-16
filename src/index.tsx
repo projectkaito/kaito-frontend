@@ -9,10 +9,8 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { setUpNotifications } from "reapop";
 import { Provider } from "react-redux";
 import store from "./state";
-import { WalletProvider, CHAIN_ID } from "@react-dapp/wallet";
 import Logo from "src/assets/logos/logo.png";
 import { Notification } from "src/components/Notification/Notification";
-import { isProduction } from "./config/config";
 
 // run this function when your application starts before creating any notifications
 setUpNotifications({
@@ -27,23 +25,16 @@ setUpNotifications({
 
 ReactDOM.render(
   <React.StrictMode>
-    <WalletProvider
-      config={{
-        chainId: isProduction ? CHAIN_ID.ETH : 5,
-        supportedChainIds: [{ id: isProduction ? CHAIN_ID.ETH : 5 }, { id: 1337 }, { id: 31337 }],
-      }}
-    >
-      <Provider store={store}>
-        <Notification />
-        <BrowserRouter>
-          <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
-              <App />
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </BrowserRouter>
-      </Provider>
-    </WalletProvider>
+    <Provider store={store}>
+      <Notification />
+      <BrowserRouter>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

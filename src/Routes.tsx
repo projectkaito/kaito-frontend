@@ -4,7 +4,7 @@ import Home from "src/pages/Home/Home";
 import Navbar from "src/components/Navbar/Navbar";
 import Footer from "src/components/Footer/Footer";
 import NotFound from "src/pages/NotFound/NotFound";
-import useAccount from "./hooks/useAccount";
+import useAccount from "./hooks/useWallet";
 import { makeStyles } from "@mui/styles";
 // import backgroundImage from "src/assets/images/gif.webm";
 // import backgroundImage from "src/assets/images/bg.gif";
