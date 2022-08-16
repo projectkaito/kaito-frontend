@@ -30,9 +30,12 @@ export interface Stats {
   teamMintStartTimestamp: number;
   whitelistMintStartTimestamp: number;
   numberMinted: number;
+  teamClaim: boolean;
+  whitelistClaim: boolean;
 }
 
 const mapContractReads = (data?: any) => {
+  console.log("d", data);
   if (data) {
     const obj: Stats = {
       maxPublicMintPerWallet: data[0].toNumber(),
@@ -42,6 +45,8 @@ const mapContractReads = (data?: any) => {
       teamMintStartTimestamp: data[4].toNumber(),
       whitelistMintStartTimestamp: data[5].toNumber(),
       numberMinted: data[6].toNumber(),
+      teamClaim: data[7],
+      whitelistClaim: data[8],
     };
     return obj;
   } else return undefined;
@@ -81,6 +86,16 @@ const useWhitelist = () => {
         functionName: "numberMinted",
         args: [account],
       },
+      {
+        ...whitelistContractInfo,
+        functionName: "teamClaim",
+        args: [account],
+      },
+      {
+        ...whitelistContractInfo,
+        functionName: "whitelistClaim",
+        args: [account],
+      },
     ],
     [account]
   );
@@ -94,6 +109,7 @@ const useWhitelist = () => {
   const [loading, setLoading] = useState(false);
   const { data } = useContractReads({
     contracts: readContracts,
+    watch: true,
   });
   const stats = React.useMemo(() => mapContractReads(data), [data]);
 

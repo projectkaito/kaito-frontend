@@ -6,7 +6,7 @@ interface Addresses {
 
 const goerliAddresses: Addresses = {
   zeroAddress: "0x0000000000000000000000000000000000000000",
-  kaitoWhitelist: "0xF4bC89e45ed253c483e847D2582c3b50Efa3615b",
+  kaitoWhitelist: "0x309180cA767E71341571a8Bfb7079cCEB3478e12",
 };
 
 export const addressesByChainId: { [key: number]: Addresses } = {

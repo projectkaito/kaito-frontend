@@ -34,19 +34,19 @@ interface Props {
 
 const MintNft: React.FC<Props> = ({ selectedType }) => {
   const classes = useStyles();
-  const { whitelistInfo, loading, mint } = useWhitelist();
+  const { whitelistInfo, loading, mint, stats } = useWhitelist();
 
   const disabled = React.useMemo(() => {
     if (!selectedType) {
       return false;
-    } else if (selectedType === "user" && whitelistInfo?.userType === "user") {
+    } else if (selectedType === "user" && whitelistInfo?.userType === "user" && !stats?.whitelistClaim) {
       return false;
-    } else if (selectedType === "team" && whitelistInfo?.userType === "team") {
+    } else if (selectedType === "team" && whitelistInfo?.userType === "team" && !stats?.teamClaim) {
       return false;
     } else {
       return true;
     }
-  }, [selectedType, whitelistInfo?.userType]);
+  }, [selectedType, whitelistInfo?.userType, stats]);
 
   return (
     <div className={classes.root}>

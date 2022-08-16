@@ -73,6 +73,7 @@ export interface KaitoInterface extends utils.Interface {
     "setOwnersExplicit(uint256)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
+    "teamClaim(address)": FunctionFragment;
     "teamMintCount()": FunctionFragment;
     "teamMintEnabled()": FunctionFragment;
     "teamMintStartTimestamp()": FunctionFragment;
@@ -82,6 +83,7 @@ export interface KaitoInterface extends utils.Interface {
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "whitelistClaim(address)": FunctionFragment;
     "whitelistMintCount()": FunctionFragment;
     "whitelistMintEnabled()": FunctionFragment;
     "whitelistMintStartTimestamp()": FunctionFragment;
@@ -131,6 +133,7 @@ export interface KaitoInterface extends utils.Interface {
       | "setOwnersExplicit"
       | "supportsInterface"
       | "symbol"
+      | "teamClaim"
       | "teamMintCount"
       | "teamMintEnabled"
       | "teamMintStartTimestamp"
@@ -140,6 +143,7 @@ export interface KaitoInterface extends utils.Interface {
       | "totalSupply"
       | "transferFrom"
       | "transferOwnership"
+      | "whitelistClaim"
       | "whitelistMintCount"
       | "whitelistMintEnabled"
       | "whitelistMintStartTimestamp"
@@ -199,6 +203,7 @@ export interface KaitoInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "setOwnersExplicit", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
   encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(functionFragment: "teamClaim", values: [string]): string;
   encodeFunctionData(functionFragment: "teamMintCount", values?: undefined): string;
   encodeFunctionData(functionFragment: "teamMintEnabled", values?: undefined): string;
   encodeFunctionData(functionFragment: "teamMintStartTimestamp", values?: undefined): string;
@@ -208,6 +213,7 @@ export interface KaitoInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
   encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
   encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
+  encodeFunctionData(functionFragment: "whitelistClaim", values: [string]): string;
   encodeFunctionData(functionFragment: "whitelistMintCount", values?: undefined): string;
   encodeFunctionData(functionFragment: "whitelistMintEnabled", values?: undefined): string;
   encodeFunctionData(functionFragment: "whitelistMintStartTimestamp", values?: undefined): string;
@@ -254,6 +260,7 @@ export interface KaitoInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "setOwnersExplicit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "teamClaim", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "teamMintCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "teamMintEnabled", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "teamMintStartTimestamp", data: BytesLike): Result;
@@ -263,6 +270,7 @@ export interface KaitoInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "totalSupply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "transferFrom", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "whitelistClaim", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "whitelistMintCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "whitelistMintEnabled", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "whitelistMintStartTimestamp", data: BytesLike): Result;
@@ -514,6 +522,8 @@ export interface Kaito extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
+    teamClaim(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+
     teamMintCount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     teamMintEnabled(overrides?: CallOverrides): Promise<[boolean]>;
@@ -539,6 +549,8 @@ export interface Kaito extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelistClaim(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     whitelistMintCount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -690,6 +702,8 @@ export interface Kaito extends BaseContract {
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
+  teamClaim(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
   teamMintCount(overrides?: CallOverrides): Promise<BigNumber>;
 
   teamMintEnabled(overrides?: CallOverrides): Promise<boolean>;
@@ -715,6 +729,8 @@ export interface Kaito extends BaseContract {
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  whitelistClaim(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   whitelistMintCount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -832,6 +848,8 @@ export interface Kaito extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
+    teamClaim(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
     teamMintCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     teamMintEnabled(overrides?: CallOverrides): Promise<boolean>;
@@ -849,6 +867,8 @@ export interface Kaito extends BaseContract {
     transferFrom(from: string, to: string, tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+
+    whitelistClaim(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     whitelistMintCount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1049,6 +1069,8 @@ export interface Kaito extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
+    teamClaim(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     teamMintCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     teamMintEnabled(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1074,6 +1096,8 @@ export interface Kaito extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelistClaim(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     whitelistMintCount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1226,6 +1250,8 @@ export interface Kaito extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    teamClaim(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     teamMintCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     teamMintEnabled(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1251,6 +1277,8 @@ export interface Kaito extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    whitelistClaim(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     whitelistMintCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
