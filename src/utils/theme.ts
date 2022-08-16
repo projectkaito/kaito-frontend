@@ -62,6 +62,9 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
+          "&.Mui-disabled": {
+            backgroundColor: "grey",
+          },
         },
         containedPrimary: {
           boxShadow: "none",

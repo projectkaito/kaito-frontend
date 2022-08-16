@@ -89,7 +89,7 @@ const Whitelist: React.FC<Props> = () => {
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <MintNft />
+              <MintNft selectedType={selectedType} />
             </div>
           </Grid>
         </Grid>

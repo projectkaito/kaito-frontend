@@ -29,11 +29,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {}
+interface Props {
+  selectedType?: "user" | "team";
+}
 
-const MintNft: React.FC<Props> = () => {
+const MintNft: React.FC<Props> = ({ selectedType }) => {
   const classes = useStyles();
   const { whitelistInfo, loading, mint } = useWhitelist();
+
+  const disabled = React.useMemo(() => {
+    if (!selectedType) {
+      return false;
+    } else if (selectedType === "user" && whitelistInfo?.userType === "user") {
+      return false;
+    } else if (selectedType === "team" && whitelistInfo?.userType === "team") {
+      return false;
+    } else {
+      return true;
+    }
+  }, [selectedType, whitelistInfo?.userType]);
 
   return (
     <div className={classes.root}>
@@ -45,13 +59,10 @@ const MintNft: React.FC<Props> = () => {
           className={classes.btn}
           color="primary"
           variant="contained"
-          onClick={mint}
+          onClick={() => mint(selectedType)}
+          disabled={disabled}
         >
-          {whitelistInfo?.userType === "team"
-            ? "Mint Team"
-            : whitelistInfo?.userType === "user"
-            ? "Mint Whitelist"
-            : "Mint"}
+          {selectedType === "team" ? "Mint Team" : selectedType === "user" ? "Mint Whitelist" : "Mint"}
         </WalletButtonBase>
       </div>
     </div>

@@ -23,8 +23,9 @@ const useWhitelist = () => {
 
   const [whitelistInfo, setWhitelistInfo] = React.useState<WhitelistInfo>();
 
-  const callMint = async () => {
-    if (whitelistInfo?.status === "true" && whitelistInfo.userType === "user") {
+  const callMint = async (type?: "user" | "team") => {
+    console.log(type, whitelistInfo?.status);
+    if (whitelistInfo?.status && type === "user") {
       console.log("whitelist");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintWhitelist(
@@ -36,7 +37,7 @@ const useWhitelist = () => {
       );
       let reciept = await tx.wait();
       return reciept;
-    } else if (whitelistInfo?.status === "true" && whitelistInfo.userType === "team") {
+    } else if (whitelistInfo?.status && type === "team") {
       console.log("team");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintTeam(
@@ -56,11 +57,11 @@ const useWhitelist = () => {
     }
   };
 
-  const mint = async () => {
+  const mint = async (type?: "user" | "team") => {
     let noti = notifyLoading("Minting...", "Minting Token Please Wait...");
     setLoading(true);
     try {
-      let reciept = await callMint();
+      let reciept = await callMint(type);
       let args = printLastEvent(reciept, abi);
       let tokenId = args.tokenId.toNumber();
       console.log(tokenId);

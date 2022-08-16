@@ -30,7 +30,6 @@ const useWallet = () => {
 
   const openModal = React.useCallback(() => {
     if (!isConnected) {
-      // dispatch(openWalletModal());
       _openModal();
     }
   }, [isConnected, _openModal]);
