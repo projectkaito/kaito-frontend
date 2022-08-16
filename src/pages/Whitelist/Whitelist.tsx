@@ -8,6 +8,7 @@ import LogoBar from "src/components/LogoBar/LogoBar";
 import { getWhitelistInfo } from "src/api/whitelist";
 import { useWallet } from "@react-dapp/wallet";
 import { WhitelistInfo } from "src/types/apis";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,12 +20,32 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundPositionY: "bottom",
     backgroundPositionX: "center",
   },
+  headingsContainer: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    marginBottom: 50,
+  },
+  heading: {
+    color: "grey",
+    transform: "scale(0.8)",
+    cursor: "pointer",
+    userSelect: "none",
+    transition: "all 300ms ease-in-out"
+  },
+  selected: {
+    color: "white",
+    transform: "scale(1.2)",
+    cursor: "default",
+  },
 }));
 
 interface Props {}
 
+type SelectedType = undefined | "team" | "user";
+
 const Whitelist: React.FC<Props> = () => {
   const classes = useStyles();
+  const [selectedType, setSelectedType] = React.useState<SelectedType>(undefined);
 
   return (
     <div className={classes.root}>
@@ -34,6 +55,34 @@ const Whitelist: React.FC<Props> = () => {
           Whitelist
         </Typography> */}
         <Grid container spacing={3} style={{ marginTop: 50 }}>
+          <Grid item xs={12}>
+            <div className={classes.headingsContainer}>
+              <Typography
+                variant="h4"
+                align="center"
+                className={clsx(classes.heading, !selectedType && classes.selected)}
+                onClick={() => setSelectedType(undefined)}
+              >
+                Public Mint
+              </Typography>
+              <Typography
+                variant="h4"
+                align="center"
+                className={clsx(classes.heading, selectedType === "user" && classes.selected)}
+                onClick={() => setSelectedType("user")}
+              >
+                Whitelist Mint
+              </Typography>
+              <Typography
+                variant="h4"
+                align="center"
+                className={clsx(classes.heading, selectedType === "team" && classes.selected)}
+                onClick={() => setSelectedType("team")}
+              >
+                Team Mint
+              </Typography>
+            </div>
+          </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Content />

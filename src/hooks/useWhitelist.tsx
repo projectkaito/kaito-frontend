@@ -18,10 +18,10 @@ const useWhitelist = () => {
   const [loading, setLoading] = useState(false);
 
   const [whitelistInfo, setWhitelistInfo] = React.useState<WhitelistInfo>();
-  console.log(process.env.REACT_APP_PRODUCTION);
 
   const callMint = async () => {
     if (whitelistInfo?.status === "true" && whitelistInfo.userType === "user") {
+      console.log("whitelist");
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = contract?.mintWhitelist(
         whitelistInfo.deadline,
