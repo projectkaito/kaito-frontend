@@ -14,6 +14,7 @@ import Animation from "src/assets/images/gif.webm";
 import Minting from "./pages/Minting/Minting";
 import NFTPage from "./pages/NFTPage/NFTPage";
 import Test from "./pages/Test/Test";
+import Inventory from "./pages/Inventory/Inventory";
 
 const useStyle = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -104,6 +105,7 @@ const Routes: React.FC<Props> = () => {
         /> */}
         <Route path="/" element={<Minting />} />
         <Route path="/minting" element={<Minting />} />
+        <Route path="/inventory" element={<Inventory />} />
         <Route path="/nft/:address/:tokenId" element={<NFTPage />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
