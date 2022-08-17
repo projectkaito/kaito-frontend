@@ -6,7 +6,7 @@ import Content from "./components/Content";
 import MintNft from "./components/MintNft";
 import LogoBar from "src/components/LogoBar/LogoBar";
 import { getWhitelistInfo } from "src/api/whitelist";
-import { WhitelistInfo } from "src/types/apis";
+import { WhitelistInfo, WhitelistUserType } from "src/types/apis";
 import clsx from "clsx";
 import useWhitelist from "src/hooks/useWhitelist";
 
@@ -41,11 +41,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {}
 
-type SelectedType = undefined | "team" | "user";
-
 const Whitelist: React.FC<Props> = () => {
   const classes = useStyles();
-  const [selectedType, setSelectedType] = React.useState<SelectedType>(undefined);
+  const [selectedType, setSelectedType] = React.useState<WhitelistUserType | undefined>(undefined);
   const { whitelistInfo, stats } = useWhitelist();
 
   return (
@@ -69,16 +67,16 @@ const Whitelist: React.FC<Props> = () => {
               <Typography
                 variant="h4"
                 align="center"
-                className={clsx(classes.heading, selectedType === "user" && classes.selected)}
-                onClick={() => setSelectedType("user")}
+                className={clsx(classes.heading, selectedType === WhitelistUserType.Whitelist && classes.selected)}
+                onClick={() => setSelectedType(WhitelistUserType.Whitelist)}
               >
                 Whitelist Mint
               </Typography>
               <Typography
                 variant="h4"
                 align="center"
-                className={clsx(classes.heading, selectedType === "team" && classes.selected)}
-                onClick={() => setSelectedType("team")}
+                className={clsx(classes.heading, selectedType === WhitelistUserType.Team && classes.selected)}
+                onClick={() => setSelectedType(WhitelistUserType.Team)}
               >
                 Team Mint
               </Typography>

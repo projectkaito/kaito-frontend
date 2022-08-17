@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Theme, Typography } from "@mui/material";
 import { Stats } from "src/hooks/useWhitelist";
 import { useTimer } from "src/hooks/useTimer";
+import { WhitelistUserType } from "src/types/apis";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   stats?: Stats;
-  selectedType?: "team" | "user";
+  selectedType?: WhitelistUserType;
 }
 
 const Content: React.FC<Props> = ({ stats, selectedType }) => {
@@ -27,7 +28,7 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
   const timestamp = React.useMemo(
     () =>
       selectedType
-        ? selectedType === "user"
+        ? selectedType === WhitelistUserType.Whitelist
           ? stats?.whitelistMintStartTimestamp
           : stats?.teamMintStartTimestamp
         : stats?.publicMintStartTimestamp,
@@ -45,7 +46,9 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
       </Typography>
       {!timeFinished && (
         <Typography color="textPrimary" variant="h5" style={{ marginTop: 50 }}>
-          <b>{`${selectedType ? (selectedType === "user" ? "Whitelist" : "Team") : "Public"}`} Sale</b>
+          <b>
+            {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
+          </b>
         </Typography>
       )}
       {!timeFinished && (
@@ -87,7 +90,8 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
       {timeFinished && (
         <Typography color="textPrimary" variant="h5" style={{ marginTop: 50 }}>
           <b>
-            {`${selectedType ? (selectedType === "user" ? "Whitelist" : "Team") : "Public"}`} Sale is
+            {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
+            is
             <br />
             Live
           </b>

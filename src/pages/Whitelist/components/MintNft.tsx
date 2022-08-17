@@ -5,6 +5,7 @@ import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
 import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
 import useWhitelist from "src/hooks/useWhitelist";
+import { WhitelistUserType } from "src/types/apis";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  selectedType?: "user" | "team";
+  selectedType?: WhitelistUserType;
 }
 
 const MintNft: React.FC<Props> = ({ selectedType }) => {
@@ -39,9 +40,17 @@ const MintNft: React.FC<Props> = ({ selectedType }) => {
   const disabled = React.useMemo(() => {
     if (!selectedType && stats && stats?.numberMinted < stats?.maxPublicMintPerWallet) {
       return false;
-    } else if (selectedType === "user" && whitelistInfo?.userType === "user" && !stats?.whitelistClaim) {
+    } else if (
+      selectedType === WhitelistUserType.Whitelist &&
+      whitelistInfo?.userType === WhitelistUserType.Whitelist &&
+      !stats?.whitelistClaim
+    ) {
       return false;
-    } else if (selectedType === "team" && whitelistInfo?.userType === "team" && !stats?.teamClaim) {
+    } else if (
+      selectedType === WhitelistUserType.Team &&
+      whitelistInfo?.userType === WhitelistUserType.Team &&
+      !stats?.teamClaim
+    ) {
       return false;
     } else {
       return true;
@@ -61,7 +70,11 @@ const MintNft: React.FC<Props> = ({ selectedType }) => {
           onClick={() => mint(selectedType)}
           disabled={disabled}
         >
-          {selectedType === "team" ? "Mint Team" : selectedType === "user" ? "Mint Whitelist" : "Mint"}
+          {selectedType === WhitelistUserType.Team
+            ? "Mint Team"
+            : selectedType === WhitelistUserType.Whitelist
+            ? "Mint Whitelist"
+            : "Mint"}
         </WalletButtonBase>
       </div>
     </div>

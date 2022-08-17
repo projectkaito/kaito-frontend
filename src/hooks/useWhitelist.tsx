@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getWhitelistInfo } from "src/api/whitelist";
-import { WhitelistInfo } from "src/types/apis";
+import { WhitelistInfo, WhitelistUserType } from "src/types/apis";
 import { Kaito } from "src/types/contract/Kaito";
 import useNotify from "./useNotify";
 import { useNavigate } from "react-router-dom";
@@ -115,8 +115,8 @@ const useWhitelist = () => {
 
   const [whitelistInfo, setWhitelistInfo] = React.useState<WhitelistInfo>();
 
-  const callMint = async (type?: "user" | "team") => {
-    if (whitelistInfo?.status && type === "user") {
+  const callMint = async (type?: WhitelistUserType) => {
+    if (whitelistInfo?.status && type === WhitelistUserType.Whitelist) {
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintWhitelist(
         whitelistInfo.deadline!.toString(),
@@ -127,7 +127,7 @@ const useWhitelist = () => {
       );
       let reciept = await tx.wait();
       return reciept;
-    } else if (whitelistInfo?.status && type === "team") {
+    } else if (whitelistInfo?.status && type === WhitelistUserType.Team) {
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintTeam(
         whitelistInfo.deadline!.toString(),
@@ -145,7 +145,7 @@ const useWhitelist = () => {
     }
   };
 
-  const mint = async (type?: "user" | "team") => {
+  const mint = async (type?: WhitelistUserType) => {
     let noti = notifyLoading("Minting...", "Minting Token Please Wait...");
     setLoading(true);
     try {
