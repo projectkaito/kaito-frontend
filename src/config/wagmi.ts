@@ -1,4 +1,4 @@
-import { createClient, defaultChains, configureChains } from "wagmi";
+import { createClient, configureChains, chain } from "wagmi";
 
 import { publicProvider } from "wagmi/providers/public";
 
@@ -6,10 +6,11 @@ import { publicProvider } from "wagmi/providers/public";
 // import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { defaultChainId } from ".";
 
 // Configure chains & providers with the Alchemy provider.
 // Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
-const { chains, provider, webSocketProvider } = configureChains([defaultChains[3]], [publicProvider()]);
+const { chains, provider, webSocketProvider } = configureChains([chain.rinkeby], [publicProvider()]);
 // console.log(defaultChains);
 // Set up client
 const wagmiConfig = createClient({
