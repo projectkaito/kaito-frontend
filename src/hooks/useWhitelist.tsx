@@ -35,21 +35,26 @@ export interface Stats {
 }
 
 const mapContractReads = (data?: any) => {
-  if (data) {
-    const obj: Stats = {
-      maxPublicMintPerWallet: data[0].toNumber(),
-      maxWhitelistMintPerWallet: data[1].toNumber(),
-      maxTeamMintPerWallet: data[2].toNumber(),
-      publicMintStartTimestamp: data[3].toNumber(),
-      teamMintStartTimestamp: data[4].toNumber(),
-      whitelistMintStartTimestamp: data[5].toNumber(),
-      numberMinted: data[6].toNumber(),
-      teamClaim: data[7],
-      whitelistClaim: data[8],
-    };
-    console.log("stats", obj);
-    return obj;
-  } else return undefined;
+  try {
+    if (data) {
+      const obj: Stats = {
+        maxPublicMintPerWallet: data[0].toNumber(),
+        maxWhitelistMintPerWallet: data[1].toNumber(),
+        maxTeamMintPerWallet: data[2].toNumber(),
+        publicMintStartTimestamp: data[3].toNumber(),
+        teamMintStartTimestamp: data[4].toNumber(),
+        whitelistMintStartTimestamp: data[5].toNumber(),
+        numberMinted: data[6].toNumber(),
+        teamClaim: data[7],
+        whitelistClaim: data[8],
+      };
+      console.log("stats", obj);
+      return obj;
+    } else return undefined;
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
 };
 
 const useWhitelist = () => {
