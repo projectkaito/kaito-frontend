@@ -9,6 +9,10 @@ export interface MoralisNFT {
     description: string;
     image: string;
     name: string;
+    attributes: {
+      trait_type: string;
+      value: string;
+    }[];
   };
   name: string;
   owner_of: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Container, Grid, Theme } from "@mui/material";
+import { Container, Grid, Paper, Skeleton, Theme } from "@mui/material";
 import LogoBar from "src/components/LogoBar/LogoBar";
 import Img1 from "src/assets/images/nfts/1.jpg";
 import Details from "./components/Details";
@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useMetadata } from "src/hooks/useMetadata";
 import { useMoralisWeb3Api } from "react-moralis";
 import { MoralisNFT } from "src/types/moralis";
+import { defaultChainName } from "src/config";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -27,22 +28,35 @@ interface Props {}
 const NFTPage: React.FC<Props> = () => {
   const classes = useStyles();
   const { tokenId, address } = useParams();
-  const { metadata } = useMetadata(address, tokenId);
+  // const { metadata } = useMetadata(address, tokenId);
   const Web3Api = useMoralisWeb3Api();
   const [nftData, setNftData] = React.useState<Partial<MoralisNFT>>({});
-  console.log("met", metadata, nftData);
-  React.useEffect(() => {
+  const [loaded, setLoaded] = React.useState(false);
+  console.log("met", nftData);
+
+  const fetchMetadata = React.useCallback(async () => {
     if (!address || !tokenId) return;
-    Web3Api.token
-      .getTokenIdMetadata({
-        address: address,
-        token_id: tokenId,
-        chain: "rinkeby",
-      })
-      .then((res: MoralisNFT) => {
-        setNftData(res);
-      });
-  }, [Web3Api, address, tokenId]);
+    console.log("run");
+    let res = await Web3Api.token.getTokenIdMetadata({
+      address: address,
+      token_id: tokenId,
+      chain: defaultChainName,
+    });
+    setNftData({ ...res, metadata: JSON.parse(res.metadata) });
+  }, [Web3Api]);
+
+  const refresh = async () => {
+    await Web3Api.token.reSyncMetadata({
+      chain: defaultChainName,
+      address: address!,
+      token_id: tokenId!,
+    });
+    await fetchMetadata();
+  };
+
+  React.useEffect(() => {
+    fetchMetadata();
+  }, [fetchMetadata]);
 
   return (
     <div className={classes.root}>
@@ -50,10 +64,34 @@ const NFTPage: React.FC<Props> = () => {
         <LogoBar />
         <Grid container spacing={4} style={{ marginTop: 50 }}>
           <Grid item xs={12} sm={6} md={4}>
-            <img src={metadata?.image} alt="" style={{ width: "100%" }} />
+            <img
+              src={nftData.metadata?.image}
+              alt=""
+              onLoad={() => {
+                setLoaded(true);
+              }}
+              style={{ display: loaded ? "initial" : "none", width: "100%" }}
+            />
+            {!loaded && (
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                style={{ aspectRatio: "1/1", height: "auto" }}
+                component={Paper}
+              />
+            )}
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
-            <Details data={metadata} />
+            <Details
+              refresh={refresh}
+              data={{
+                image: nftData.metadata?.image,
+                description: nftData.metadata?.description,
+                name: nftData.metadata?.name,
+                attributes: nftData.metadata?.attributes,
+                ownerAddress: nftData.owner_of,
+              }}
+            />
           </Grid>
         </Grid>
       </Container>

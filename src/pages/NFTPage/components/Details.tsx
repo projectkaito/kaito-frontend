@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Grid, Theme, Typography } from "@mui/material";
+import { Grid, IconButton, Theme, Typography } from "@mui/material";
 import clsx from "clsx";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -13,28 +14,58 @@ const useStyles = makeStyles((theme: Theme) => ({
   attrType: {
     fontSize: 12,
   },
+  rotate: {
+    animation: "$rotate 1s infinite linear",
+  },
+  "@keyframes rotate": {
+    "0%": {
+      transform: "rotate(0deg)",
+    },
+    "100%": {
+      transform: "rotate(360deg)",
+    },
+  },
 }));
 
 interface Props {
+  refresh: () => Promise<void>;
   data: {
-    name: string;
-    description: string;
-    image: string;
-    attributes: {
+    name?: string;
+    description?: string;
+    image?: string;
+    ownerAddress?: string;
+    attributes?: {
       trait_type: string;
       value: string;
     }[];
   };
 }
 
-const Details: React.FC<Props> = ({ data }) => {
+const Details: React.FC<Props> = ({ data, refresh }) => {
   const classes = useStyles();
+  const [resyncing, setResyncing] = React.useState(false);
+
+  const handleRefresh = async () => {
+    setResyncing(true);
+    try {
+      await refresh();
+    } catch (error) {
+      console.log(error);
+    }
+    setResyncing(false);
+  };
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" color="textPrimary">
-        {data?.name}
-      </Typography>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="h4" color="textPrimary">
+          {data?.name}
+        </Typography>
+        <IconButton style={{ color: "white" }} onClick={handleRefresh} className={resyncing ? classes.rotate : ""}>
+          <RefreshIcon fontSize="large" />
+        </IconButton>
+      </div>
+      <Typography color="textPrimary">Owner: {data.ownerAddress}</Typography>
       <Typography color="textPrimary" style={{ marginTop: 20 }}>
         {data?.description}
       </Typography>

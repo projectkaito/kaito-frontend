@@ -7,6 +7,7 @@ import WaveText from "src/components/WaveText/WaveText";
 import { useMoralisWeb3Api } from "react-moralis";
 import useWallet from "src/hooks/useWallet";
 import { MoralisNFT } from "src/types/moralis";
+import { defaultChainName } from "src/config";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -33,7 +34,7 @@ const Inventory: React.FC<IProps> = () => {
     if (!account) return;
     Web3Api.account
       .getNFTs({
-        chain: "rinkeby",
+        chain: defaultChainName,
         address: account!,
         token_addresses: ["0xfD8eeFBe27Ce0a5EFE5f773B66ED159224c7Ed6b"],
       })

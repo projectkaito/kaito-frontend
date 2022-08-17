@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { IconButton, Typography, Theme, Popover, List, ListItem, ListItemText } from "@mui/material";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import useWallet from "src/hooks/useWallet";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -55,6 +56,11 @@ const WalletIcon: React.FC<Props> = () => {
         }}
       >
         <List>
+          <ListItem button color="primary">
+            <Typography component={Link} to="/inventory" color="secondary">
+              Inventory
+            </Typography>
+          </ListItem>
           <ListItem button onClick={logout} color="primary">
             <Typography color="secondary">Logout</Typography>
           </ListItem>
