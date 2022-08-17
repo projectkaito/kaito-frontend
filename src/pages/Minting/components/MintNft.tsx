@@ -82,7 +82,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
       if (whitelistInfo?.userType === WhitelistUserType.Team) {
         if (stats?.teamClaim) {
           obj = {
-            txt: "Already Claimed",
+            txt: "Already Minted",
             disabled: true,
           };
         } else {
@@ -101,7 +101,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
       if (whitelistInfo?.userType === WhitelistUserType.Whitelist) {
         if (stats.whitelistClaim) {
           obj = {
-            txt: "Already Claimed",
+            txt: "Already Minted",
             disabled: true,
           };
         } else {
