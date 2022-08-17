@@ -12,6 +12,9 @@
   border: 0;
   -webkit-user-drag: none;
 }
+a{
+  text-decoration: none;
+}
 :root {
   --text-color: hsla(210, 50%, 85%, 1);
   --shadow-color: rgba(182, 84, 114, 0.4);
