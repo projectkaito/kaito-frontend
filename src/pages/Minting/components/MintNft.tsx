@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Button, Theme } from "@mui/material";
 import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
+import prerevealImage from "src/assets/images/prereveal.gif";
 import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
 import useWhitelist from "src/hooks/useWhitelist";
 import { WhitelistUserType } from "src/types/apis";
@@ -123,7 +124,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
   return (
     <div className={classes.root}>
       <div className={classes.glitchContainer}>
-        <GlitchImg srcSet={NFT_IMAGES} className={classes.img} />
+        <GlitchImg srcSet={[prerevealImage, prerevealImage]} className={classes.img} />
         <WalletButtonBase
           loading={loading}
           loadingText="Minting.."

@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-between",
+    cursor: "pointer",
   },
 }));
 
