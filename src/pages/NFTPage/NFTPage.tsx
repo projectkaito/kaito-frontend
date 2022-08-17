@@ -7,6 +7,8 @@ import Details from "./components/Details";
 import Bg from "src/assets/images/buildings.gif";
 import { useParams } from "react-router-dom";
 import { useMetadata } from "src/hooks/useMetadata";
+import { useMoralisWeb3Api } from "react-moralis";
+import { MoralisNFT } from "src/types/moralis";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,6 +28,21 @@ const NFTPage: React.FC<Props> = () => {
   const classes = useStyles();
   const { tokenId, address } = useParams();
   const { metadata } = useMetadata(address, tokenId);
+  const Web3Api = useMoralisWeb3Api();
+  const [nftData, setNftData] = React.useState<Partial<MoralisNFT>>({});
+  console.log("met", metadata, nftData);
+  React.useEffect(() => {
+    if (!address || !tokenId) return;
+    Web3Api.token
+      .getTokenIdMetadata({
+        address: address,
+        token_id: tokenId,
+        chain: "rinkeby",
+      })
+      .then((res: MoralisNFT) => {
+        setNftData(res);
+      });
+  }, [Web3Api, address, tokenId]);
 
   return (
     <div className={classes.root}>
