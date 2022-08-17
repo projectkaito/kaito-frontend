@@ -5,7 +5,7 @@ import NFTCard from "src/components/NFTCard/NFTCard";
 import WaveText from "src/components/WaveText/WaveText";
 import useWallet from "src/hooks/useWallet";
 import { MoralisNFT } from "src/types/moralis";
-import { defaultChainName } from "src/config";
+import { Contracts, defaultChainName } from "src/config";
 import useMoralis from "src/hooks/useMoralis";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,7 +34,7 @@ const Inventory: React.FC<IProps> = () => {
       .getNFTs({
         chain: defaultChainName,
         address: account!,
-        token_addresses: ["0xfD8eeFBe27Ce0a5EFE5f773B66ED159224c7Ed6b"],
+        token_addresses: [Contracts.kaitoWhitelist],
       })
       .then((res) => {
         let result = res.result;
