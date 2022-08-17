@@ -89,6 +89,24 @@ let theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderColor: "white",
+          "& label": {
+            color: "grey",
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          background: "rgba(100,100,100,0.2)",
+          backdropFilter: "blur(10px)",
+        },
+      },
+    },
   },
   fonts: [Typographica],
 });
