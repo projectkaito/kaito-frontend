@@ -15,6 +15,7 @@ import Minting from "./pages/Minting/Minting";
 import Whitelist from "./pages/Whitelist/Whitelist";
 import NFTPage from "./pages/NFTPage/NFTPage";
 import Test from "./pages/Test/Test";
+import Inventory from "./pages/Inventory/Inventory";
 
 const useStyle = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -106,6 +107,7 @@ const Routes: React.FC<Props> = () => {
         <Route path="/" element={<Whitelist />} />
         <Route path="/minting" element={<Minting />} />
         <Route path="/whitelist" element={<Whitelist />} />
+        <Route path="/inventory" element={<Inventory />} />
         <Route path="/nft/:address/:tokenId" element={<NFTPage />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
