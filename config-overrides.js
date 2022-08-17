@@ -8,7 +8,6 @@ module.exports = {
     config.resolve.fallback = {
       // util: require.resolve('util/'),
       // url: require.resolve('url'),
-      // assert: require.resolve('assert'),
       buffer: require.resolve("buffer"),
       assert: require.resolve("assert"),
       crypto: require.resolve("crypto-browserify"),

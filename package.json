@@ -18,6 +18,7 @@
     "@types/bignumber.js": "^5.0.0",
     "@types/jquery": "^3.5.14",
     "@types/react-modal": "^3.13.1",
+    "assert": "^2.0.0",
     "axios": "^0.24.0",
     "bignumber.js": "^9.1.0",
     "browserify-zlib": "^0.2.0",
