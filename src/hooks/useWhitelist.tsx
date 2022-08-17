@@ -48,7 +48,6 @@ const mapContractReads = (data?: any) => {
         teamClaim: data[7],
         whitelistClaim: data[8],
       };
-      console.log("stats", obj);
       return obj;
     } else return undefined;
   } catch (error) {
@@ -123,7 +122,6 @@ const useWhitelist = () => {
   const callMint = async (type?: WhitelistUserType) => {
     if (whitelistInfo?.status && type === WhitelistUserType.Whitelist) {
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
-      console.log("white", splitted, whitelistInfo);
       let tx = await contract?.mintWhitelist(
         whitelistInfo.deadline!.toString(),
         whitelistInfo.quantity!.toString(),
