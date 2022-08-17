@@ -17,6 +17,22 @@ export const useTimer = (futureTime?: number): IUseTimer => {
   const [timeLeft, setTimeLeft] = React.useState<ITimeLeft | undefined>();
 
   React.useEffect(() => {
+    const now = Date.now() / 1000;
+    if (futureTime && now < futureTime) {
+      setTimeLeft(
+        getTimeLeft(futureTime - now) ?? {
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        }
+      );
+      setTimeFinished(false);
+    } else {
+      setTimeFinished(true);
+      setTimeLeft(undefined);
+    }
+
     const interval = setInterval(() => {
       const now = Date.now() / 1000;
       if (futureTime && now < futureTime) {
