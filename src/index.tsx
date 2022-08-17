@@ -28,18 +28,18 @@ setUpNotifications({
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoralisProvider serverUrl={MORALIS_SERVER_URL!} appId={MORALIS_APP_ID!}>
-      <Provider store={store}>
-        <Notification />
-        <BrowserRouter>
-          <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
-              <App />
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </BrowserRouter>
-      </Provider>
-    </MoralisProvider>
+    {/* <MoralisProvider serverUrl={MORALIS_SERVER_URL!} appId={MORALIS_APP_ID!}> */}
+    <Provider store={store}>
+      <Notification />
+      <BrowserRouter>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </BrowserRouter>
+    </Provider>
+    {/* </MoralisProvider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

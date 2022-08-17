@@ -7,6 +7,7 @@ import wagmiConfig from "./config/wagmi";
 import { WagmiConfig } from "wagmi";
 import { WalletModal } from "./modals/WalletModal/WalletModal";
 import { WalletProvider } from "./components/WalletContext/WalletContext";
+import { MoralisProvider } from "./components/MoralisContext/MoralisContext";
 
 const allModals: ModalObject[] = [
   {
@@ -21,13 +22,15 @@ const allModals: ModalObject[] = [
 
 function App() {
   return (
-    <WagmiConfig client={wagmiConfig}>
-      <WalletProvider>
-        <ModalProvider allModals={allModals}>
-          <Routes />
-        </ModalProvider>
-      </WalletProvider>
-    </WagmiConfig>
+    <MoralisProvider>
+      <WagmiConfig client={wagmiConfig}>
+        <WalletProvider>
+          <ModalProvider allModals={allModals}>
+            <Routes />
+          </ModalProvider>
+        </WalletProvider>
+      </WagmiConfig>
+    </MoralisProvider>
   );
 }
 

@@ -4,10 +4,10 @@ import { Container, Grid, Theme, Typography } from "@mui/material";
 import Bg from "src/assets/images/buildings.gif";
 import NFTCard from "src/components/NFTCard/NFTCard";
 import WaveText from "src/components/WaveText/WaveText";
-import { useMoralisWeb3Api } from "react-moralis";
 import useWallet from "src/hooks/useWallet";
 import { MoralisNFT } from "src/types/moralis";
 import { defaultChainName } from "src/config";
+import useMoralis from "src/hooks/useMoralis";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,13 +26,12 @@ interface IProps {}
 const Inventory: React.FC<IProps> = () => {
   const classes = useStyles();
   const { account } = useWallet();
+  const { isConnected, Moralis } = useMoralis();
   const [results, setResults] = React.useState<MoralisNFT[]>([]);
 
-  const Web3Api = useMoralisWeb3Api();
-
   React.useEffect(() => {
-    if (!account) return;
-    Web3Api.account
+    if (!account && !isConnected) return;
+    Moralis.Web3API.account
       .getNFTs({
         chain: defaultChainName,
         address: account!,
@@ -40,9 +39,9 @@ const Inventory: React.FC<IProps> = () => {
       })
       .then((res) => {
         let result = res.result;
-        setResults(result.map((item: any) => ({ ...item, metadata: JSON.parse(item.metadata) })));
+        setResults(result!.map((item: any) => ({ ...item, metadata: JSON.parse(item.metadata) })));
       });
-  }, [Web3Api, account, setResults]);
+  }, [isConnected, account, setResults, Moralis.Web3API.account]);
 
   return (
     <div className={classes.root}>

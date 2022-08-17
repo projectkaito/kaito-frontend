@@ -2,14 +2,12 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Container, Grid, Paper, Skeleton, Theme } from "@mui/material";
 import LogoBar from "src/components/LogoBar/LogoBar";
-import Img1 from "src/assets/images/nfts/1.jpg";
 import Details from "./components/Details";
 import Bg from "src/assets/images/buildings.gif";
 import { useParams } from "react-router-dom";
-import { useMetadata } from "src/hooks/useMetadata";
-import { useMoralisWeb3Api } from "react-moralis";
 import { MoralisNFT } from "src/types/moralis";
 import { defaultChainName } from "src/config";
+import useMoralis from "src/hooks/useMoralis";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -29,24 +27,23 @@ const NFTPage: React.FC<Props> = () => {
   const classes = useStyles();
   const { tokenId, address } = useParams();
   // const { metadata } = useMetadata(address, tokenId);
-  const Web3Api = useMoralisWeb3Api();
+  const { isConnected, Moralis } = useMoralis();
   const [nftData, setNftData] = React.useState<Partial<MoralisNFT>>({});
   const [loaded, setLoaded] = React.useState(false);
-  console.log("met", nftData);
 
   const fetchMetadata = React.useCallback(async () => {
-    if (!address || !tokenId) return;
-    console.log("run");
-    let res = await Web3Api.token.getTokenIdMetadata({
+    if (!address || !tokenId || !isConnected) return;
+    console.log("fetching metadata");
+    let res = await Moralis.Web3API.token.getTokenIdMetadata({
       address: address,
       token_id: tokenId,
       chain: defaultChainName,
     });
-    setNftData({ ...res, metadata: JSON.parse(res.metadata) });
-  }, [Web3Api]);
+    setNftData({ ...res, metadata: JSON.parse(res.metadata!) });
+  }, [isConnected, address, tokenId, Moralis.Web3API.token]);
 
   const refresh = async () => {
-    await Web3Api.token.reSyncMetadata({
+    await Moralis.Web3API.token.reSyncMetadata({
       chain: defaultChainName,
       address: address!,
       token_id: tokenId!,
