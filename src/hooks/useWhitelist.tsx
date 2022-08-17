@@ -118,6 +118,7 @@ const useWhitelist = () => {
   const callMint = async (type?: WhitelistUserType) => {
     if (whitelistInfo?.status && type === WhitelistUserType.Whitelist) {
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
+      console.log("white", splitted, whitelistInfo);
       let tx = await contract?.mintWhitelist(
         whitelistInfo.deadline!.toString(),
         whitelistInfo.quantity!.toString(),
