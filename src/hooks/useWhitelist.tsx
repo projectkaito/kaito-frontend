@@ -122,9 +122,10 @@ const useWhitelist = () => {
   const callMint = async (type?: WhitelistUserType) => {
     if (whitelistInfo?.status && type === WhitelistUserType.Whitelist) {
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
+      console.log(splitted, whitelistInfo);
       let tx = await contract?.mintWhitelist(
-        whitelistInfo.deadline!.toString(),
-        whitelistInfo.quantity!.toString(),
+        whitelistInfo.deadline!,
+        whitelistInfo.quantity!,
         splitted.v,
         splitted.r,
         splitted.s
@@ -134,8 +135,8 @@ const useWhitelist = () => {
     } else if (whitelistInfo?.status && type === WhitelistUserType.Team) {
       let splitted = ethers.utils.splitSignature(whitelistInfo?.signature!);
       let tx = await contract?.mintTeam(
-        whitelistInfo.deadline!.toString(),
-        whitelistInfo.quantity!.toString(),
+        whitelistInfo.deadline!,
+        whitelistInfo.quantity!,
         splitted.v,
         splitted.r,
         splitted.s

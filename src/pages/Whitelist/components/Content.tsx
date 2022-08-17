@@ -4,6 +4,7 @@ import { Theme, Typography } from "@mui/material";
 import { Stats } from "src/hooks/useWhitelist";
 import { IUseTimer, useTimer } from "src/hooks/useTimer";
 import { WhitelistUserType } from "src/types/apis";
+import Live from "./Live";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -84,7 +85,7 @@ const Content: React.FC<Props> = ({ selectedType, timer }) => {
             {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
             is
             <br />
-            Live
+            <Live />
           </b>
         </Typography>
       )}
