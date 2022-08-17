@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { IconButton, Typography, Theme, Popover, List, ListItem, ListItemText } from "@mui/material";
+import { IconButton, Typography, Theme, Popover, List, ListItem } from "@mui/material";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import useWallet from "src/hooks/useWallet";
 import { Link } from "react-router-dom";

@@ -12,9 +12,6 @@ import store from "./state";
 import Logo from "src/assets/logos/logo.png";
 import { Notification } from "src/components/Notification/Notification";
 
-import { MoralisProvider } from "react-moralis";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "./config/config";
-
 // run this function when your application starts before creating any notifications
 setUpNotifications({
   defaultProps: {
@@ -28,7 +25,6 @@ setUpNotifications({
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <MoralisProvider serverUrl={MORALIS_SERVER_URL!} appId={MORALIS_APP_ID!}> */}
     <Provider store={store}>
       <Notification />
       <BrowserRouter>
@@ -39,7 +35,6 @@ ReactDOM.render(
         </StyledEngineProvider>
       </BrowserRouter>
     </Provider>
-    {/* </MoralisProvider> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

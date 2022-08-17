@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Container, Grid, Theme, Typography } from "@mui/material";
-import Bg from "src/assets/images/buildings.gif";
+import { Container, Grid, Theme } from "@mui/material";
 import NFTCard from "src/components/NFTCard/NFTCard";
 import WaveText from "src/components/WaveText/WaveText";
 import useWallet from "src/hooks/useWallet";
