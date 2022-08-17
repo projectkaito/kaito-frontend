@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Theme, Typography } from "@mui/material";
 import { Stats } from "src/hooks/useWhitelist";
-import { useTimer } from "src/hooks/useTimer";
+import { IUseTimer, useTimer } from "src/hooks/useTimer";
 import { WhitelistUserType } from "src/types/apis";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -21,20 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   stats?: Stats;
   selectedType?: WhitelistUserType;
+  timer?: IUseTimer;
 }
 
-const Content: React.FC<Props> = ({ stats, selectedType }) => {
+const Content: React.FC<Props> = ({ selectedType, timer }) => {
   const classes = useStyles();
-  const timestamp = React.useMemo(
-    () =>
-      selectedType
-        ? selectedType === WhitelistUserType.Whitelist
-          ? stats?.whitelistMintStartTimestamp
-          : stats?.teamMintStartTimestamp
-        : stats?.publicMintStartTimestamp,
-    [selectedType, stats]
-  );
-  const { timeFinished, timeLeft } = useTimer(timestamp);
 
   return (
     <div className={classes.root}>
@@ -44,18 +35,18 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
       <Typography color="primary" variant="h2">
         Future
       </Typography>
-      {!timeFinished && (
+      {!timer?.timeFinished && (
         <Typography color="textPrimary" variant="h5" style={{ marginTop: 50 }}>
           <b>
             {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
           </b>
         </Typography>
       )}
-      {!timeFinished && (
+      {!timer?.timeFinished && timer?.timeLeft && (
         <div className={classes.countdownContainer}>
           <div>
             <Typography color="textPrimary" variant="h4" align="center">
-              <b>{timeLeft.days}</b>
+              <b>{timer?.timeLeft.days}</b>
             </Typography>
             <Typography color="textPrimary" align="center" className={classes.timeText}>
               Days
@@ -63,7 +54,7 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
           </div>
           <div>
             <Typography color="textPrimary" variant="h4" align="center">
-              <b>{timeLeft.hours}</b>
+              <b>{timer?.timeLeft.hours}</b>
             </Typography>
             <Typography color="textPrimary" align="center" className={classes.timeText}>
               Hours
@@ -71,7 +62,7 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
           </div>
           <div>
             <Typography color="textPrimary" variant="h4" align="center">
-              <b>{timeLeft.minutes}</b>
+              <b>{timer?.timeLeft.minutes}</b>
             </Typography>
             <Typography color="textPrimary" align="center" className={classes.timeText}>
               Mins
@@ -79,7 +70,7 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
           </div>
           <div>
             <Typography color="textPrimary" variant="h4" align="center">
-              <b>{timeLeft.seconds}</b>
+              <b>{timer?.timeLeft.seconds}</b>
             </Typography>
             <Typography color="textPrimary" align="center" className={classes.timeText}>
               Secs
@@ -87,7 +78,7 @@ const Content: React.FC<Props> = ({ stats, selectedType }) => {
           </div>
         </div>
       )}
-      {timeFinished && (
+      {timer?.timeFinished && (
         <Typography color="textPrimary" variant="h5" style={{ marginTop: 50 }}>
           <b>
             {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale

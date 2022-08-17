@@ -6,6 +6,8 @@ import { NFT_IMAGES } from "src/config/constants";
 import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
 import useWhitelist from "src/hooks/useWhitelist";
 import { WhitelistUserType } from "src/types/apis";
+import { IUseTimer } from "src/hooks/useTimer";
+import useWallet from "src/hooks/useWallet";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
@@ -31,31 +33,92 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   selectedType?: WhitelistUserType;
+  timer?: IUseTimer;
 }
 
-const MintNft: React.FC<Props> = ({ selectedType }) => {
+const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
   const classes = useStyles();
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
+  const { account } = useWallet();
 
-  const disabled = React.useMemo(() => {
-    if (!selectedType && stats && stats?.numberMinted < stats?.maxPublicMintPerWallet) {
-      return false;
-    } else if (
-      selectedType === WhitelistUserType.Whitelist &&
-      whitelistInfo?.userType === WhitelistUserType.Whitelist &&
-      !stats?.whitelistClaim
-    ) {
-      return false;
-    } else if (
-      selectedType === WhitelistUserType.Team &&
-      whitelistInfo?.userType === WhitelistUserType.Team &&
-      !stats?.teamClaim
-    ) {
-      return false;
-    } else {
-      return true;
+  const isAllowed = React.useMemo(() => {
+    let obj = {
+      txt: "Mint",
+      disabled: false,
+    };
+    if (!timer?.timeFinished) {
+      obj = {
+        txt: "Minting Not Live",
+        disabled: true,
+      };
+      return obj;
+    } else if (!account) {
+      obj = {
+        txt: "Connect Wallet",
+        disabled: false,
+      };
+      return obj;
+    } else if (!stats) {
+      obj = {
+        txt: "Loading...",
+        disabled: true,
+      };
+      return obj;
     }
-  }, [selectedType, whitelistInfo?.userType, stats]);
+
+    if (!selectedType) {
+      if (stats?.numberMinted >= stats?.maxPublicMintPerWallet) {
+        obj = {
+          txt: "Max Minted",
+          disabled: true,
+        };
+      } else {
+        obj = {
+          txt: "Mint",
+          disabled: false,
+        };
+      }
+    } else if (selectedType === WhitelistUserType.Team) {
+      if (whitelistInfo?.userType === WhitelistUserType.Team) {
+        if (stats?.teamClaim) {
+          obj = {
+            txt: "Already Claimed",
+            disabled: true,
+          };
+        } else {
+          obj = {
+            txt: "Mint Team",
+            disabled: false,
+          };
+        }
+      } else {
+        obj = {
+          txt: "Not Allowed",
+          disabled: true,
+        };
+      }
+    } else if (selectedType === WhitelistUserType.Whitelist) {
+      if (whitelistInfo?.userType === WhitelistUserType.Whitelist) {
+        if (stats.whitelistClaim) {
+          obj = {
+            txt: "Already Claimed",
+            disabled: true,
+          };
+        } else {
+          obj = {
+            txt: "Mint Whitelist",
+            disabled: false,
+          };
+        }
+      } else {
+        obj = {
+          txt: "Not Allowed",
+          disabled: true,
+        };
+      }
+    }
+    return obj;
+  }, [selectedType, timer, account, stats, whitelistInfo]);
 
   return (
     <div className={classes.root}>
@@ -68,13 +131,9 @@ const MintNft: React.FC<Props> = ({ selectedType }) => {
           color="primary"
           variant="contained"
           onClick={() => mint(selectedType)}
-          disabled={disabled}
+          disabled={isAllowed.disabled}
         >
-          {selectedType === WhitelistUserType.Team
-            ? "Mint Team"
-            : selectedType === WhitelistUserType.Whitelist
-            ? "Mint Whitelist"
-            : "Mint"}
+          {isAllowed.txt}
         </WalletButtonBase>
       </div>
     </div>

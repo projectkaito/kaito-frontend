@@ -1,18 +1,20 @@
 import React from "react";
 
-export const useTimer = (futureTime?: number) => {
+export interface ITimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+export interface IUseTimer {
+  timeLeft?: ITimeLeft;
+  timeFinished: boolean;
+}
+
+export const useTimer = (futureTime?: number): IUseTimer => {
   const [timeFinished, setTimeFinished] = React.useState(false);
-  const [timeLeft, setTimeLeft] = React.useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [timeLeft, setTimeLeft] = React.useState<ITimeLeft | undefined>();
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -28,8 +30,8 @@ export const useTimer = (futureTime?: number) => {
         );
         setTimeFinished(false);
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         setTimeFinished(true);
+        setTimeLeft(undefined);
         clearInterval(interval);
       }
     }, 1000);
