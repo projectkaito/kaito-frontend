@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { MoralisNFT } from "src/types/moralis";
 import { defaultChainName } from "src/config";
 import useMoralis from "src/hooks/useMoralis";
+import { sleep } from "src/utils";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -48,6 +49,7 @@ const NFTPage: React.FC<Props> = () => {
       address: address!,
       token_id: tokenId!,
     });
+    await sleep(1000);
     await fetchMetadata();
   };
 
