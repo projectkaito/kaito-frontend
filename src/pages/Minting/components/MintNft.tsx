@@ -121,10 +121,13 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
     return obj;
   }, [selectedType, timer, account, stats, whitelistInfo]);
 
+  const SrcSet = React.useMemo(() => [prerevealImage, prerevealImage], []);
+
   return (
     <div className={classes.root}>
       <div className={classes.glitchContainer}>
-        <GlitchImg srcSet={[prerevealImage, prerevealImage]} className={classes.img} />
+        <GlitchImg srcSet={SrcSet} className={classes.img} />
+
         <WalletButtonBase
           loading={loading}
           loadingText="Minting.."
