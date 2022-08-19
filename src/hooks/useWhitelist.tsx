@@ -44,7 +44,7 @@ const mapContractReads = (data?: any) => {
         publicMintStartTimestamp: data[3].toNumber(),
         teamMintStartTimestamp: data[4].toNumber(),
         whitelistMintStartTimestamp: data[5].toNumber(),
-        numberMinted: data[6].toNumber(),
+        numberMinted: data[6]?.toNumber(),
         teamClaim: data[7],
         whitelistClaim: data[8],
       };
@@ -59,8 +59,8 @@ const mapContractReads = (data?: any) => {
 const useWhitelist = () => {
   const { account, signer, provider } = useWallet();
 
-  const readContracts: ReadContract[] = React.useMemo(
-    () => [
+  const readContracts: ReadContract[] = React.useMemo(() => {
+    let arr: ReadContract[] = [
       {
         ...whitelistContractInfo,
         functionName: "maxPublicMintPerWallet",
@@ -85,24 +85,29 @@ const useWhitelist = () => {
         ...whitelistContractInfo,
         functionName: "whitelistMintStartTimestamp",
       },
-      {
-        ...whitelistContractInfo,
-        functionName: "numberMinted",
-        args: [account],
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "teamClaim",
-        args: [account],
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "whitelistClaim",
-        args: [account],
-      },
-    ],
-    [account]
-  );
+    ];
+    if (account) {
+      arr = [
+        ...arr,
+        {
+          ...whitelistContractInfo,
+          functionName: "numberMinted",
+          args: [account],
+        },
+        {
+          ...whitelistContractInfo,
+          functionName: "teamClaim",
+          args: [account],
+        },
+        {
+          ...whitelistContractInfo,
+          functionName: "whitelistClaim",
+          args: [account],
+        },
+      ];
+    }
+    return arr;
+  }, [account]);
 
   const contract = useContract<Kaito>({
     signerOrProvider: signer || provider,
@@ -111,7 +116,7 @@ const useWhitelist = () => {
   const { dismissNotify, notifyLoading, notifyError, notifySuccess, notifySystem } = useNotify();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { data } = useContractReads({
+  const { data, error } = useContractReads({
     contracts: readContracts,
     watch: true,
   });
