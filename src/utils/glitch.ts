@@ -27,9 +27,9 @@ export const getMultipleGlitchImages = (base64: string, number: number) =>
 
 export const getGlitchImagesForMultpleImages = (base64: string[]) =>
   new Promise<string>(async (res) => {
-    let sha256 = hash.sha256().update(base64).digest("hex");
+    let sha256 = hash.sha256().update(base64.toString()).digest("hex");
     let storedHash = localStorage.getItem("gifhash");
-    console.log(storedHash, sha256);
+    // console.log(storedHash, sha256, base64);
     if (storedHash === sha256 && localStorage.getItem("gif")) {
       res(localStorage.getItem("gif")!);
       return;
