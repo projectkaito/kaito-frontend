@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material";
 import Logo from "src/assets/logos/logo.png";
+import Logo2 from "src/assets/images/kaito_logo.svg";
 import { useNavigate } from "react-router-dom";
 import WalletIcon from "../WalletIcon/WalletIcon";
 
@@ -10,6 +11,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "space-between",
     cursor: "pointer",
+  },
+  img: {
+    maxWidth: 250,
+    marginTop: -20,
+    // position: "fixed",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 40,
+      maxWidth: 150,
+    },
   },
 }));
 
@@ -25,7 +35,7 @@ const LogoBar: React.FC<Props> = () => {
 
   return (
     <div className={classes.root}>
-      <img src={Logo} alt="Kaito" style={{ maxWidth: 150, marginTop: 20 }} onClick={handleClick} />
+      <img src={Logo2} alt="Kaito" onClick={handleClick} className={classes.img} />
       <WalletIcon />
     </div>
   );

@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& h2": {
       color: "#fff",
       position: "absolute",
+      transform: "translateX(50%)",
       // transform: "translate(-50%, -50%)",
       fontSize: 100,
       [theme.breakpoints.down("sm")]: {

@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Container, Grid, Theme, Typography } from "@mui/material";
-import Bg from "src/assets/images/buildings.gif";
+import Bg from "src/assets/images/bg1.png";
 import Content from "./components/Content";
 import MintNft from "./components/MintNft";
 import LogoBar from "src/components/LogoBar/LogoBar";
@@ -10,6 +10,7 @@ import { WhitelistInfo, WhitelistUserType } from "src/types/apis";
 import clsx from "clsx";
 import useWhitelist from "src/hooks/useWhitelist";
 import { useTimer } from "src/hooks/useTimer";
+import SpeedLines from "src/components/SpeedLines/SpeedLines";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,14 +18,38 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: "100vh",
     background: `url(${Bg})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "100%",
-    backgroundPositionY: "bottom",
+    backgroundSize: "cover",
+    backgroundPositionY: "center",
     backgroundPositionX: "center",
+    postion: "relative",
+    "&:after": {
+      content: "''",
+      position: "fixed",
+      top: "-14px",
+      width: "750px",
+      transform: "rotate(350deg)",
+      left: "-20px",
+      height: 50,
+      background: ` linear-gradient(220.9deg, #D3165E 13%, #F63852 39.53%, #DF095B 92.61%, #DB005D 101.95%)`,
+      border: "3px solid black",
+    },
+    "&:before": {
+      content: "''",
+      zIndex: 10,
+      position: "fixed",
+      bottom: "-19px",
+      width: "750px",
+      transform: "rotate(353deg)",
+      right: "-20px",
+      height: 50,
+      background: ` linear-gradient(220.9deg, #D3165E 13%, #F63852 39.53%, #DF095B 92.61%, #DB005D 101.95%)`,
+      border: "3px solid black",
+    },
   },
   headingsContainer: {
     display: "flex",
     justifyContent: "space-evenly",
-    marginBottom: 50,
+    marginBottom: 0,
   },
   heading: {
     color: "grey",
@@ -60,51 +85,54 @@ const Minting: React.FC<Props> = () => {
 
   return (
     <div className={classes.root}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}>
+        <SpeedLines />
         <LogoBar />
         {/* <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
           Whitelist
         </Typography> */}
-        <Grid container spacing={3} style={{ marginTop: 50 }}>
-          <Grid item xs={12}>
-            <div className={classes.headingsContainer}>
-              <Typography
-                variant="h4"
-                align="center"
-                className={clsx(classes.heading, !selectedType && classes.selected)}
-                onClick={() => setSelectedType(undefined)}
-              >
-                Public Mint
-              </Typography>
-              <Typography
-                variant="h4"
-                align="center"
-                className={clsx(classes.heading, selectedType === WhitelistUserType.Whitelist && classes.selected)}
-                onClick={() => setSelectedType(WhitelistUserType.Whitelist)}
-              >
-                Whitelist Mint
-              </Typography>
-              <Typography
-                variant="h4"
-                align="center"
-                className={clsx(classes.heading, selectedType === WhitelistUserType.Team && classes.selected)}
-                onClick={() => setSelectedType(WhitelistUserType.Team)}
-              >
-                Team Mint
-              </Typography>
-            </div>
+        <div className="center">
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <div className={classes.headingsContainer}>
+                <Typography
+                  variant="h4"
+                  align="center"
+                  className={clsx(classes.heading, !selectedType && classes.selected)}
+                  onClick={() => setSelectedType(undefined)}
+                >
+                  Public Mint
+                </Typography>
+                <Typography
+                  variant="h4"
+                  align="center"
+                  className={clsx(classes.heading, selectedType === WhitelistUserType.Whitelist && classes.selected)}
+                  onClick={() => setSelectedType(WhitelistUserType.Whitelist)}
+                >
+                  Whitelist Mint
+                </Typography>
+                <Typography
+                  variant="h4"
+                  align="center"
+                  className={clsx(classes.heading, selectedType === WhitelistUserType.Team && classes.selected)}
+                  onClick={() => setSelectedType(WhitelistUserType.Team)}
+                >
+                  Team Mint
+                </Typography>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Content timer={timer} stats={stats} selectedType={selectedType} />
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <MintNft timer={timer} selectedType={selectedType} />
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Content timer={timer} stats={stats} selectedType={selectedType} />
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <MintNft timer={timer} selectedType={selectedType} />
-            </div>
-          </Grid>
-        </Grid>
+        </div>
       </Container>
     </div>
   );

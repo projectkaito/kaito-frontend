@@ -14,20 +14,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   glitchContainer: {
     display: "flex",
     flexFlow: "column",
+    alignItems: "center",
   },
   img: {
-    width: 300,
-    height: 300,
+    width: "80%",
+    maxWidth: 400,
+    aspectRatio: "1/1",
+    height: "auto",
     [theme.breakpoints.down("sm")]: {
-      width: 200,
-      height: 200,
+      // width: 200,
+      // height: 200,
     },
   },
   btn: {
-    width: 300,
+    width: "80%",
+    maxWidth: 400,
     borderRadius: 0,
     [theme.breakpoints.down("sm")]: {
-      width: 200,
+      // width: 200,
     },
   },
 }));
