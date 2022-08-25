@@ -11,6 +11,7 @@ import clsx from "clsx";
 import useWhitelist from "src/hooks/useWhitelist";
 import { useTimer } from "src/hooks/useTimer";
 import SpeedLines from "src/components/SpeedLines/SpeedLines";
+import MintingAnimation from "src/components/MintingAnimation/MintingAnimation";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -71,6 +72,7 @@ const Minting: React.FC<Props> = () => {
   const classes = useStyles();
   const [selectedType, setSelectedType] = React.useState<WhitelistUserType | undefined>(undefined);
   const { stats } = useWhitelist();
+  const [openMinting, setOpenMinting] = React.useState(false);
 
   const timestamp = React.useMemo(
     () =>
@@ -84,9 +86,10 @@ const Minting: React.FC<Props> = () => {
   const timer = useTimer(timestamp);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={() => setOpenMinting(!openMinting)}>
       <Container maxWidth="lg" style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}>
         <SpeedLines />
+        <MintingAnimation open={openMinting} />
         <LogoBar />
         {/* <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
           Whitelist

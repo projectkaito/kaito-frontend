@@ -17,6 +17,7 @@ module.exports = {
       stream: require.resolve("stream-browserify"),
       zlib: require.resolve("browserify-zlib"),
       url: false,
+      "process/browser" : require.resolve("process/browser")
     };
     config.plugins.push(
       new webpack.ProvidePlugin({
