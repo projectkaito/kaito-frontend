@@ -29,8 +29,10 @@ declare module "@mui/material/styles" {
 }
 
 const Typographica = "Typographica";
+const RealityCheck = "RealityCheck";
+const Ubuntu = "'Ubuntu', sans-serif";
 
-const primaryCrimson = "#D3165E";
+const primaryCrimson = "#C92115";
 const secondaryWhite = "#FFFFFF";
 
 let theme = createTheme({
@@ -46,7 +48,8 @@ let theme = createTheme({
     },
   },
   typography: {
-    fontFamily: " 'Ubuntu', sans-serif",
+    // fontFamily: " 'Ubuntu', sans-serif",
+    fontFamily: RealityCheck,
   },
   breakpoints: {
     values: {
@@ -69,9 +72,10 @@ let theme = createTheme({
         containedPrimary: {
           boxShadow: "none",
           borderRadius: 10,
-          fontWeight: 600,
+          fontWeight: 400,
           fontSize: "1.2rem",
           padding: "3px 32px",
+          background: "linear-gradient(180deg, #C92212 0%, #700B0F 100%)",
         },
       },
     },
@@ -108,7 +112,7 @@ let theme = createTheme({
       },
     },
   },
-  fonts: [Typographica],
+  fonts: [RealityCheck, Typographica, Ubuntu],
 });
 
 theme = responsiveFontSizes(theme);

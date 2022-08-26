@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: "50%",
     left: "50%",
     transform: "translate(-140px,-50%)",
-    fontWeight: 600,
+    fontWeight: 400,
     [theme.breakpoints.down("lg")]: {
       transform: "translate(-120px,-50%)",
     },

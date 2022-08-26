@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       transform: "translateX(50%)",
       // transform: "translate(-50%, -50%)",
       fontSize: 100,
+      fontFamily: theme.fonts[2],
       [theme.breakpoints.down("sm")]: {
         fontSize: 50,
       },

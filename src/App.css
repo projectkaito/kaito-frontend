@@ -5,6 +5,10 @@
   font-family: Typographica;
   src: url(./assets/fonts/typographica.otf);
 }
+@font-face {
+  font-family: RealityCheck;
+  src: url(./assets/fonts/realitycheck.otf);
+}
 * {
   box-sizing: border-box;
   padding: 0;
