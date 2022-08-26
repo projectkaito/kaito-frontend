@@ -23,29 +23,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundPositionY: "center",
     backgroundPositionX: "center",
     postion: "relative",
-    "&:after": {
-      content: "''",
-      position: "fixed",
-      top: "-14px",
-      width: "750px",
-      transform: "rotate(350deg)",
-      left: "-20px",
-      height: 50,
-      background: ` linear-gradient(220.9deg, #D3165E 13%, #F63852 39.53%, #DF095B 92.61%, #DB005D 101.95%)`,
-      border: "3px solid black",
-    },
-    "&:before": {
-      content: "''",
-      zIndex: 10,
-      position: "fixed",
-      bottom: "-19px",
-      width: "750px",
-      transform: "rotate(353deg)",
-      right: "-20px",
-      height: 50,
-      background: ` linear-gradient(220.9deg, #D3165E 13%, #F63852 39.53%, #DF095B 92.61%, #DB005D 101.95%)`,
-      border: "3px solid black",
-    },
+    // "&:after": {
+    //   content: "''",
+    //   position: "fixed",
+    //   top: "-14px",
+    //   width: "750px",
+    //   transform: "rotate(350deg)",
+    //   left: "-20px",
+    //   height: 50,
+    //   background: `linear-gradient(220.9deg, #000000 12.04%, #C0C0C0 101.95%)`,
+    //   border: "3px solid black",
+    // },
+    // "&:before": {
+    //   content: "''",
+    //   zIndex: 10,
+    //   position: "fixed",
+    //   bottom: "-19px",
+    //   width: "750px",
+    //   transform: "rotate(353deg)",
+    //   right: "-20px",
+    //   height: 50,
+    //   background: `linear-gradient(220.9deg, #000000 12.04%, #C0C0C0 101.95%)`,
+    //   border: "3px solid black",
+    // },
   },
   headingsContainer: {
     display: "flex",
@@ -88,7 +88,7 @@ const Minting: React.FC<Props> = () => {
   return (
     <div className={classes.root} onClick={() => setOpenMinting(!openMinting)}>
       <Container maxWidth="lg" style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}>
-        <SpeedLines />
+        <SpeedLines open={openMinting} />
         <MintingAnimation open={openMinting} />
         <LogoBar />
         {/* <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
@@ -96,7 +96,7 @@ const Minting: React.FC<Props> = () => {
         </Typography> */}
         <div className="center">
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <div className={classes.headingsContainer}>
                 <Typography
                   variant="h4"
@@ -123,7 +123,7 @@ const Minting: React.FC<Props> = () => {
                   Team Mint
                 </Typography>
               </div>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={12} md={6}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Content timer={timer} stats={stats} selectedType={selectedType} />

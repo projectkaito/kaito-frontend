@@ -11,10 +11,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface IProps {}
+interface IProps {
+  open?: boolean;
+}
+
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
-const SpeedLines: React.FC<IProps> = () => {
+const SpeedLines: React.FC<IProps> = ({ open }) => {
   const classes = useStyles();
   const ref = React.useRef<HTMLCanvasElement>(null);
 
@@ -113,6 +116,15 @@ const SpeedLines: React.FC<IProps> = () => {
       window.removeEventListener("resize", resizeListener);
     };
   }, []);
+
+  React.useEffect(() => {
+    if (open) {
+      ref.current!.style.display = "block";
+    } else {
+      ref.current!.style.display = "none";
+    }
+  }, [open]);
+
   return <canvas ref={ref} className={classes.root} />;
 };
 
