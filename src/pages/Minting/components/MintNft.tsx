@@ -39,9 +39,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   selectedType?: WhitelistUserType;
   timer?: IUseTimer;
+  loading?: boolean;
+  setLoading?: (loading: boolean) => void;
 }
 
-const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
+const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
   const classes = useStyles();
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
   const { account } = useWallet();
@@ -90,6 +92,11 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
             txt: "Already Minted",
             disabled: true,
           };
+        } else if (stats.numberMinted >= stats.maxTeamMintPerWallet) {
+          obj = {
+            txt: "Max Minted",
+            disabled: true,
+          };
         } else {
           obj = {
             txt: "Mint Team",
@@ -109,6 +116,11 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
             txt: "Already Minted",
             disabled: true,
           };
+        } else if (stats.numberMinted >= stats.maxWhitelistMintPerWallet) {
+          obj = {
+            txt: "Max Minted",
+            disabled: true,
+          };
         } else {
           obj = {
             txt: "Mint Whitelist",
@@ -126,6 +138,10 @@ const MintNft: React.FC<Props> = ({ selectedType, timer }) => {
   }, [selectedType, timer, account, stats, whitelistInfo]);
 
   const SrcSet = React.useMemo(() => [prerevealImage, prerevealImage], []);
+
+  React.useEffect(() => {
+    setLoading && setLoading(loading);
+  }, [loading, setLoading]);
 
   return (
     <div className={classes.root}>

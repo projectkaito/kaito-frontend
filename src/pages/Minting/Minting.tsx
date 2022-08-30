@@ -70,7 +70,7 @@ interface Props {}
 
 const Minting: React.FC<Props> = () => {
   const classes = useStyles();
-  const [selectedType, setSelectedType] = React.useState<WhitelistUserType | undefined>(undefined);
+  const [selectedType, setSelectedType] = React.useState<WhitelistUserType>(WhitelistUserType.Team);
   const { stats } = useWhitelist();
   const [openMinting, setOpenMinting] = React.useState(false);
 
@@ -83,10 +83,11 @@ const Minting: React.FC<Props> = () => {
         : stats?.publicMintStartTimestamp,
     [selectedType, stats]
   );
+
   const timer = useTimer(timestamp);
 
   return (
-    <div className={classes.root} onClick={() => setOpenMinting(!openMinting)}>
+    <div className={classes.root}>
       <Container maxWidth="lg" style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}>
         <SpeedLines open={openMinting} />
         <MintingAnimation open={openMinting} />
@@ -131,7 +132,7 @@ const Minting: React.FC<Props> = () => {
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <MintNft timer={timer} selectedType={selectedType} />
+                <MintNft timer={timer} selectedType={selectedType} loading={openMinting} setLoading={setOpenMinting} />
               </div>
             </Grid>
           </Grid>

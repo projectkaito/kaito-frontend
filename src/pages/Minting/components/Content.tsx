@@ -49,9 +49,7 @@ const Content: React.FC<Props> = ({ selectedType, timer }) => {
       </Typography> */}
       {!timer?.timeFinished && (
         <Typography color="textPrimary" variant="h5" style={{ marginTop: 50 }}>
-          <b>
-            {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
-          </b>
+          {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
         </Typography>
       )}
       {!timer?.timeFinished && timer?.timeLeft && (
@@ -92,12 +90,9 @@ const Content: React.FC<Props> = ({ selectedType, timer }) => {
       )}
       {timer?.timeFinished && (
         <Typography color="textPrimary" variant="h5" align="center" style={{ marginTop: 10 }}>
-          <b>
-            {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale
-            is
-            <br />
-            <Live />
-          </b>
+          {`${selectedType ? (selectedType === WhitelistUserType.Whitelist ? "Whitelist" : "Team") : "Public"}`} Sale is
+          <br />
+          <Live />
         </Typography>
       )}
     </div>

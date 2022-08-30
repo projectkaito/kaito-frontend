@@ -9,4 +9,5 @@ export interface WhitelistInfo {
 export enum WhitelistUserType {
   Whitelist = "whitelist",
   Team = "team",
+  Public = "public",
 }

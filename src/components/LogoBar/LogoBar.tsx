@@ -10,10 +10,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-between",
-    cursor: "pointer",
   },
   img: {
     maxWidth: 200,
+    cursor: "pointer",
     // marginTop: -20,
     // position: "fixed",
     [theme.breakpoints.down("sm")]: {
