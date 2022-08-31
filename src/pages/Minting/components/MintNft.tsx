@@ -10,6 +10,7 @@ import { WhitelistUserType } from "src/types/apis";
 import { IUseTimer } from "src/hooks/useTimer";
 import useWallet from "src/hooks/useWallet";
 import MintBubble from "src/assets/images/mint_bubble.svg";
+import useNotify from "src/hooks/useNotify";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -63,6 +64,7 @@ interface Props {
 }
 
 const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
+  const { notifyLoading, notifyError, notifySuccess } = useNotify();
   const classes = useStyles();
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
   const { account, openModal } = useWallet();
@@ -160,11 +162,14 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
   const SrcSet = React.useMemo(() => [prerevealImage, prerevealImage], []);
 
   const handleClick = () => {
-    if (!account) {
-      openModal();
-      return;
-    }
-    if (!isAllowed.disabled) mint(selectedType);
+    notifyLoading("Minting NFT...", "asdsdada");
+    notifyError("Minting NFT...", "asdsdada");
+    notifySuccess("Minting NFT...", "asdsdada");
+    // if (!account) {
+    //   openModal();
+    //   return;
+    // }
+    // if (!isAllowed.disabled) mint(selectedType);
   };
 
   React.useEffect(() => {
