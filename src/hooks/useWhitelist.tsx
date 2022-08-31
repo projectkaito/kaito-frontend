@@ -161,6 +161,8 @@ const useWhitelist = () => {
       let args = printLastEvent(reciept, abi);
       let tokenId = args.tokenId.toNumber();
       console.log(tokenId);
+      setLoading(false);
+      dismissNotify(noti);
       notifySuccess(`Minted Token ${tokenId}`, "Minted Token Successfully");
       // navigate(`/nft/${Contracts.kaitoWhitelist}/${tokenId}`);
       // wait some seconds so moralis sync the contract
@@ -174,9 +176,9 @@ const useWhitelist = () => {
       notifyError("Error", msg);
       notifySystem("Error", msg, "ERROR");
       console.log(JSON.stringify(error));
-    } finally {
       setLoading(false);
       dismissNotify(noti);
+    } finally {
     }
   };
 
