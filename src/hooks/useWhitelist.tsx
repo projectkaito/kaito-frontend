@@ -165,7 +165,7 @@ const useWhitelist = () => {
       // navigate(`/nft/${Contracts.kaitoWhitelist}/${tokenId}`);
       // wait some seconds so moralis sync the contract
       await new Promise((resolve) => setTimeout(resolve, 5000));
-      navigate(`/inventory`);
+      navigate(`/other-world`);
     } catch (error: any) {
       let msg =
         error?.error?.message

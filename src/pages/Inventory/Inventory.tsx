@@ -39,7 +39,7 @@ const Inventory: React.FC<IProps> = () => {
 
         <div className="center">
           <Typography color="secondary" variant="h3" className={classes.mainHeading}>
-            INVENTORY
+            OTHER WORLD
           </Typography>
         </div>
         {/* <Typography color="primary" variant="h2" align="center" sx={{ pt: 3 }}>

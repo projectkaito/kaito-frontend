@@ -8,6 +8,10 @@ import Image from "../Image/Image";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     cursor: "pointer",
+    filter: "saturate(0)",
+    "&:hover": {
+      filter: "saturate(1)",
+    },
   },
   img: {
     width: "100%",

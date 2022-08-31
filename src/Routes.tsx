@@ -105,9 +105,9 @@ const Routes: React.FC<Props> = () => {
         /> */}
         <Route path="/" element={<Minting />} />
         <Route path="/minting" element={<Minting />} />
-        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/other-world" element={<Inventory />} />
         <Route path="/nft/:address/:tokenId" element={<NFTPage />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="/whitelist-verify" element={<Test />} />
         <Route path="*" element={<NotFound />} />
       </Switch>
       {/* <Footer /> */}

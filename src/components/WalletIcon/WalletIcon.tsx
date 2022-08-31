@@ -61,6 +61,12 @@ const WalletIcon: React.FC<Props> = () => {
               Inventory
             </Typography>
           </ListItem>
+          <ListItem button color="primary">
+            <Typography component={Link} to="/whitelist-verify" color="secondary">
+              Whitelist Verify
+            </Typography>
+          </ListItem>
+
           <ListItem button onClick={logout} color="primary">
             <Typography color="secondary">Logout</Typography>
           </ListItem>
