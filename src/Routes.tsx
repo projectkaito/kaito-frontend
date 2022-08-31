@@ -76,7 +76,7 @@ const Routes: React.FC<Props> = () => {
   return (
     <div className={classes.mainContainer} style={{}}>
       {/* <div className={classes.img}></div> */}
-      <video ref={videoRef} autoPlay={true} loop={true} src={Animation} muted className={classes.vid} />
+      {/* <video ref={videoRef} autoPlay={true} loop={true} src={Animation} muted className={classes.vid} /> */}
 
       <Switch>
         {/* <Route
