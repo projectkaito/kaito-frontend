@@ -58,7 +58,7 @@ const WalletIcon: React.FC<Props> = () => {
         <List>
           <ListItem button color="primary">
             <Typography component={Link} to="/other-world" color="secondary">
-              Inventory
+              Other World
             </Typography>
           </ListItem>
           <ListItem button color="primary">
