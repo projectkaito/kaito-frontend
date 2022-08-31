@@ -1,16 +1,11 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Button, Theme, Typography } from "@mui/material";
-import GlitchImg from "src/components/GlitchImg/GlitchImg";
-import { NFT_IMAGES } from "src/config/constants";
-import prerevealImage from "src/assets/images/prereveal.gif";
-import WalletButtonBase from "src/components/WalletButtonBase/WalletButtonBase";
+import { Theme, Typography } from "@mui/material";
 import useWhitelist from "src/hooks/useWhitelist";
 import { WhitelistUserType } from "src/types/apis";
 import { IUseTimer } from "src/hooks/useTimer";
 import useWallet from "src/hooks/useWallet";
 import MintBubble from "src/assets/images/mint_bubble.svg";
-import useNotify from "src/hooks/useNotify";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -64,7 +59,6 @@ interface Props {
 }
 
 const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
-  const { notifyLoading, notifyError, notifySuccess } = useNotify();
   const classes = useStyles();
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
   const { account, openModal } = useWallet();
@@ -159,17 +153,13 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
     }
     return obj;
   }, [selectedType, timer, account, stats, whitelistInfo]);
-  const SrcSet = React.useMemo(() => [prerevealImage, prerevealImage], []);
 
   const handleClick = () => {
-    notifyLoading("Minting NFT...", "asdsdada");
-    notifyError("Minting NFT...", "asdsdada");
-    notifySuccess("Minting NFT...", "asdsdada");
-    // if (!account) {
-    //   openModal();
-    //   return;
-    // }
-    // if (!isAllowed.disabled) mint(selectedType);
+    if (!account) {
+      openModal();
+      return;
+    }
+    if (!isAllowed.disabled) mint(selectedType);
   };
 
   React.useEffect(() => {
