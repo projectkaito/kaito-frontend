@@ -73,14 +73,14 @@ const Test: React.FC<Props> = () => {
         return (
           <>
             Congrats! You are whitelisted for team minting. <br />
-            You will be able to mint ${qty} tokens.
+            You will be able to mint x{qty} tokens.
           </>
         );
       } else {
         return (
           <>
             Congrats! You are whitelisted. <br />
-            You will be able to mint ${qty} tokens.
+            You will be able to mint x{qty} tokens.
           </>
         );
       }
@@ -93,7 +93,7 @@ const Test: React.FC<Props> = () => {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h4" fontWeight={600} sx={{ mb: 2 }}>
-          Whitelist Info
+          Whitelist Verification
         </Typography>
         <Typography color="primary" sx={{ mb: 2 }}>
           Enter Wallet Address

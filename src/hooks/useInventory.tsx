@@ -9,9 +9,11 @@ const useInventory = () => {
   const { isConnected, Moralis } = useMoralis();
   const [results, setResults] = React.useState<MoralisNFT[]>([]);
   const [loading, setLoading] = React.useState(false);
+  const [interval, setInt] = React.useState(1);
 
   React.useEffect(() => {
     if (!account && !isConnected) return;
+    console.log("refresh: ", interval);
     setLoading(true);
     Moralis.Web3API.account
       .getNFTs({
@@ -28,7 +30,13 @@ const useInventory = () => {
       .catch(() => {
         setLoading(false);
       });
-  }, [isConnected, account, setResults, Moralis.Web3API.account]);
+  }, [isConnected, account, setResults, Moralis.Web3API.account, interval]);
+
+  React.useEffect(() => {
+    setInterval(() => {
+      setInt((prev) => prev + 1);
+    }, 30000);
+  }, []);
 
   return { results, loading };
 };

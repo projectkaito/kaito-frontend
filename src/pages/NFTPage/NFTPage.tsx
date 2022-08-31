@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundSize: "100%",
     backgroundPositionY: "bottom",
     backgroundPositionX: "center",
+    paddingBottom: 50,
     "& .drop": {
       background: "grey",
     },
@@ -30,11 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     filter: "saturate(0)",
     "&:hover": {
       filter: "saturate(1)",
-    },
-  },
-  "@global": {
-    "html, body": {
-      overflow: "hidden",
     },
   },
 }));

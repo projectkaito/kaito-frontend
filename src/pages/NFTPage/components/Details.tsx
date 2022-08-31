@@ -31,11 +31,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: `url(${BubbleImg})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
-    paddingTop: 10,
-    paddingBottom: 20,
-    paddingLeft: "5%",
-    paddingRight: "2%",
-    transform: "translateX(-10%)",
+    paddingTop: 12,
+    paddingBottom: 22,
+    paddingLeft: "8%",
+    paddingRight: "4%",
+
+    transform: "translateX(-8%)",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "10%",
+    },
   },
 }));
 

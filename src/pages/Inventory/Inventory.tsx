@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundSize: "100%",
     backgroundPositionY: "bottom",
     backgroundPositionX: "center",
+    paddingBottom: 50,
   },
   mainHeading: {
     fontFamily: theme.fonts[0],
