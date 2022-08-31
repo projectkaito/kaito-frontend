@@ -11,7 +11,7 @@ const goerliAddresses: Addresses = {
 
 const rinkebyAddresses: Addresses = {
   zeroAddress: "0x0000000000000000000000000000000000000000",
-  kaitoWhitelist: "0xf2d5EfF1c5aD940FcAa08C719de87980DB8dD84e",
+  kaitoWhitelist: "0x16f52019c63D4a871dF785286793441718B2703c",
 };
 
 export const addressesByChainId: { [key: number]: Addresses } = {
