@@ -3,18 +3,19 @@ import style from "./assets/WalletModal.module.css";
 import WalletConnectIco from "./assets/walletconnect_big.svg";
 import MetamaskIco from "./assets/metamask_big.svg";
 import { useConnect } from "wagmi";
+import { defaultChainId } from "src/config";
 
 export const WalletModal: React.FC = () => {
   const { connectors, connectAsync } = useConnect();
 
   const connectMetamask = async () => {
     let connector = connectors.find((c) => c.name === "MetaMask");
-    await connectAsync({ connector });
+    await connectAsync({ connector, chainId: defaultChainId });
   };
 
   const connectWalletConnect = async () => {
     let connector = connectors.find((c) => c.name === "WalletConnect");
-    await connectAsync({ connector });
+    await connectAsync({ connector, chainId: defaultChainId });
   };
 
   return (
