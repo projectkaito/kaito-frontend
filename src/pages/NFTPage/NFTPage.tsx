@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundPositionY: "bottom",
     backgroundPositionX: "center",
   },
+  img: {
+    filter: "saturate(0)",
+    "&:hover": {
+      filter: "saturate(1)",
+    },
+  },
 }));
 
 interface Props {}
@@ -34,7 +40,7 @@ const NFTPage: React.FC<Props> = () => {
         <LogoBar />
         <Grid container spacing={4} style={{ marginTop: 50 }}>
           <Grid item xs={12} sm={6} md={4}>
-            <Image src={nftData.metadata?.image} />
+            <Image src={nftData.metadata?.image} className={classes.img} />
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
             <Details
