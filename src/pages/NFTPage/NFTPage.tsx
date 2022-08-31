@@ -8,6 +8,11 @@ import { useParams } from "react-router-dom";
 import Image from "src/components/Image/Image";
 import useMoralisMetadata from "src/hooks/useMoralisMetadata";
 
+import ReactRain from "react-rain-animation";
+
+// import all the styles
+import "react-rain-animation/lib/style.css";
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: "black",
@@ -17,11 +22,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundSize: "100%",
     backgroundPositionY: "bottom",
     backgroundPositionX: "center",
+    "& .drop": {
+      background: "grey",
+    },
   },
   img: {
     filter: "saturate(0)",
     "&:hover": {
       filter: "saturate(1)",
+    },
+  },
+  "@global": {
+    "html, body": {
+      overflow: "hidden",
     },
   },
 }));
@@ -36,6 +49,9 @@ const NFTPage: React.FC<Props> = () => {
 
   return (
     <div className={classes.root}>
+      <div style={{ transform: "scale(3)" }}>
+        <ReactRain numDrops="200" />
+      </div>
       <Container maxWidth="lg">
         <LogoBar />
         <Grid container spacing={4} style={{ marginTop: 50 }}>
