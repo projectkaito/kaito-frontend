@@ -49,9 +49,9 @@ const NFTPage: React.FC<Props> = () => {
 
   return (
     <div className={classes.root}>
-      <div style={{ transform: "scale(3)" }}>
+      {/* <div style={{ transform: "scale(3)" }}>
         <ReactRain numDrops="200" />
-      </div>
+      </div> */}
       <Container maxWidth="lg">
         <LogoBar />
         <Grid container spacing={4} style={{ marginTop: 50 }}>
