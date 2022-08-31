@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Container, Grid, Theme } from "@mui/material";
 import LogoBar from "src/components/LogoBar/LogoBar";
 import Details from "./components/Details";
-import Bg from "src/assets/images/buildings.gif";
+import Bg from "src/assets/images/bg2.png";
 import { useParams } from "react-router-dom";
 import Image from "src/components/Image/Image";
 import useMoralisMetadata from "src/hooks/useMoralisMetadata";

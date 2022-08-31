@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Grid, IconButton, Skeleton, Theme, Typography } from "@mui/material";
 import clsx from "clsx";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import BubbleImg from "src/assets/images/bubbleText.png";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -24,6 +25,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     "100%": {
       transform: "rotate(360deg)",
     },
+  },
+  bubbleWrap: {
+    color: "black",
+    background: `url(${BubbleImg})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 100%",
+    paddingTop: 10,
+    paddingBottom: 20,
+    paddingLeft: "5%",
+    paddingRight: "2%",
+    transform: "translateX(-10%)",
   },
 }));
 
@@ -61,7 +73,7 @@ const Details: React.FC<Props> = ({ data, refresh, loading }) => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {loading && <Skeleton variant="text" height={45} width={300} />}
         {!loading && (
-          <Typography variant="h4" color="textPrimary">
+          <Typography variant="h4" fontWeight={600} className={classes.bubbleWrap}>
             {data?.name}
           </Typography>
         )}

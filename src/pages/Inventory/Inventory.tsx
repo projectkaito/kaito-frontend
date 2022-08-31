@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Container, Grid, Paper, Skeleton, Theme } from "@mui/material";
+import { Container, Grid, Paper, Skeleton, Theme, Typography } from "@mui/material";
 import NFTCard from "src/components/NFTCard/NFTCard";
 import WaveText from "src/components/WaveText/WaveText";
 import useWallet from "src/hooks/useWallet";
@@ -8,7 +8,7 @@ import { MoralisNFT } from "src/types/moralis";
 import { Contracts, defaultChainName } from "src/config";
 import useMoralis from "src/hooks/useMoralis";
 import LogoBar from "src/components/LogoBar/LogoBar";
-import Bg from "src/assets/images/buildings.gif";
+import Bg from "src/assets/images/bg2.png";
 import useInventory from "src/hooks/useInventory";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundSize: "100%",
     backgroundPositionY: "bottom",
     backgroundPositionX: "center",
+  },
+  mainHeading: {
+    fontFamily: theme.fonts[0],
   },
 }));
 
@@ -35,7 +38,9 @@ const Inventory: React.FC<IProps> = () => {
         <LogoBar />
 
         <div className="center">
-          <WaveText text="Inventory" />
+          <Typography color="secondary" variant="h3" className={classes.mainHeading}>
+            INVENTORY
+          </Typography>
         </div>
         {/* <Typography color="primary" variant="h2" align="center" sx={{ pt: 3 }}>
           Inventory
