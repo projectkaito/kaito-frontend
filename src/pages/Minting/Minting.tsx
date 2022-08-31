@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Container, Grid, Theme } from "@mui/material";
+import { Container, Grid, Theme, useMediaQuery } from "@mui/material";
 import Bg from "src/assets/images/bg1.png";
 import Content from "./components/Content";
 import MintNft from "./components/MintNft";
@@ -10,6 +10,7 @@ import useWhitelist from "src/hooks/useWhitelist";
 import { useTimer } from "src/hooks/useTimer";
 import SpeedLines from "src/components/SpeedLines/SpeedLines";
 import MintingAnimation from "src/assets/images/minting_animation.gif";
+import MintingAnimationMobile from "src/assets/images/minting_animation_mobile.gif";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -60,6 +61,7 @@ const Minting: React.FC<Props> = () => {
   const classes = useStyles();
   const { stats, currentWhitelistType } = useWhitelist();
   const [openMinting, setOpenMinting] = React.useState(false);
+  const isSM = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
   const timestamp = React.useMemo(
     () =>
@@ -81,7 +83,9 @@ const Minting: React.FC<Props> = () => {
         style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}
         // onClick={() => setOpenMinting(!openMinting)}
       >
-        {openMinting && <img src={MintingAnimation} alt="" className={classes.fullScreen} />}
+        {openMinting && (
+          <img src={isSM ? MintingAnimationMobile : MintingAnimation} alt="" className={classes.fullScreen} />
+        )}
         {/* TODO: remove these components and keep them safe for some future use */}
         {/* <SpeedLines open={openMinting} /> */}
         {/* <MintingAnimation open={openMinting} /> */}
