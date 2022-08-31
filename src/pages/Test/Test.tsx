@@ -3,8 +3,6 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import {
   Button,
-  Card,
-  MenuItem,
   Paper,
   Table,
   TableBody,
@@ -14,14 +12,12 @@ import {
   TableRow,
   TextField,
   Theme,
+  Typography,
 } from "@mui/material";
-import Img from "src/assets/images/nfts/1.jpg";
-import { NFT_IMAGES } from "src/config/constants";
 import useWallet from "src/hooks/useWallet";
-import { WhitelistUserType } from "src/types/apis";
-import { addToWhitelist, getWhitelistInfo, removefromWhitelist } from "src/api/whitelist";
+import { getWhitelistInfo } from "src/api/whitelist";
 import useNotify from "src/hooks/useNotify";
-import Bg from "src/assets/images/bg2.png";
+import Bg from "src/assets/images/bg1.png";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -33,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: 50,
     minHeight: "100vh",
     backgroundColor: "black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   paper: {
     minHeight: "50vh",
@@ -55,6 +54,7 @@ const Test: React.FC<Props> = () => {
     getWhitelistInfo(acc)
       .then((res) => {
         setData(res);
+        console.log("Whitelist Info: ", res);
       })
       .catch((err) => {
         setData({
@@ -66,32 +66,43 @@ const Test: React.FC<Props> = () => {
       });
   };
 
+  const text = React.useMemo(() => {
+    let qty = data.quantity || 1;
+    if (data.userType) {
+      if (data.userType === "team") {
+        return (
+          <>
+            Congrats! You are whitelisted for team minting. <br />
+            You will be able to mint ${qty} tokens.
+          </>
+        );
+      } else {
+        return (
+          <>
+            Congrats! You are whitelisted. <br />
+            You will be able to mint ${qty} tokens.
+          </>
+        );
+      }
+    } else {
+      return "Sorry you are not whitelisted!!!";
+    }
+  }, [data]);
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+        <Typography variant="h4" fontWeight={600} sx={{ mb: 2 }}>
+          Whitelist Info
+        </Typography>
+        <Typography color="primary" sx={{ mb: 2 }}>
+          Enter Wallet Address
+        </Typography>
         <TextField fullWidth label="Address" value={acc} onChange={(e) => setAcc(e.target.value)} sx={{ mb: 2 }} />
-
         <Button variant="outlined" sx={{ m: 1 }} onClick={checkWhitelist} disabled={loading}>
-          Check Whitelist
+          Verify
         </Button>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Key</TableCell>
-                <TableCell>Value</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Object.entries(data).map(([key, value]) => (
-                <TableRow>
-                  <TableCell>{key.toString()}</TableCell>
-                  <TableCell>{value}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Typography align="center">{text}</Typography>
       </Paper>
     </div>
   );
