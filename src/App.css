@@ -9,6 +9,10 @@
   font-family: RealityCheck;
   src: url(./assets/fonts/realitycheck.otf);
 }
+@font-face {
+  font-family: ComicS;
+  src: url(./assets/fonts/comicsans.ttf);
+}
 * {
   box-sizing: border-box;
   padding: 0;

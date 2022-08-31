@@ -31,7 +31,7 @@ declare module "@mui/material/styles" {
 const Typographica = "Typographica";
 const RealityCheck = "RealityCheck";
 const Ubuntu = "'Ubuntu', sans-serif";
-const ComicSans = `"Comic Sans MS", "Comic Sans", cursive`;
+const ComicSans = `"ComicS", "Comic Sans", cursive`;
 
 const primaryCrimson = "#B6B6B6";
 // const primaryCrimson = "#C92115";
