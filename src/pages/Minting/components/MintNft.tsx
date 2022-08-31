@@ -65,7 +65,7 @@ interface Props {
 const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
   const classes = useStyles();
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
-  const { account } = useWallet();
+  const { account, openModal } = useWallet();
   const isAllowed = React.useMemo(() => {
     let mintText = `Mint ${
       whitelistInfo?.quantity && whitelistInfo?.quantity > 1 ? `x${whitelistInfo?.quantity} ` : ""
@@ -160,6 +160,10 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
   const SrcSet = React.useMemo(() => [prerevealImage, prerevealImage], []);
 
   const handleClick = () => {
+    if (!account) {
+      openModal();
+      return;
+    }
     if (!isAllowed.disabled) mint(selectedType);
   };
 

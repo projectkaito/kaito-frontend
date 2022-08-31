@@ -79,7 +79,7 @@ const Minting: React.FC<Props> = () => {
       <Container
         maxWidth="lg"
         style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}
-        onClick={() => setOpenMinting(!openMinting)}
+        // onClick={() => setOpenMinting(!openMinting)}
       >
         {openMinting && <img src={MintingAnimation} alt="" className={classes.fullScreen} />}
         {/* TODO: remove these components and keep them safe for some future use */}
