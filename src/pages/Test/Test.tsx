@@ -18,6 +18,7 @@ import useWallet from "src/hooks/useWallet";
 import { getWhitelistInfo } from "src/api/whitelist";
 import useNotify from "src/hooks/useNotify";
 import Bg from "src/assets/images/bg1.png";
+import { ethers } from "ethers";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -51,7 +52,8 @@ const Test: React.FC<Props> = () => {
 
   const checkWhitelist = () => {
     setLoading(true);
-    getWhitelistInfo(acc)
+    const _checksumAddress = ethers.utils.getAddress(acc);
+    getWhitelistInfo(_checksumAddress)
       .then((res) => {
         setData(res);
         console.log("Whitelist Info: ", res);
