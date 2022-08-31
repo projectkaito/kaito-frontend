@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: `url(${Bg})`,
     backgroundSize: "cover",
     paddingRight: 50,
+    minHeight: "100vh",
+    backgroundColor: "black",
   },
   paper: {
     minHeight: "50vh",
@@ -46,11 +48,22 @@ const Test: React.FC<Props> = () => {
   const [acc, setAcc] = React.useState(account);
   const { notifyError, notifySuccess } = useNotify();
   const [data, setData] = React.useState<any>({});
+  const [loading, setLoading] = React.useState(false);
 
   const checkWhitelist = () => {
-    getWhitelistInfo(acc).then((res) => {
-      setData(res);
-    });
+    setLoading(true);
+    getWhitelistInfo(acc)
+      .then((res) => {
+        setData(res);
+      })
+      .catch((err) => {
+        setData({
+          Error: "Some Error....",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -58,7 +71,7 @@ const Test: React.FC<Props> = () => {
       <Paper className={classes.paper}>
         <TextField fullWidth label="Address" value={acc} onChange={(e) => setAcc(e.target.value)} sx={{ mb: 2 }} />
 
-        <Button variant="outlined" sx={{ m: 1 }} onClick={checkWhitelist}>
+        <Button variant="outlined" sx={{ m: 1 }} onClick={checkWhitelist} disabled={loading}>
           Check Whitelist
         </Button>
         <TableContainer>
