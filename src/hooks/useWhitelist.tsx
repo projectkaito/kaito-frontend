@@ -29,6 +29,9 @@ export interface Stats {
   publicMintStartTimestamp: number;
   teamMintStartTimestamp: number;
   whitelistMintStartTimestamp: number;
+  publicMintEnabled: boolean;
+  teamMintEnabled: boolean;
+  whitelistMintEnabled: boolean;
   numberMinted: number;
   teamClaim: boolean;
   whitelistClaim: boolean;
@@ -44,9 +47,12 @@ const mapContractReads = (data?: any) => {
         publicMintStartTimestamp: data[3].toNumber(),
         teamMintStartTimestamp: data[4].toNumber(),
         whitelistMintStartTimestamp: data[5].toNumber(),
-        numberMinted: data[6]?.toNumber(),
-        teamClaim: data[7],
-        whitelistClaim: data[8],
+        publicMintEnabled: data[6],
+        teamMintEnabled: data[7],
+        whitelistMintEnabled: data[8],
+        numberMinted: data[9]?.toNumber(),
+        teamClaim: data[10],
+        whitelistClaim: data[11],
       };
       return obj;
     } else return undefined;
@@ -61,30 +67,15 @@ const useWhitelist = () => {
 
   const readContracts: ReadContract[] = React.useMemo(() => {
     let arr: ReadContract[] = [
-      {
-        ...whitelistContractInfo,
-        functionName: "maxPublicMintPerWallet",
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "maxWhitelistMintPerWallet",
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "maxTeamMintPerWallet",
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "publicMintStartTimestamp",
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "teamMintStartTimestamp",
-      },
-      {
-        ...whitelistContractInfo,
-        functionName: "whitelistMintStartTimestamp",
-      },
+      { ...whitelistContractInfo, functionName: "maxPublicMintPerWallet" },
+      { ...whitelistContractInfo, functionName: "maxWhitelistMintPerWallet" },
+      { ...whitelistContractInfo, functionName: "maxTeamMintPerWallet" },
+      { ...whitelistContractInfo, functionName: "publicMintStartTimestamp" },
+      { ...whitelistContractInfo, functionName: "teamMintStartTimestamp" },
+      { ...whitelistContractInfo, functionName: "whitelistMintStartTimestamp" },
+      { ...whitelistContractInfo, functionName: "publicMintEnabled" },
+      { ...whitelistContractInfo, functionName: "teamMintEnabled" },
+      { ...whitelistContractInfo, functionName: "whitelistMintEnabled" },
     ];
     if (account) {
       arr = [
@@ -121,6 +112,12 @@ const useWhitelist = () => {
     watch: true,
   });
   const stats = React.useMemo(() => mapContractReads(data), [data]);
+  const currentWhitelistType: WhitelistUserType = React.useMemo(() => {
+    if (stats?.publicMintEnabled) return WhitelistUserType.Public;
+    if (stats?.whitelistMintEnabled) return WhitelistUserType.Whitelist;
+    if (stats?.teamMintEnabled) return WhitelistUserType.Team;
+    return WhitelistUserType.Team;
+  }, [stats]);
 
   const [whitelistInfo, setWhitelistInfo] = React.useState<WhitelistInfo>();
 
@@ -149,6 +146,7 @@ const useWhitelist = () => {
       let reciept = await tx.wait();
       return reciept;
     } else {
+      // Public mint
       let tx = await contract?.mint(1);
       let reciept = await tx.wait();
       return reciept;
@@ -195,7 +193,7 @@ const useWhitelist = () => {
     });
   }, [account]);
 
-  return { whitelistInfo, loading, mint, stats };
+  return { whitelistInfo, loading, mint, stats, currentWhitelistType };
 };
 
 export default useWhitelist;

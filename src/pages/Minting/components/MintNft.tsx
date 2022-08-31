@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Button, Theme } from "@mui/material";
+import { Button, Theme, Typography } from "@mui/material";
 import GlitchImg from "src/components/GlitchImg/GlitchImg";
 import { NFT_IMAGES } from "src/config/constants";
 import prerevealImage from "src/assets/images/prereveal.gif";
@@ -9,6 +9,8 @@ import useWhitelist from "src/hooks/useWhitelist";
 import { WhitelistUserType } from "src/types/apis";
 import { IUseTimer } from "src/hooks/useTimer";
 import useWallet from "src/hooks/useWallet";
+import MintBubble from "src/assets/images/mint_bubble.svg";
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   glitchContainer: {
@@ -34,6 +36,23 @@ const useStyles = makeStyles((theme: Theme) => ({
       // width: 200,
     },
   },
+  mintWrapper: {
+    background: `url(${MintBubble})`,
+    height: 220,
+    width: 220,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: "10%",
+    backgroundSize: "contain",
+    right: "10%",
+    color: "#B6B6B6",
+    cursor: "pointer",
+    "&:hover": {
+      color: "white",
+    },
+  },
 }));
 
 interface Props {
@@ -47,10 +66,12 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
   const classes = useStyles();
   const { whitelistInfo, loading, mint, stats } = useWhitelist();
   const { account } = useWallet();
-
   const isAllowed = React.useMemo(() => {
+    let mintText = `Mint ${
+      whitelistInfo?.quantity && whitelistInfo?.quantity > 1 ? `x${whitelistInfo?.quantity} ` : ""
+    }`;
     let obj = {
-      txt: "Mint",
+      txt: mintText,
       disabled: false,
     };
     if (!timer?.timeFinished) {
@@ -81,7 +102,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
         };
       } else {
         obj = {
-          txt: "Mint",
+          txt: mintText,
           disabled: false,
         };
       }
@@ -99,7 +120,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
           };
         } else {
           obj = {
-            txt: "Mint Team",
+            txt: mintText,
             disabled: false,
           };
         }
@@ -123,7 +144,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
           };
         } else {
           obj = {
-            txt: "Mint Whitelist",
+            txt: mintText,
             disabled: false,
           };
         }
@@ -136,8 +157,11 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
     }
     return obj;
   }, [selectedType, timer, account, stats, whitelistInfo]);
-
   const SrcSet = React.useMemo(() => [prerevealImage, prerevealImage], []);
+
+  const handleClick = () => {
+    if (!isAllowed.disabled) mint(selectedType);
+  };
 
   React.useEffect(() => {
     setLoading && setLoading(loading);
@@ -145,7 +169,7 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.glitchContainer}>
+      {/* <div className={classes.glitchContainer}>
         <GlitchImg srcSet={SrcSet} className={classes.img} />
 
         <WalletButtonBase
@@ -159,6 +183,12 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
         >
           {isAllowed.txt}
         </WalletButtonBase>
+      </div> */}
+
+      <div className={classes.mintWrapper} onClick={handleClick}>
+        <Typography align="center" variant="h5">
+          {isAllowed.txt}
+        </Typography>
       </div>
     </div>
   );

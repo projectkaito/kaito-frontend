@@ -31,8 +31,10 @@ declare module "@mui/material/styles" {
 const Typographica = "Typographica";
 const RealityCheck = "RealityCheck";
 const Ubuntu = "'Ubuntu', sans-serif";
+const ComicSans = `"Comic Sans MS", "Comic Sans", cursive`;
 
-const primaryCrimson = "#C92115";
+const primaryCrimson = "#B6B6B6";
+// const primaryCrimson = "#C92115";
 const secondaryWhite = "#FFFFFF";
 
 let theme = createTheme({
@@ -49,7 +51,7 @@ let theme = createTheme({
   },
   typography: {
     // fontFamily: " 'Ubuntu', sans-serif",
-    fontFamily: RealityCheck,
+    fontFamily: ComicSans,
   },
   breakpoints: {
     values: {

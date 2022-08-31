@@ -1,17 +1,15 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Container, Grid, Theme, Typography } from "@mui/material";
+import { Container, Grid, Theme } from "@mui/material";
 import Bg from "src/assets/images/bg1.png";
 import Content from "./components/Content";
 import MintNft from "./components/MintNft";
 import LogoBar from "src/components/LogoBar/LogoBar";
-import { getWhitelistInfo } from "src/api/whitelist";
-import { WhitelistInfo, WhitelistUserType } from "src/types/apis";
-import clsx from "clsx";
+import { WhitelistUserType } from "src/types/apis";
 import useWhitelist from "src/hooks/useWhitelist";
 import { useTimer } from "src/hooks/useTimer";
 import SpeedLines from "src/components/SpeedLines/SpeedLines";
-import MintingAnimation from "src/components/MintingAnimation/MintingAnimation";
+import MintingAnimation from "src/assets/images/minting_animation.gif";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,33 +17,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: "100vh",
     background: `url(${Bg})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "100% 100%",
     backgroundPositionY: "center",
     backgroundPositionX: "center",
     postion: "relative",
-    // "&:after": {
-    //   content: "''",
-    //   position: "fixed",
-    //   top: "-14px",
-    //   width: "750px",
-    //   transform: "rotate(350deg)",
-    //   left: "-20px",
-    //   height: 50,
-    //   background: `linear-gradient(220.9deg, #000000 12.04%, #C0C0C0 101.95%)`,
-    //   border: "3px solid black",
-    // },
-    // "&:before": {
-    //   content: "''",
-    //   zIndex: 10,
-    //   position: "fixed",
-    //   bottom: "-19px",
-    //   width: "750px",
-    //   transform: "rotate(353deg)",
-    //   right: "-20px",
-    //   height: 50,
-    //   background: `linear-gradient(220.9deg, #000000 12.04%, #C0C0C0 101.95%)`,
-    //   border: "3px solid black",
-    // },
+    [theme.breakpoints.down("md")]: {
+      backgroundSize: "cover",
+      backgroundPositionX: "left",
+      backgroundPositionY: "center",
+    },
   },
   headingsContainer: {
     display: "flex",
@@ -64,75 +44,64 @@ const useStyles = makeStyles((theme: Theme) => ({
     transform: "scale(1.2)",
     cursor: "default",
   },
+  fullScreen: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100vh",
+    zIndex: 10,
+  },
 }));
 
 interface Props {}
 
 const Minting: React.FC<Props> = () => {
   const classes = useStyles();
-  const [selectedType, setSelectedType] = React.useState<WhitelistUserType>(WhitelistUserType.Team);
-  const { stats } = useWhitelist();
+  const { stats, currentWhitelistType } = useWhitelist();
   const [openMinting, setOpenMinting] = React.useState(false);
 
   const timestamp = React.useMemo(
     () =>
-      selectedType
-        ? selectedType === WhitelistUserType.Whitelist
+      currentWhitelistType
+        ? currentWhitelistType === WhitelistUserType.Whitelist
           ? stats?.whitelistMintStartTimestamp
           : stats?.teamMintStartTimestamp
         : stats?.publicMintStartTimestamp,
-    [selectedType, stats]
+    [currentWhitelistType, stats]
   );
 
+  // const timer = useTimer(new Date().getTime() / 997);
   const timer = useTimer(timestamp);
 
   return (
     <div className={classes.root}>
-      <Container maxWidth="lg" style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}>
-        <SpeedLines open={openMinting} />
-        <MintingAnimation open={openMinting} />
+      <Container
+        maxWidth="lg"
+        style={{ display: "grid", gridTemplateRows: "min-content 1fr", minHeight: "90vh" }}
+        onClick={() => setOpenMinting(!openMinting)}
+      >
+        {openMinting && <img src={MintingAnimation} alt="" className={classes.fullScreen} />}
+        {/* TODO: remove these components and keep them safe for some future use */}
+        {/* <SpeedLines open={openMinting} /> */}
+        {/* <MintingAnimation open={openMinting} /> */}
         <LogoBar />
-        {/* <Typography variant="h3" align="center" color="textPrimary" style={{ marginTop: 30 }}>
-          Whitelist
-        </Typography> */}
+
         <div className="center">
           <Grid container spacing={3}>
-            {/* <Grid item xs={12}>
-              <div className={classes.headingsContainer}>
-                <Typography
-                  variant="h4"
-                  align="center"
-                  className={clsx(classes.heading, !selectedType && classes.selected)}
-                  onClick={() => setSelectedType(undefined)}
-                >
-                  Public Mint
-                </Typography>
-                <Typography
-                  variant="h4"
-                  align="center"
-                  className={clsx(classes.heading, selectedType === WhitelistUserType.Whitelist && classes.selected)}
-                  onClick={() => setSelectedType(WhitelistUserType.Whitelist)}
-                >
-                  Whitelist Mint
-                </Typography>
-                <Typography
-                  variant="h4"
-                  align="center"
-                  className={clsx(classes.heading, selectedType === WhitelistUserType.Team && classes.selected)}
-                  onClick={() => setSelectedType(WhitelistUserType.Team)}
-                >
-                  Team Mint
-                </Typography>
-              </div>
-            </Grid> */}
             <Grid item xs={12} sm={12} md={6}>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <Content timer={timer} stats={stats} selectedType={selectedType} />
+                <Content timer={timer} stats={stats} selectedType={currentWhitelistType} />
               </div>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <MintNft timer={timer} selectedType={selectedType} loading={openMinting} setLoading={setOpenMinting} />
+                <MintNft
+                  timer={timer}
+                  selectedType={currentWhitelistType}
+                  loading={openMinting}
+                  setLoading={setOpenMinting}
+                />
               </div>
             </Grid>
           </Grid>

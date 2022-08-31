@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& h2": {
       color: "#fff",
       position: "absolute",
-      transform: "translateX(50%)",
+      transform: "translateX(0%)",
       // transform: "translate(-50%, -50%)",
       fontSize: 100,
       fontFamily: theme.fonts[2],
