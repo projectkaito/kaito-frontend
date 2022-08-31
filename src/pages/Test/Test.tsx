@@ -66,6 +66,10 @@ const Test: React.FC<Props> = () => {
       });
   };
 
+  React.useEffect(() => {
+    checkWhitelist();
+  }, [account]);
+
   const text = React.useMemo(() => {
     let qty = data.quantity || 1;
     if (data.userType) {
