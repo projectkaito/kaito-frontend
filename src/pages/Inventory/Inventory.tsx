@@ -39,7 +39,7 @@ const Inventory: React.FC<IProps> = () => {
         <LogoBar />
 
         <div className="center">
-          <Typography color="secondary" variant="h3" className={classes.mainHeading}>
+          <Typography fontWeight={600} color="secondary" variant="h3" className={classes.mainHeading}>
             OTHER WORLD
           </Typography>
         </div>
