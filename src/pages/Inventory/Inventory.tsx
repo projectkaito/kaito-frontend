@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: 50,
   },
   mainHeading: {
-    fontFamily: theme.fonts[0],
+    fontFamily: theme.fonts[3],
   },
 }));
 

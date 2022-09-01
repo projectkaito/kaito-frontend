@@ -114,7 +114,7 @@ let theme = createTheme({
       },
     },
   },
-  fonts: [RealityCheck, Typographica, Ubuntu],
+  fonts: [RealityCheck, Typographica, Ubuntu, ComicSans],
 });
 
 theme = responsiveFontSizes(theme);
