@@ -5,8 +5,8 @@ import { addressesByChainId } from "./constants/contracts";
 /**
  * This is the default chain id of the dapp.
  */
-export const defaultChainId = chainId.rinkeby;
-export const defaultChainName: ChainNames = "rinkeby";
+export const defaultChainId = chainId.mainnet;
+export const defaultChainName: ChainNames = "eth";
 
 /**
  * All the contract addresses used throughout the dapp.
