@@ -29,6 +29,7 @@ export const addToWhitelist = async (address: string, quantity: number, type: Wh
     };
   }
 };
+
 export const removefromWhitelist = async (address: string) => {
   try {
     const rawResponse = await whiteListApiCall.post(`/remove-from-whitelist/${address}`);
