@@ -184,9 +184,13 @@ const MintNft: React.FC<Props> = ({ selectedType, timer, setLoading }) => {
         </WalletButtonBase>
       </div> */}
 
-      <div className={classes.mintWrapper} onClick={handleClick}>
+      <div
+        className={classes.mintWrapper}
+        // onClick={handleClick}
+      >
         <Typography align="center" variant="h5">
-          {isAllowed.txt}
+          {/* {isAllowed.txt} */}
+          SOLD OUT
         </Typography>
       </div>
     </div>
